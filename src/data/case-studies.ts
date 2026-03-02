@@ -7,6 +7,7 @@ export interface CaseStudy {
   results: string[];
   tools: string[];
   highlight: string;
+  image: string;
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -26,6 +27,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     tools: ["Custom GPTs", "OpenAI API", "Compliance Frameworks"],
     highlight: "50% reduction in report creation time",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop",
   },
   {
     slug: "real-estate-booking-system",
@@ -43,6 +45,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     tools: ["GoHighLevel", "Webhooks", "Payment APIs", "n8n"],
     highlight: "End-to-end automated client onboarding",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=500&fit=crop",
   },
   {
     slug: "cv-builder-auto-replier",
@@ -60,6 +63,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     tools: ["OpenAI API", "n8n", "Custom Templates", "Email APIs"],
     highlight: "Full application pipeline automated",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=500&fit=crop",
   },
   {
     slug: "ecommerce-automation",
@@ -77,6 +81,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     tools: ["Make.com", "WooCommerce", "REST APIs", "Webhooks"],
     highlight: "Multi-channel operations fully automated",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=500&fit=crop",
   },
   {
     slug: "social-media-pipeline",
@@ -94,6 +99,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     tools: ["OpenAI API", "Make.com", "Social APIs", "Airtable"],
     highlight: "Content production scaled without new hires",
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&h=500&fit=crop",
   },
   {
     slug: "client-onboarding-automation",
@@ -111,5 +117,6 @@ export const caseStudies: CaseStudy[] = [
     ],
     tools: ["n8n", "GoHighLevel", "Google Workspace", "Webhooks"],
     highlight: "Zero-touch client onboarding achieved",
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=500&fit=crop",
   },
 ];

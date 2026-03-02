@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <!-- Logo Mark: Nested overlapping shapes -->
+  <g transform="translate(4, 4)">
+    <!-- Outer shape -->
+    <path d="M20 0L36 10L36 30L20 40L4 30L4 10Z" fill="#2563eb" opacity="0.85"/>
+    <!-- Inner offset shape creating fusion effect -->
+    <path d="M24 2L38 11L38 29L24 38L10 29L10 11Z" fill="#3b82f6" opacity="0.65"/>
+    <!-- Core highlight -->
+    <path d="M22 8L32 14L32 26L22 32L12 26L12 14Z" fill="#60a5fa" opacity="0.5"/>
+  </g>
+  <!-- Text -->
+  <text x="52" y="20" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="18" fill="#0f172a">Nested</text>
+  <text x="52" y="39" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="18" fill="#2563eb">Fusion</text>
+</svg>

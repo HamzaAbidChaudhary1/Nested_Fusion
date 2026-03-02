@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -19,8 +20,8 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-border">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="text-xl font-bold tracking-tight text-primary">
-          Nested<span className="text-accent">Fusion</span>
+        <Link href="/" className="flex items-center">
+          <Image src="/logo.svg" alt="Nested Fusion" width={150} height={38} priority />
         </Link>
 
         {/* Desktop nav */}

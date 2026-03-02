@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Section from "@/components/section";
 import Badge from "@/components/badge";
+import ServiceIcon from "@/components/service-icon";
 import { services } from "@/data/services";
 import { caseStudies } from "@/data/case-studies";
 
@@ -31,38 +33,58 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-surface px-6 pt-20 pb-28 md:pt-32 md:pb-36">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--color-accent)/5%,_transparent_70%)]" />
         <div className="relative mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <Badge>AI Automation Consultancy</Badge>
-            <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-primary md:text-6xl md:leading-[1.1]">
-              Scale Your Business by{" "}
-              <span className="text-accent">Analyzing Every Step</span>
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary">
-              We build intelligent automation systems, custom AI solutions, and
-              full-stack applications that eliminate manual work and unlock
-              growth. From n8n workflows to custom GPTs — we handle the
-              complexity so you don&apos;t have to.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/contact"
-                className="rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-dark"
-              >
-                Start a Project
-              </Link>
-              <Link
-                href="/case-studies"
-                className="rounded-lg border border-border px-6 py-3 text-sm font-medium text-primary transition-colors hover:bg-surface-muted"
-              >
-                View Case Studies
-              </Link>
-            </div>
-          </motion.div>
+          <div className="grid items-center gap-12 md:grid-cols-2">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Badge>AI Automation Consultancy</Badge>
+              <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-primary md:text-6xl md:leading-[1.1]">
+                Scale Your Business by{" "}
+                <span className="text-accent">Analyzing Every Step</span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary">
+                We build intelligent automation systems, custom AI solutions, and
+                full-stack applications that eliminate manual work and unlock
+                growth. From n8n workflows to custom GPTs — we handle the
+                complexity so you don&apos;t have to.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link
+                  href="/contact"
+                  className="rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-dark"
+                >
+                  Start a Project
+                </Link>
+                <Link
+                  href="/case-studies"
+                  className="rounded-lg border border-border px-6 py-3 text-sm font-medium text-primary transition-colors hover:bg-surface-muted"
+                >
+                  View Case Studies
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Hero image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative hidden md:block"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                <Image
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
+                  alt="Dashboard analytics and automation"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+              </div>
+            </motion.div>
+          </div>
 
           {/* Stats */}
           <motion.div
@@ -110,24 +132,37 @@ export default function HomePage() {
             >
               <Link
                 href={`/services#${service.slug}`}
-                className="group block rounded-2xl border border-border bg-white p-8 transition-shadow hover:shadow-lg"
+                className="group block overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg"
               >
-                <div className="text-3xl">{service.icon}</div>
-                <h3 className="mt-4 text-xl font-semibold text-primary group-hover:text-accent transition-colors">
-                  {service.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                  {service.tagline}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {service.tools.slice(0, 3).map((tool) => (
-                    <span
-                      key={tool}
-                      className="rounded-full bg-surface-muted px-2.5 py-0.5 text-xs text-text-muted"
-                    >
-                      {tool}
-                    </span>
-                  ))}
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <ServiceIcon name={service.icon} className="h-10 w-10" />
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-primary group-hover:text-accent transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+                    {service.tagline}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {service.tools.slice(0, 3).map((tool) => (
+                      <span
+                        key={tool}
+                        className="rounded-full bg-surface-muted px-2.5 py-0.5 text-xs text-text-muted"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </Link>
             </motion.div>
@@ -163,21 +198,32 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="rounded-2xl border border-border bg-white p-8"
+              className="overflow-hidden rounded-2xl border border-border bg-white"
             >
-              <span className="text-xs font-medium uppercase tracking-wider text-accent">
-                {study.sector}
-              </span>
-              <h3 className="mt-3 text-lg font-semibold text-primary">
-                {study.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                {study.challenge.slice(0, 120)}...
-              </p>
-              <div className="mt-4 rounded-lg bg-accent/5 px-4 py-3">
-                <p className="text-sm font-medium text-accent">
-                  {study.highlight}
+              <div className="relative h-44 overflow-hidden">
+                <Image
+                  src={study.image}
+                  alt={study.title}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              </div>
+              <div className="p-6">
+                <span className="text-xs font-medium uppercase tracking-wider text-accent">
+                  {study.sector}
+                </span>
+                <h3 className="mt-2 text-lg font-semibold text-primary">
+                  {study.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+                  {study.challenge.slice(0, 120)}...
                 </p>
+                <div className="mt-4 rounded-lg bg-accent/5 px-4 py-3">
+                  <p className="text-sm font-medium text-accent">
+                    {study.highlight}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

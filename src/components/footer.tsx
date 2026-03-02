@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const footerLinks = {
   Company: [
@@ -23,11 +24,8 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-4">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link
-              href="/"
-              className="text-xl font-bold tracking-tight text-primary"
-            >
-              Nested<span className="text-accent">Fusion</span>
+            <Link href="/" className="inline-flex items-center">
+              <Image src="/logo.svg" alt="Nested Fusion" width={150} height={38} />
             </Link>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-text-secondary">
               AI automation consultancy helping businesses scale through

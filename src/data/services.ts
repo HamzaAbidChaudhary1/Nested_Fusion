@@ -6,6 +6,7 @@ export interface Service {
   features: string[];
   tools: string[];
   icon: string;
+  image: string;
 }
 
 export const services: Service[] = [
@@ -24,7 +25,8 @@ export const services: Service[] = [
       "Multi-step business process automation",
     ],
     tools: ["n8n", "Make.com", "Zapier", "REST APIs", "Webhooks"],
-    icon: "⚡",
+    icon: "workflow",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
   },
   {
     slug: "ai-development",
@@ -41,7 +43,8 @@ export const services: Service[] = [
       "AI output quality and accuracy guardrails",
     ],
     tools: ["OpenAI GPT", "Google Gemini", "DALL-E 3", "Tavily", "Custom APIs"],
-    icon: "🤖",
+    icon: "ai",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
   },
   {
     slug: "full-stack-development",
@@ -65,7 +68,8 @@ export const services: Service[] = [
       "GoHighLevel",
       "HubSpot",
     ],
-    icon: "💻",
+    icon: "code",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
   },
   {
     slug: "ai-consulting",
@@ -86,6 +90,7 @@ export const services: Service[] = [
       "Live workshops",
       "AI tool ecosystems",
     ],
-    icon: "🎓",
+    icon: "consulting",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
   },
 ];

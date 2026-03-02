@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Section from "@/components/section";
 import Badge from "@/components/badge";
+import ServiceIcon from "@/components/service-icon";
 import { services } from "@/data/services";
 
 export const metadata: Metadata = {
@@ -42,16 +44,26 @@ export default function ServicesPage() {
     <>
       {/* Hero */}
       <Section>
-        <div className="max-w-3xl">
-          <Badge>Services</Badge>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
-            Automation, AI, and Development — Built to Scale
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-text-secondary">
-            We offer a full range of automation and development services. Whether
-            you need a single workflow or an enterprise-wide AI integration, we
-            have the expertise to deliver.
-          </p>
+        <div className="grid items-center gap-12 md:grid-cols-2">
+          <div>
+            <Badge>Services</Badge>
+            <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
+              Automation, AI, and Development — Built to Scale
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-text-secondary">
+              We offer a full range of automation and development services. Whether
+              you need a single workflow or an enterprise-wide AI integration, we
+              have the expertise to deliver.
+            </p>
+          </div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+            <Image
+              src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+              alt="Team working on automation solutions"
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
       </Section>
 
@@ -60,7 +72,7 @@ export default function ServicesPage() {
         <Section key={service.slug} id={service.slug} alt={i % 2 !== 0}>
           <div className="grid items-start gap-12 md:grid-cols-2">
             <div>
-              <div className="text-4xl">{service.icon}</div>
+              <ServiceIcon name={service.icon} className="h-12 w-12" />
               <h2 className="mt-4 text-3xl font-bold text-primary">
                 {service.title}
               </h2>
@@ -81,21 +93,31 @@ export default function ServicesPage() {
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-border bg-white p-8">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted">
-                What&apos;s Included
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {service.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-start gap-3 text-sm text-text-secondary"
-                  >
-                    <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+            <div className="space-y-6">
+              <div className="relative aspect-video overflow-hidden rounded-2xl">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="rounded-2xl border border-border bg-white p-8">
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted">
+                  What&apos;s Included
+                </h3>
+                <ul className="mt-4 space-y-3">
+                  {service.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-3 text-sm text-text-secondary"
+                    >
+                      <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </Section>

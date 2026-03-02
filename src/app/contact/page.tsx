@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Section from "@/components/section";
 import Badge from "@/components/badge";
 import ContactForm from "@/components/contact-form";
@@ -36,15 +37,25 @@ export default function ContactPage() {
   return (
     <>
       <Section>
-        <div className="max-w-3xl">
-          <Badge>Contact</Badge>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
-            Let&apos;s Build Something Together
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-text-secondary">
-            Have a project in mind? Need help with automation or AI? Send me a
-            message and I&apos;ll get back to you within 24 hours.
-          </p>
+        <div className="grid items-center gap-12 md:grid-cols-2">
+          <div>
+            <Badge>Contact</Badge>
+            <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
+              Let&apos;s Build Something Together
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-text-secondary">
+              Have a project in mind? Need help with automation or AI? Send me a
+              message and I&apos;ll get back to you within 24 hours.
+            </p>
+          </div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+            <Image
+              src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=800&h=600&fit=crop"
+              alt="Getting in touch"
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
       </Section>
 

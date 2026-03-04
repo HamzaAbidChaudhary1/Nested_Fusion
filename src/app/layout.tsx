@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | NestedFusion",
   },
   description:
-    "AI-powered workflow automation, custom GPT development, and full-stack solutions. Scale your business by analyzing every step.",
+    "End-to-end AI automation for businesses ready to eliminate manual work, reduce costs, and scale operations — without hiring more people.",
   keywords: [
     "AI automation",
     "n8n",
@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
       </head>

@@ -17,14 +17,14 @@ export default function ContactForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-2xl border border-border bg-surface-alt p-10 text-center"
+        className="rounded-2xl border border-border bg-bg-card p-10 text-center"
       >
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent/10">
           <svg className="h-7 w-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="mt-4 text-xl font-semibold text-primary">
+        <h3 className="mt-4 text-xl font-semibold text-text-primary">
           Message Sent
         </h3>
         <p className="mt-2 text-text-secondary">
@@ -34,55 +34,30 @@ export default function ContactForm() {
     );
   }
 
+  const inputClasses =
+    "w-full rounded-xl border border-border bg-bg-card px-4 py-3 text-sm text-text-primary outline-none transition-all duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/10 placeholder:text-text-muted";
+
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid gap-5 md:grid-cols-2">
         <div>
-          <label
-            htmlFor="name"
-            className="mb-1.5 block text-sm font-medium text-primary"
-          >
+          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-text-primary">
             Name
           </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-primary outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20"
-            placeholder="Your name"
-          />
+          <input type="text" id="name" name="name" required className={inputClasses} placeholder="Your name" />
         </div>
         <div>
-          <label
-            htmlFor="email"
-            className="mb-1.5 block text-sm font-medium text-primary"
-          >
+          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-text-primary">
             Email
           </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-primary outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20"
-            placeholder="you@company.com"
-          />
+          <input type="email" id="email" name="email" required className={inputClasses} placeholder="you@company.com" />
         </div>
       </div>
       <div>
-        <label
-          htmlFor="subject"
-          className="mb-1.5 block text-sm font-medium text-primary"
-        >
+        <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-text-primary">
           Subject
         </label>
-        <select
-          id="subject"
-          name="subject"
-          required
-          className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-primary outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20"
-        >
+        <select id="subject" name="subject" required className={inputClasses}>
           <option value="">Select a topic</option>
           <option value="automation">Workflow Automation</option>
           <option value="ai">AI / Custom GPT Development</option>
@@ -92,10 +67,7 @@ export default function ContactForm() {
         </select>
       </div>
       <div>
-        <label
-          htmlFor="message"
-          className="mb-1.5 block text-sm font-medium text-primary"
-        >
+        <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-text-primary">
           Message
         </label>
         <textarea
@@ -103,13 +75,13 @@ export default function ContactForm() {
           name="message"
           rows={5}
           required
-          className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-primary outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20 resize-none"
+          className={`${inputClasses} resize-none`}
           placeholder="Tell me about your project..."
         />
       </div>
       <button
         type="submit"
-        className="w-full rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-dark"
+        className="w-full rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-bg transition-all duration-300 hover:shadow-[0_0_40px_rgba(200,255,0,0.15),0_0_80px_rgba(200,255,0,0.06)] hover:-translate-y-0.5"
       >
         Send Message
       </button>

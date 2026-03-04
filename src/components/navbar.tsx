@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/case-studies", label: "Case Studies" },
@@ -18,33 +16,32 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-border">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center">
-          <Image src="/logo.svg" alt="Nested Fusion" width={150} height={38} priority />
+    <header className="fixed top-0 w-full z-50 backdrop-blur-xl bg-bg/70 border-b border-border">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-12">
+        <Link href="/" className="font-mono text-sm font-medium tracking-[3px] uppercase text-text-primary">
+          Nested<span className="text-accent">Fusion</span>
         </Link>
 
         {/* Desktop nav */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden md:flex items-center gap-9">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-sm font-medium text-text-secondary hover:text-accent transition-colors"
+                className="relative text-[13px] font-medium text-text-secondary tracking-wide hover:text-text-primary transition-colors duration-300 after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-px after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
               </Link>
             </li>
           ))}
-          <li>
-            <Link
-              href="/contact"
-              className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-dark transition-colors"
-            >
-              Get Started
-            </Link>
-          </li>
         </ul>
+
+        <Link
+          href="/contact"
+          className="hidden md:block text-[13px] font-semibold px-6 py-2.5 bg-accent text-bg rounded-full tracking-wide transition-all duration-300 hover:shadow-[0_0_30px_rgba(200,255,0,0.15),0_0_60px_rgba(200,255,0,0.08)] hover:-translate-y-0.5"
+        >
+          Book a Call
+        </Link>
 
         {/* Mobile menu button */}
         <button
@@ -53,17 +50,17 @@ export default function Navbar() {
           aria-label="Toggle menu"
         >
           <span
-            className={`block h-0.5 w-6 bg-primary transition-transform ${
+            className={`block h-0.5 w-6 bg-text-primary transition-transform duration-300 ${
               mobileOpen ? "translate-y-2 rotate-45" : ""
             }`}
           />
           <span
-            className={`block h-0.5 w-6 bg-primary transition-opacity ${
+            className={`block h-0.5 w-6 bg-text-primary transition-opacity duration-300 ${
               mobileOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block h-0.5 w-6 bg-primary transition-transform ${
+            className={`block h-0.5 w-6 bg-text-primary transition-transform duration-300 ${
               mobileOpen ? "-translate-y-2 -rotate-45" : ""
             }`}
           />
@@ -77,7 +74,7 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden overflow-hidden border-t border-border bg-white"
+            className="md:hidden overflow-hidden border-t border-border bg-bg"
           >
             <ul className="flex flex-col gap-1 px-6 py-4">
               {navLinks.map((link) => (
@@ -85,7 +82,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block rounded-lg px-3 py-2.5 text-sm font-medium text-text-secondary hover:bg-surface-muted hover:text-accent transition-colors"
+                    className="block rounded-lg px-3 py-2.5 text-sm font-medium text-text-secondary hover:bg-bg-card hover:text-accent transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -95,9 +92,9 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={() => setMobileOpen(false)}
-                  className="block rounded-lg bg-accent px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-accent-dark transition-colors"
+                  className="block rounded-full bg-accent px-4 py-2.5 text-center text-sm font-semibold text-bg transition-all hover:shadow-[0_0_30px_rgba(200,255,0,0.15)]"
                 >
-                  Get Started
+                  Book a Call
                 </Link>
               </li>
             </ul>

@@ -1,106 +1,90 @@
-import type { Metadata } from "next";
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Section from "@/components/section";
 import Badge from "@/components/badge";
-
-export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Insights on AI automation, workflow design, and building scalable systems — from the NestedFusion team.",
-};
 
 const posts = [
   {
     slug: "why-n8n-for-business-automation",
     title: "Why n8n Is Our Go-To for Business Automation",
-    excerpt:
-      "A breakdown of why we choose n8n for most client projects — from self-hosting flexibility to its powerful node ecosystem.",
+    excerpt: "A breakdown of why we choose n8n for most client projects \u2014 from self-hosting flexibility to its powerful node ecosystem.",
     date: "Coming Soon",
     category: "Automation",
-    image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=600&h=400&fit=crop",
   },
   {
     slug: "building-compliance-gpts",
     title: "Building Compliance-Safe GPTs for Healthcare",
-    excerpt:
-      "Lessons learned from deploying 12+ custom GPTs in the disability services sector — including how we tackled evidence fabrication.",
+    excerpt: "Lessons learned from deploying 12+ custom GPTs in the disability services sector \u2014 including how we tackled evidence fabrication.",
     date: "Coming Soon",
     category: "AI Development",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
   },
   {
     slug: "automation-roi-framework",
     title: "How to Calculate ROI on Workflow Automation",
-    excerpt:
-      "A practical framework for measuring the real impact of automation — hours saved, errors reduced, and revenue unlocked.",
+    excerpt: "A practical framework for measuring the real impact of automation \u2014 hours saved, errors reduced, and revenue unlocked.",
     date: "Coming Soon",
     category: "Strategy",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
   },
 ];
 
 export default function BlogPage() {
   return (
     <>
-      <Section>
-        <div className="max-w-3xl">
-          <Badge>Blog</Badge>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
-            Insights & Ideas
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-text-secondary">
-            Practical articles on AI automation, workflow design, and building
-            systems that scale. No fluff — just implementation-ready insights.
-          </p>
+      {/* Hero */}
+      <section className="relative px-6 pt-36 pb-20 md:px-12 md:pt-44 md:pb-28">
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(200,255,0,0.04)_0%,transparent_70%)] pointer-events-none" />
+        <div className="relative mx-auto max-w-7xl">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <Badge>Blog</Badge>
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mt-10 font-display text-[clamp(40px,6vw,80px)] leading-[0.95] font-normal tracking-tight max-w-[700px]"
+          >
+            Insights & <em className="italic text-accent">ideas</em>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.25 }}
+            className="mt-8 text-lg leading-relaxed text-text-secondary max-w-[520px]"
+          >
+            Practical articles on AI automation, workflow design, and building systems that scale. No fluff — just implementation-ready insights.
+          </motion.p>
         </div>
-      </Section>
+      </section>
 
       <Section alt>
-        <div className="grid gap-6 md:grid-cols-3">
-          {posts.map((post) => (
-            <article
+        <div className="grid gap-5 md:grid-cols-3">
+          {posts.map((post, i) => (
+            <motion.article
               key={post.slug}
-              className="group overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="group rounded-2xl border border-border bg-bg-card p-8 transition-all duration-400 hover:bg-bg-card-hover hover:border-border-light hover:-translate-y-1"
             >
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-6">
-                <span className="text-xs font-medium uppercase tracking-wider text-accent">
-                  {post.category}
-                </span>
-                <h2 className="mt-3 text-lg font-semibold text-primary group-hover:text-accent transition-colors">
-                  {post.title}
-                </h2>
-                <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                  {post.excerpt}
-                </p>
-                <p className="mt-4 text-xs font-medium text-text-muted">
-                  {post.date}
-                </p>
-              </div>
-            </article>
+              <span className="font-mono text-[11px] tracking-[3px] uppercase text-accent">{post.category}</span>
+              <h2 className="mt-4 font-display text-xl font-normal transition-colors group-hover:text-accent">{post.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-text-secondary">{post.excerpt}</p>
+              <p className="mt-5 font-mono text-[11px] tracking-wider text-text-muted">{post.date}</p>
+            </motion.article>
           ))}
         </div>
 
-        <div className="mt-16 rounded-2xl border border-dashed border-border bg-white p-12 text-center">
-          <h2 className="text-xl font-semibold text-primary">
-            More Articles Coming Soon
-          </h2>
+        <div className="mt-16 rounded-2xl border border-dashed border-border bg-bg-card p-12 text-center">
+          <h2 className="font-display text-2xl font-normal">More articles coming soon</h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-text-secondary">
-            We&apos;re working on in-depth articles about automation
-            architecture, AI implementation, and scaling workflows. Check back
-            soon.
+            We&apos;re working on in-depth articles about automation architecture, AI implementation, and scaling workflows. Check back soon.
           </p>
           <Link
             href="/contact"
-            className="mt-6 inline-block rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-primary hover:bg-surface-muted transition-colors"
+            className="mt-6 inline-block text-[13px] font-medium text-text-primary px-6 py-2.5 border border-border-light rounded-full transition-all duration-300 hover:border-text-muted hover:bg-bg-card-hover"
           >
             Get Notified
           </Link>

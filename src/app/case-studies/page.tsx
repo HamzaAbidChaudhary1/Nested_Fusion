@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import Section from "@/components/section";
 import Badge from "@/components/badge";
@@ -11,33 +10,34 @@ export default function CaseStudiesPage() {
   return (
     <>
       {/* Hero */}
-      <Section>
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          <div>
+      <section className="relative px-6 pt-36 pb-20 md:px-12 md:pt-44 md:pb-28">
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(200,255,0,0.04)_0%,transparent_70%)] pointer-events-none" />
+        <div className="relative mx-auto max-w-7xl">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <Badge>Case Studies</Badge>
-            <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
-              Real Solutions, Measurable Results
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-text-secondary">
-              Every project starts with a business problem and ends with a working
-              system. Here are some of the automation and AI solutions we&apos;ve
-              delivered.
-            </p>
-          </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-            <Image
-              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
-              alt="Data analytics and results"
-              fill
-              className="object-cover"
-            />
-          </div>
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mt-10 font-display text-[clamp(40px,6vw,80px)] leading-[0.95] font-normal tracking-tight max-w-[800px]"
+          >
+            Real solutions, <em className="italic text-accent">measurable</em> results
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.25 }}
+            className="mt-8 text-lg leading-relaxed text-text-secondary max-w-[560px]"
+          >
+            Every project starts with a business problem and ends with a working system. Here are some of the automation and AI solutions we&apos;ve delivered.
+          </motion.p>
         </div>
-      </Section>
+      </section>
 
       {/* Case study cards */}
       <Section alt>
-        <div className="space-y-8">
+        <div className="space-y-6">
           {caseStudies.map((study, i) => (
             <motion.div
               key={study.slug}
@@ -46,84 +46,49 @@ export default function CaseStudiesPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               id={study.slug}
-              className="overflow-hidden rounded-2xl border border-border bg-white"
+              className="rounded-2xl border border-border bg-bg-card overflow-hidden transition-all duration-400 hover:border-border-light"
             >
-              <div className="grid md:grid-cols-3">
-                {/* Image */}
-                <div className="relative h-48 md:h-full">
-                  <Image
-                    src={study.image}
-                    alt={study.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+              <div className="p-8 md:p-10">
+                <div className="grid gap-10 lg:grid-cols-5">
+                  {/* Left: overview */}
+                  <div className="lg:col-span-3">
+                    <span className="font-mono text-[11px] tracking-[3px] uppercase text-accent">{study.sector}</span>
+                    <h2 className="mt-3 font-display text-2xl font-normal">{study.title}</h2>
 
-                {/* Content */}
-                <div className="p-8 md:col-span-2 md:p-10">
-                  <div className="grid gap-8 md:grid-cols-5">
-                    {/* Left: overview */}
-                    <div className="md:col-span-3">
-                      <span className="text-xs font-medium uppercase tracking-wider text-accent">
-                        {study.sector}
-                      </span>
-                      <h2 className="mt-2 text-2xl font-bold text-primary">
-                        {study.title}
-                      </h2>
-
-                      <div className="mt-6">
-                        <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted">
-                          Challenge
-                        </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                          {study.challenge}
-                        </p>
-                      </div>
-
-                      <div className="mt-5">
-                        <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted">
-                          Solution
-                        </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                          {study.solution}
-                        </p>
-                      </div>
-
-                      <div className="mt-5 flex flex-wrap gap-2">
-                        {study.tools.map((tool) => (
-                          <span
-                            key={tool}
-                            className="rounded-full border border-border px-3 py-1 text-xs font-medium text-text-secondary"
-                          >
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="mt-7">
+                      <h3 className="font-mono text-[11px] tracking-[3px] uppercase text-text-muted mb-2">Challenge</h3>
+                      <p className="text-sm leading-relaxed text-text-secondary">{study.challenge}</p>
                     </div>
 
-                    {/* Right: results */}
-                    <div className="md:col-span-2">
-                      <div className="rounded-xl bg-surface-alt p-6">
-                        <div className="mb-4 rounded-lg bg-accent/10 px-4 py-3">
-                          <p className="text-sm font-semibold text-accent">
-                            {study.highlight}
-                          </p>
-                        </div>
-                        <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted">
-                          Results
-                        </h3>
-                        <ul className="mt-3 space-y-2.5">
-                          {study.results.map((result) => (
-                            <li
-                              key={result}
-                              className="flex items-start gap-2 text-sm text-text-secondary"
-                            >
-                              <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                              {result}
-                            </li>
-                          ))}
-                        </ul>
+                    <div className="mt-5">
+                      <h3 className="font-mono text-[11px] tracking-[3px] uppercase text-text-muted mb-2">Solution</h3>
+                      <p className="text-sm leading-relaxed text-text-secondary">{study.solution}</p>
+                    </div>
+
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {study.tools.map((tool) => (
+                        <span key={tool} className="font-mono text-[11px] tracking-wider text-accent-dim px-3 py-1 border border-accent/12 rounded-full">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right: results */}
+                  <div className="lg:col-span-2">
+                    <div className="rounded-xl bg-bg-secondary border border-border p-6">
+                      <div className="mb-5 rounded-lg bg-accent/8 border border-accent/15 px-4 py-3">
+                        <p className="text-sm font-semibold text-accent">{study.highlight}</p>
                       </div>
+                      <h3 className="font-mono text-[11px] tracking-[3px] uppercase text-text-muted mb-3">Results</h3>
+                      <ul className="space-y-2.5">
+                        {study.results.map((result) => (
+                          <li key={result} className="flex items-start gap-2.5 text-sm text-text-secondary">
+                            <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                            {result}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -135,20 +100,23 @@ export default function CaseStudiesPage() {
 
       {/* CTA */}
       <Section>
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-primary md:text-4xl">
-            Want Results Like These?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            Let&apos;s discuss your project and see how automation and AI can
-            drive real impact for your business.
-          </p>
-          <Link
-            href="/contact"
-            className="mt-8 inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-dark"
-          >
-            Start a Project
-          </Link>
+        <div className="relative text-center py-8">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[radial-gradient(circle,rgba(200,255,0,0.05)_0%,transparent_60%)] pointer-events-none" />
+          <div className="relative">
+            <h2 className="font-display text-[clamp(32px,4vw,56px)] leading-[1.1] mb-6">
+              Want results like <em className="italic text-accent">these</em>?
+            </h2>
+            <p className="text-[15px] text-text-secondary max-w-lg mx-auto leading-relaxed mb-8">
+              Let&apos;s discuss your project and see how automation and AI can drive real impact for your business.
+            </p>
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-bg text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(200,255,0,0.15)] hover:-translate-y-0.5"
+            >
+              Start a Project
+              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+            </Link>
+          </div>
         </div>
       </Section>
     </>

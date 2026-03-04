@@ -19,7 +19,7 @@ const services = [
     ),
     title: "Workflow Automation",
     description: "Multi-platform automations using n8n, Make.com, and Zapier that connect your entire tech stack into seamless, self-running pipelines.",
-    tag: "n8n \u00b7 Make \u00b7 Zapier",
+    tag: "n8n · Make · Zapier",
   },
   {
     icon: (
@@ -29,7 +29,7 @@ const services = [
     ),
     title: "Custom AI Agents",
     description: "Purpose-built GPTs and AI agents trained on your domain data — from NDIS report writers to real estate assistants to product intelligence bots.",
-    tag: "GPT \u00b7 Gemini \u00b7 Claude",
+    tag: "GPT · Gemini · Claude",
   },
   {
     icon: (
@@ -39,7 +39,7 @@ const services = [
     ),
     title: "Full-Stack Apps",
     description: "Custom web applications with React frontends, Node.js backends, Supabase databases, and complete deployment — not just prototypes.",
-    tag: "React \u00b7 Node \u00b7 Supabase",
+    tag: "React · Node · Supabase",
   },
   {
     icon: (
@@ -49,7 +49,7 @@ const services = [
     ),
     title: "CRM Integration",
     description: "Deep integrations with GoHighLevel, HubSpot, and custom CRMs — booking flows, pipeline management, and automated follow-ups.",
-    tag: "GHL \u00b7 HubSpot \u00b7 Webhooks",
+    tag: "GHL · HubSpot · Webhooks",
   },
   {
     icon: (
@@ -59,7 +59,7 @@ const services = [
     ),
     title: "Content Automation",
     description: "Automated newsletter generation, social media pipelines, EDM campaigns, and content repurposing systems powered by AI.",
-    tag: "Notion \u00b7 EDM \u00b7 Social",
+    tag: "Notion · EDM · Social",
   },
   {
     icon: (
@@ -69,7 +69,7 @@ const services = [
     ),
     title: "AI Strategy & Training",
     description: "1:1 AI Champions sessions, team training programs, and strategic roadmaps to embed AI across your operations systematically.",
-    tag: "Training \u00b7 Strategy",
+    tag: "Training · Strategy",
   },
 ];
 
@@ -88,7 +88,7 @@ const techItems = [
       </svg>
     ),
     title: "Automation Platforms",
-    tools: "n8n \u00b7 Make.com \u00b7 Zapier \u00b7 Power Automate",
+    tools: "n8n · Make.com · Zapier · Power Automate",
   },
   {
     icon: (
@@ -97,7 +97,7 @@ const techItems = [
       </svg>
     ),
     title: "AI Models & APIs",
-    tools: "OpenAI \u00b7 Claude \u00b7 Gemini \u00b7 Custom Fine-tunes",
+    tools: "OpenAI · Claude · Gemini · Custom Fine-tunes",
   },
   {
     icon: (
@@ -106,7 +106,7 @@ const techItems = [
       </svg>
     ),
     title: "Backend & Data",
-    tools: "Node.js \u00b7 Supabase \u00b7 Express \u00b7 PostgreSQL",
+    tools: "Node.js · Supabase · Express · PostgreSQL",
   },
   {
     icon: (
@@ -115,7 +115,7 @@ const techItems = [
       </svg>
     ),
     title: "Frontend & CRM",
-    tools: "React \u00b7 Next.js \u00b7 GoHighLevel \u00b7 HubSpot",
+    tools: "React · Next.js · GoHighLevel · HubSpot",
   },
 ];
 
@@ -123,19 +123,19 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex flex-col justify-center px-6 pt-32 pb-20 md:px-12 md:pt-36 md:pb-24">
+      <section className="relative min-h-screen flex flex-col justify-center px-6 pt-32 pb-24 md:px-12 md:pt-36 md:pb-28">
         {/* Grid background */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: "linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px)",
+            backgroundImage: "linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px)",
             backgroundSize: "80px 80px",
             maskImage: "radial-gradient(ellipse 70% 50% at 50% 40%, black 20%, transparent 70%)",
             WebkitMaskImage: "radial-gradient(ellipse 70% 50% at 50% 40%, black 20%, transparent 70%)",
           }}
         />
         {/* Glow */}
-        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[radial-gradient(circle,rgba(37,99,235,0.06)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(circle,rgba(37,99,235,0.08)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="relative mx-auto max-w-7xl w-full">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
@@ -146,7 +146,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mt-10 font-display text-[clamp(52px,7.5vw,110px)] leading-[0.95] font-normal tracking-tight max-w-[900px]"
+            className="mt-10 font-display text-[clamp(48px,7.5vw,110px)] leading-[0.92] font-normal tracking-tight max-w-[900px]"
           >
             We build the<br />systems that<br /><em className="italic text-accent">think</em> for you
           </motion.h1>
@@ -155,7 +155,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-8 text-lg leading-relaxed text-text-secondary max-w-[520px]"
+            className="mt-8 text-[17px] leading-relaxed text-text-secondary max-w-[520px]"
           >
             End-to-end AI automation for businesses ready to eliminate manual work, reduce costs, and scale operations — without hiring more people.
           </motion.p>
@@ -168,14 +168,14 @@ export default function HomePage() {
           >
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-white text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2),0_0_80px_rgba(37,99,235,0.06)] hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-white text-[15px] font-semibold rounded-full shadow-button transition-all duration-300 hover:shadow-button-hover hover:-translate-y-0.5"
             >
               Start a Project
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </Link>
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 px-8 py-4 text-text-primary text-[15px] font-medium border border-border-light rounded-full transition-all duration-300 hover:border-text-muted hover:bg-bg-secondary"
+              className="inline-flex items-center gap-2 px-8 py-4 text-text-primary text-[15px] font-medium border border-border rounded-full transition-all duration-300 hover:border-border-light hover:bg-bg-secondary hover:shadow-card"
             >
               See How It Works
             </Link>
@@ -185,7 +185,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
-            className="mt-20 pt-10 border-t border-border flex flex-col sm:flex-row gap-14"
+            className="mt-24 pt-12 border-t border-border flex flex-col sm:flex-row gap-16"
           >
             {[
               { value: "50+", label: "Automations Deployed" },
@@ -193,7 +193,7 @@ export default function HomePage() {
               { value: "98%", label: "Client Retention Rate" },
             ].map((stat) => (
               <div key={stat.label}>
-                <div className="font-display text-[42px] text-text-primary leading-none">{stat.value}</div>
+                <div className="font-display text-[48px] text-text-primary leading-none">{stat.value}</div>
                 <div className="mt-2 text-[13px] text-text-muted tracking-wide">{stat.label}</div>
               </div>
             ))}
@@ -202,12 +202,12 @@ export default function HomePage() {
       </section>
 
       {/* ── MARQUEE ── */}
-      <div className="py-8 border-t border-b border-border overflow-hidden">
+      <div className="py-8 border-t border-b border-border bg-bg-secondary overflow-hidden">
         <div className="flex gap-12 animate-marquee w-max">
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
             <span key={i} className="font-mono text-[13px] text-text-muted tracking-[2px] uppercase whitespace-nowrap flex items-center gap-12">
               {item}
-              <span className="text-[8px] text-accent opacity-50">{"\u25C6"}</span>
+              <span className="text-[8px] text-accent opacity-60">◆</span>
             </span>
           ))}
         </div>
@@ -215,11 +215,13 @@ export default function HomePage() {
 
       {/* ── SERVICES ── */}
       <Section id="services">
-        <div className="font-mono text-[11px] tracking-[4px] uppercase text-accent mb-5">What We Build</div>
-        <h2 className="font-display text-[clamp(36px,4vw,56px)] leading-[1.1] max-w-[600px] mb-16">
-          Automation that replaces entire workflows, not just tasks
-        </h2>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="text-center mb-16">
+          <div className="font-mono text-[11px] tracking-[4px] uppercase text-accent mb-5">What We Build</div>
+          <h2 className="font-display text-[clamp(36px,4vw,56px)] leading-[1.1] max-w-[650px] mx-auto">
+            Automation that replaces entire workflows, not just tasks
+          </h2>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
@@ -227,14 +229,16 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-bg-card p-10 transition-all duration-500 hover:bg-bg-card-hover hover:border-border-light hover:-translate-y-1 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-accent before:to-transparent before:opacity-0 before:transition-opacity before:duration-400 hover:before:opacity-100"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-white p-10 shadow-card transition-all duration-500 hover:shadow-card-hover hover:border-accent/20 hover:-translate-y-1"
             >
-              <div className="w-12 h-12 rounded-[10px] bg-accent/8 border border-accent/15 flex items-center justify-center mb-7">
+              {/* Top glow line on hover */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity duration-400 group-hover:opacity-100" />
+              <div className="w-12 h-12 rounded-xl bg-accent/8 border border-accent/15 flex items-center justify-center mb-7">
                 {service.icon}
               </div>
               <h3 className="font-display text-2xl font-normal mb-3.5">{service.title}</h3>
               <p className="text-sm leading-relaxed text-text-secondary">{service.description}</p>
-              <span className="inline-block mt-5 font-mono text-[11px] tracking-wider text-accent-dim px-3 py-1.5 border border-accent/12 rounded-full">
+              <span className="inline-block mt-5 font-mono text-[11px] tracking-wider text-accent-dim px-3 py-1.5 border border-accent/12 rounded-full bg-accent/4">
                 {service.tag}
               </span>
             </motion.div>
@@ -244,19 +248,28 @@ export default function HomePage() {
 
       {/* ── PROCESS ── */}
       <Section alt id="process">
-        <div className="font-mono text-[11px] tracking-[4px] uppercase text-accent mb-5">How We Work</div>
-        <h2 className="font-display text-[clamp(36px,4vw,56px)] leading-[1.1] max-w-[600px] mb-16">
-          From chaos to clockwork in four steps
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border rounded-2xl overflow-hidden">
-          {processSteps.map((step) => (
-            <div key={step.num} className="bg-bg p-10 md:p-12 transition-all duration-400 hover:bg-bg-secondary group">
-              <div className="font-display text-[64px] text-border-light leading-none mb-6 transition-colors duration-400 group-hover:text-accent">
+        <div className="text-center mb-16">
+          <div className="font-mono text-[11px] tracking-[4px] uppercase text-accent mb-5">How We Work</div>
+          <h2 className="font-display text-[clamp(36px,4vw,56px)] leading-[1.1] max-w-[600px] mx-auto">
+            From chaos to clockwork in four steps
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {processSteps.map((step, i) => (
+            <motion.div
+              key={step.num}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="bg-white rounded-2xl border border-border p-10 shadow-card transition-all duration-400 hover:shadow-card-hover group"
+            >
+              <div className="font-display text-[56px] text-border leading-none mb-6 transition-colors duration-400 group-hover:text-accent">
                 {step.num}
               </div>
               <h3 className="text-base font-semibold mb-3">{step.title}</h3>
               <p className="text-[13px] leading-relaxed text-text-secondary">{step.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </Section>
@@ -274,8 +287,8 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col gap-4">
               {techItems.map((item) => (
-                <div key={item.title} className="flex items-center gap-4 px-6 py-5 bg-bg-card border border-border rounded-xl transition-all duration-300 hover:border-border-light hover:translate-x-1">
-                  <div className="w-10 h-10 bg-accent/6 rounded-lg flex items-center justify-center shrink-0 text-accent">
+                <div key={item.title} className="flex items-center gap-4 px-6 py-5 bg-white border border-border rounded-xl shadow-card transition-all duration-300 hover:shadow-card-hover hover:border-accent/20 hover:translate-x-1">
+                  <div className="w-10 h-10 bg-accent/8 border border-accent/12 rounded-lg flex items-center justify-center shrink-0 text-accent">
                     {item.icon}
                   </div>
                   <div>
@@ -293,42 +306,42 @@ export default function HomePage() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="relative h-[480px] bg-bg-card border border-border rounded-2xl overflow-hidden flex items-center justify-center"
+            className="relative h-[480px] bg-bg-secondary border border-border rounded-2xl overflow-hidden flex items-center justify-center shadow-card"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(37,99,235,0.08)_0%,transparent_50%),radial-gradient(circle_at_70%_70%,rgba(37,99,235,0.04)_0%,transparent_50%)]" />
             <div className="relative w-[320px] h-[320px]">
               {/* Center */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[72px] h-[72px] bg-accent rounded-2xl flex items-center justify-center font-mono text-[11px] font-bold text-white tracking-wider z-10 shadow-[0_0_60px_rgba(37,99,235,0.2)]">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[72px] h-[72px] bg-accent rounded-2xl flex items-center justify-center font-mono text-[11px] font-bold text-white tracking-wider z-10 shadow-[0_0_60px_rgba(37,99,235,0.3)]">
                 NF
               </div>
               {/* Ring 1 */}
               <div className="absolute top-1/2 left-1/2 w-[180px] h-[180px] -mt-[90px] -ml-[90px] border border-border rounded-full animate-spin-orbit" style={{ animationDuration: "20s" }}>
-                <div className="absolute -top-5 left-1/2 -ml-5 w-10 h-10 bg-bg-card border border-border-light rounded-[10px] flex items-center justify-center animate-counter-spin" style={{ animationDuration: "20s" }}>
-                  <span className="font-mono text-[9px] text-text-secondary">n8n</span>
+                <div className="absolute -top-5 left-1/2 -ml-5 w-10 h-10 bg-white border border-border rounded-[10px] flex items-center justify-center animate-counter-spin shadow-card" style={{ animationDuration: "20s" }}>
+                  <span className="font-mono text-[9px] text-text-secondary font-medium">n8n</span>
                 </div>
-                <div className="absolute -bottom-5 left-1/2 -ml-5 w-10 h-10 bg-bg-card border border-border-light rounded-[10px] flex items-center justify-center animate-counter-spin" style={{ animationDuration: "20s" }}>
-                  <span className="font-mono text-[9px] text-text-secondary">GPT</span>
+                <div className="absolute -bottom-5 left-1/2 -ml-5 w-10 h-10 bg-white border border-border rounded-[10px] flex items-center justify-center animate-counter-spin shadow-card" style={{ animationDuration: "20s" }}>
+                  <span className="font-mono text-[9px] text-text-secondary font-medium">GPT</span>
                 </div>
               </div>
               {/* Ring 2 */}
               <div className="absolute top-1/2 left-1/2 w-[260px] h-[260px] -mt-[130px] -ml-[130px] border border-border rounded-full animate-spin-orbit-reverse" style={{ animationDuration: "30s" }}>
-                <div className="absolute -top-5 left-1/2 -ml-5 w-10 h-10 bg-bg-card border border-border-light rounded-[10px] flex items-center justify-center animate-counter-spin-reverse" style={{ animationDuration: "30s" }}>
-                  <span className="font-mono text-[9px] text-text-secondary">API</span>
+                <div className="absolute -top-5 left-1/2 -ml-5 w-10 h-10 bg-white border border-border rounded-[10px] flex items-center justify-center animate-counter-spin-reverse shadow-card" style={{ animationDuration: "30s" }}>
+                  <span className="font-mono text-[9px] text-text-secondary font-medium">API</span>
                 </div>
-                <div className="absolute top-1/2 -right-5 -mt-5 w-10 h-10 bg-bg-card border border-border-light rounded-[10px] flex items-center justify-center animate-counter-spin-reverse" style={{ animationDuration: "30s" }}>
-                  <span className="font-mono text-[9px] text-text-secondary">DB</span>
+                <div className="absolute top-1/2 -right-5 -mt-5 w-10 h-10 bg-white border border-border rounded-[10px] flex items-center justify-center animate-counter-spin-reverse shadow-card" style={{ animationDuration: "30s" }}>
+                  <span className="font-mono text-[9px] text-text-secondary font-medium">DB</span>
                 </div>
-                <div className="absolute -bottom-5 left-1/2 -ml-5 w-10 h-10 bg-bg-card border border-border-light rounded-[10px] flex items-center justify-center animate-counter-spin-reverse" style={{ animationDuration: "30s" }}>
-                  <span className="font-mono text-[9px] text-text-secondary">CRM</span>
+                <div className="absolute -bottom-5 left-1/2 -ml-5 w-10 h-10 bg-white border border-border rounded-[10px] flex items-center justify-center animate-counter-spin-reverse shadow-card" style={{ animationDuration: "30s" }}>
+                  <span className="font-mono text-[9px] text-text-secondary font-medium">CRM</span>
                 </div>
               </div>
               {/* Ring 3 */}
               <div className="absolute top-1/2 left-1/2 w-[340px] h-[340px] -mt-[170px] -ml-[170px] border border-border rounded-full animate-spin-orbit-slow" style={{ animationDuration: "40s" }}>
-                <div className="absolute top-[10%] -left-5 w-10 h-10 bg-bg-card border border-border-light rounded-[10px] flex items-center justify-center animate-counter-spin-slow" style={{ animationDuration: "40s" }}>
-                  <span className="font-mono text-[9px] text-text-secondary">AI</span>
+                <div className="absolute top-[10%] -left-5 w-10 h-10 bg-white border border-border rounded-[10px] flex items-center justify-center animate-counter-spin-slow shadow-card" style={{ animationDuration: "40s" }}>
+                  <span className="font-mono text-[9px] text-text-secondary font-medium">AI</span>
                 </div>
-                <div className="absolute bottom-[10%] -right-5 w-10 h-10 bg-bg-card border border-border-light rounded-[10px] flex items-center justify-center animate-counter-spin-slow" style={{ animationDuration: "40s" }}>
-                  <span className="font-mono text-[9px] text-text-secondary">WEB</span>
+                <div className="absolute bottom-[10%] -right-5 w-10 h-10 bg-white border border-border rounded-[10px] flex items-center justify-center animate-counter-spin-slow shadow-card" style={{ animationDuration: "40s" }}>
+                  <span className="font-mono text-[9px] text-text-secondary font-medium">WEB</span>
                 </div>
               </div>
             </div>
@@ -337,9 +350,9 @@ export default function HomePage() {
       </Section>
 
       {/* ── CTA ── */}
-      <Section id="contact">
-        <div className="relative text-center py-8">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.06)_0%,transparent_60%)] pointer-events-none" />
+      <Section alt id="contact">
+        <div className="relative text-center py-12">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.08)_0%,transparent_60%)] pointer-events-none" />
           <div className="relative">
             <div className="font-mono text-[11px] tracking-[4px] uppercase text-accent mb-5">Ready?</div>
             <h2 className="font-display text-[clamp(40px,5vw,72px)] leading-[1.05] mb-6">
@@ -350,7 +363,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-white text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2),0_0_80px_rgba(37,99,235,0.06)] hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-white text-[15px] font-semibold rounded-full shadow-button transition-all duration-300 hover:shadow-button-hover hover:-translate-y-0.5"
             >
               Book Discovery Call
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>

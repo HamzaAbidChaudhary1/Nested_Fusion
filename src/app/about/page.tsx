@@ -25,17 +25,17 @@ const values = [
 
 const timeline = [
   {
-    period: "2021 \u2013 2023",
+    period: "2021 – 2023",
     title: "Foundations in Automation",
     description: "Started building workflow automations and full-stack applications, developing expertise in n8n, Make.com, and API integration.",
   },
   {
-    period: "2023 \u2013 2024",
+    period: "2023 – 2024",
     title: "Enterprise Experience",
-    description: "Worked as Automations Technician at an Australian AI consultancy \u2014 managing multi-client projects, facilitating AI training programs, and building enterprise-grade solutions.",
+    description: "Worked as Automations Technician at an Australian AI consultancy — managing multi-client projects, facilitating AI training programs, and building enterprise-grade solutions.",
   },
   {
-    period: "2024 \u2013 Present",
+    period: "2024 – Present",
     title: "NestedFusion",
     description: "Founded NestedFusion to bring enterprise-quality AI automation to businesses globally. Serving clients across Australia, US, MENA, and beyond.",
   },
@@ -61,7 +61,7 @@ export default function AboutPage() {
     <>
       {/* Hero */}
       <section className="relative px-6 pt-36 pb-20 md:px-12 md:pt-44 md:pb-28">
-        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.04)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.06)_0%,transparent_70%)] pointer-events-none" />
         <div className="relative mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <Badge>About NestedFusion</Badge>
@@ -78,7 +78,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-8 text-lg leading-relaxed text-text-secondary max-w-[560px]"
+            className="mt-8 text-[17px] leading-relaxed text-text-secondary max-w-[560px]"
           >
             NestedFusion is an AI automation consultancy founded by Hamza Abid Chaudhary. We specialize in workflow automation, custom GPT development, and full-stack solutions — helping businesses eliminate manual work and scale operations.
           </motion.p>
@@ -104,7 +104,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="space-y-5">
-            <div className="rounded-2xl border border-border bg-bg-card p-8">
+            <div className="rounded-2xl border border-border bg-white p-8 shadow-card">
               <h3 className="text-base font-semibold mb-5">Core Expertise</h3>
               <ul className="space-y-3">
                 {expertise.map((item) => (
@@ -115,7 +115,7 @@ export default function AboutPage() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-2xl border border-border bg-bg-card p-8">
+            <div className="rounded-2xl border border-border bg-white p-8 shadow-card">
               <h3 className="text-base font-semibold mb-5">Working With Me</h3>
               <ul className="space-y-3">
                 {workStyle.map((item) => (
@@ -146,9 +146,9 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="relative pl-8 border-l border-border"
+              className="relative pl-8 border-l-2 border-border"
             >
-              <div className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-accent bg-bg" />
+              <div className="absolute -left-[6px] top-1.5 h-3 w-3 rounded-full border-2 border-accent bg-white" />
               <span className="font-mono text-[11px] tracking-[2px] uppercase text-accent">{item.period}</span>
               <h3 className="mt-2 text-lg font-semibold">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-text-secondary">{item.description}</p>
@@ -163,7 +163,7 @@ export default function AboutPage() {
           <div className="font-mono text-[11px] tracking-[4px] uppercase text-accent mb-5">Approach</div>
           <h2 className="font-display text-[clamp(32px,3.5vw,48px)] leading-[1.1]">How we work</h2>
         </div>
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2">
           {values.map((value, i) => (
             <motion.div
               key={value.title}
@@ -171,7 +171,7 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="rounded-2xl border border-border bg-bg-card p-10 transition-all duration-400 hover:bg-bg-card-hover hover:border-border-light"
+              className="rounded-2xl border border-border bg-white p-10 shadow-card transition-all duration-400 hover:shadow-card-hover hover:border-accent/20"
             >
               <h3 className="font-display text-xl font-normal mb-3">{value.title}</h3>
               <p className="text-sm leading-relaxed text-text-secondary">{value.description}</p>

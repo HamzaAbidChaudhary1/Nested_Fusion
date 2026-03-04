@@ -24,7 +24,7 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <section className="relative px-6 pt-36 pb-20 md:px-12 md:pt-44 md:pb-28">
-        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.04)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.06)_0%,transparent_70%)] pointer-events-none" />
         <div className="relative mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <Badge>Contact</Badge>
@@ -41,7 +41,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-8 text-lg leading-relaxed text-text-secondary max-w-[520px]"
+            className="mt-8 text-[17px] leading-relaxed text-text-secondary max-w-[520px]"
           >
             Have a project in mind? Need help with automation or AI? Send me a message and I&apos;ll get back to you within 24 hours.
           </motion.p>
@@ -80,7 +80,7 @@ export default function ContactPage() {
               ))}
             </div>
 
-            <div className="mt-10 rounded-2xl border border-border bg-bg-card p-7">
+            <div className="mt-10 rounded-2xl border border-border bg-white p-7 shadow-card">
               <h3 className="text-base font-semibold mb-4">What to Expect</h3>
               <ul className="space-y-3">
                 {expectations.map((item) => (

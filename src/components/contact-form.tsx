@@ -35,7 +35,7 @@ export default function ContactForm() {
   }
 
   const inputClasses =
-    "w-full rounded-xl border border-border bg-bg-card px-4 py-3 text-sm text-text-primary outline-none transition-all duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/10 placeholder:text-text-muted";
+    "w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-text-primary shadow-card outline-none transition-all duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/10 focus:shadow-card-hover placeholder:text-text-muted";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
@@ -81,7 +81,7 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        className="w-full rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2),0_0_80px_rgba(37,99,235,0.06)] hover:-translate-y-0.5"
+        className="w-full rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white shadow-button transition-all duration-300 hover:shadow-button-hover hover:-translate-y-0.5"
       >
         Send Message
       </button>

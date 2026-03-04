@@ -11,7 +11,7 @@ export default function CaseStudiesPage() {
     <>
       {/* Hero */}
       <section className="relative px-6 pt-36 pb-20 md:px-12 md:pt-44 md:pb-28">
-        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.04)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.06)_0%,transparent_70%)] pointer-events-none" />
         <div className="relative mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <Badge>Case Studies</Badge>
@@ -28,7 +28,7 @@ export default function CaseStudiesPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-8 text-lg leading-relaxed text-text-secondary max-w-[560px]"
+            className="mt-8 text-[17px] leading-relaxed text-text-secondary max-w-[560px]"
           >
             Every project starts with a business problem and ends with a working system. Here are some of the automation and AI solutions we&apos;ve delivered.
           </motion.p>
@@ -46,7 +46,7 @@ export default function CaseStudiesPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               id={study.slug}
-              className="rounded-2xl border border-border bg-bg-card overflow-hidden transition-all duration-400 hover:border-border-light"
+              className="rounded-2xl border border-border bg-white overflow-hidden shadow-card transition-all duration-400 hover:shadow-card-hover hover:border-accent/20"
             >
               <div className="p-8 md:p-10">
                 <div className="grid gap-10 lg:grid-cols-5">
@@ -67,7 +67,7 @@ export default function CaseStudiesPage() {
 
                     <div className="mt-5 flex flex-wrap gap-2">
                       {study.tools.map((tool) => (
-                        <span key={tool} className="font-mono text-[11px] tracking-wider text-accent-dim px-3 py-1 border border-accent/12 rounded-full">
+                        <span key={tool} className="font-mono text-[11px] tracking-wider text-accent-dim px-3 py-1 border border-accent/12 rounded-full bg-accent/4">
                           {tool}
                         </span>
                       ))}
@@ -100,8 +100,8 @@ export default function CaseStudiesPage() {
 
       {/* CTA */}
       <Section>
-        <div className="relative text-center py-8">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[radial-gradient(circle,rgba(37,99,235,0.05)_0%,transparent_60%)] pointer-events-none" />
+        <div className="relative text-center py-12">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[radial-gradient(circle,rgba(37,99,235,0.08)_0%,transparent_60%)] pointer-events-none" />
           <div className="relative">
             <h2 className="font-display text-[clamp(32px,4vw,56px)] leading-[1.1] mb-6">
               Want results like <em className="italic text-accent">these</em>?
@@ -111,7 +111,7 @@ export default function CaseStudiesPage() {
             </p>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-white text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2)] hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-white text-[15px] font-semibold rounded-full shadow-button transition-all duration-300 hover:shadow-button-hover hover:-translate-y-0.5"
             >
               Start a Project
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>

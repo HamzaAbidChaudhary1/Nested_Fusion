@@ -43,7 +43,7 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <Section>
+      <Section hero>
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div>
             <Badge>Services</Badge>

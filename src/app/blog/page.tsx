@@ -43,7 +43,7 @@ const posts = [
 export default function BlogPage() {
   return (
     <>
-      <Section>
+      <Section hero>
         <div className="max-w-3xl">
           <Badge>Blog</Badge>
           <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
@@ -61,21 +61,21 @@ export default function BlogPage() {
           {posts.map((post) => (
             <article
               key={post.slug}
-              className="group overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg"
+              className="overflow-hidden rounded-2xl border border-border bg-white"
             >
               <div className="relative h-48 overflow-hidden">
                 <Image
                   src={post.image}
                   alt={post.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover"
                 />
               </div>
               <div className="p-6">
                 <span className="text-xs font-medium uppercase tracking-wider text-accent">
                   {post.category}
                 </span>
-                <h2 className="mt-3 text-lg font-semibold text-primary group-hover:text-accent transition-colors">
+                <h2 className="mt-3 text-lg font-semibold text-primary">
                   {post.title}
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">

@@ -31,7 +31,7 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-surface px-6 pt-20 pb-28 md:pt-32 md:pb-36">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--color-accent)/5%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgb(37_99_235_/_0.05),_transparent_70%)]" />
         <div className="relative mx-auto max-w-6xl">
           <div className="grid items-center gap-12 md:grid-cols-2">
             <motion.div

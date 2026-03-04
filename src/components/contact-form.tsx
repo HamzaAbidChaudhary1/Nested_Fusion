@@ -81,9 +81,10 @@ export default function ContactForm() {
           id="subject"
           name="subject"
           required
+          defaultValue=""
           className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-primary outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20"
         >
-          <option value="">Select a topic</option>
+          <option value="" disabled>Select a topic</option>
           <option value="automation">Workflow Automation</option>
           <option value="ai">AI / Custom GPT Development</option>
           <option value="development">Full-Stack Development</option>

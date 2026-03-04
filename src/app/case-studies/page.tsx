@@ -11,7 +11,7 @@ export default function CaseStudiesPage() {
   return (
     <>
       {/* Hero */}
-      <Section>
+      <Section hero>
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div>
             <Badge>Case Studies</Badge>
@@ -50,7 +50,7 @@ export default function CaseStudiesPage() {
             >
               <div className="grid md:grid-cols-3">
                 {/* Image */}
-                <div className="relative h-48 md:h-full">
+                <div className="relative h-48 md:h-auto md:min-h-full">
                   <Image
                     src={study.image}
                     alt={study.title}

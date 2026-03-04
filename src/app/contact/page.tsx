@@ -36,7 +36,7 @@ const contactInfo = [
 export default function ContactPage() {
   return (
     <>
-      <Section>
+      <Section hero>
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div>
             <Badge>Contact</Badge>

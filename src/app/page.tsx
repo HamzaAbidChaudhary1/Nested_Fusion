@@ -168,7 +168,7 @@ export default function HomePage() {
           >
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-whitetext-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2),0_0_80px_rgba(37,99,235,0.06)] hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-white text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2),0_0_80px_rgba(37,99,235,0.06)] hover:-translate-y-0.5"
             >
               Start a Project
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
@@ -227,7 +227,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-bg-card p-10 transition-all duration-500 hover:bg-bg-secondary-hover hover:border-border-light hover:-translate-y-1 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-accent before:to-transparent before:opacity-0 before:transition-opacity before:duration-400 hover:before:opacity-100"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-bg-card p-10 transition-all duration-500 hover:bg-bg-card-hover hover:border-border-light hover:-translate-y-1 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-accent before:to-transparent before:opacity-0 before:transition-opacity before:duration-400 hover:before:opacity-100"
             >
               <div className="w-12 h-12 rounded-[10px] bg-accent/8 border border-accent/15 flex items-center justify-center mb-7">
                 {service.icon}
@@ -298,7 +298,7 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(37,99,235,0.08)_0%,transparent_50%),radial-gradient(circle_at_70%_70%,rgba(37,99,235,0.04)_0%,transparent_50%)]" />
             <div className="relative w-[320px] h-[320px]">
               {/* Center */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[72px] h-[72px] bg-accent rounded-2xl flex items-center justify-center font-mono text-[11px] font-bold text-whitetracking-wider z-10 shadow-[0_0_60px_rgba(37,99,235,0.2)]">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[72px] h-[72px] bg-accent rounded-2xl flex items-center justify-center font-mono text-[11px] font-bold text-white tracking-wider z-10 shadow-[0_0_60px_rgba(37,99,235,0.2)]">
                 NF
               </div>
               {/* Ring 1 */}
@@ -350,7 +350,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-whitetext-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2),0_0_80px_rgba(37,99,235,0.06)] hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-white text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2),0_0_80px_rgba(37,99,235,0.06)] hover:-translate-y-0.5"
             >
               Book Discovery Call
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>

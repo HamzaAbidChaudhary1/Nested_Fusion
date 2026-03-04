@@ -19,7 +19,11 @@ export default function ContactForm() {
         animate={{ opacity: 1, scale: 1 }}
         className="rounded-2xl border border-border bg-surface-alt p-10 text-center"
       >
-        <div className="text-4xl">✓</div>
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent/10">
+          <svg className="h-7 w-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
         <h3 className="mt-4 text-xl font-semibold text-primary">
           Message Sent
         </h3>

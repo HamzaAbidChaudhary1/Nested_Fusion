@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Section from "@/components/section";
 import Badge from "@/components/badge";
 
@@ -57,17 +58,27 @@ export default function AboutPage() {
     <>
       {/* Hero */}
       <Section>
-        <div className="max-w-3xl">
-          <Badge>About NestedFusion</Badge>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
-            Building Intelligent Systems for Growing Businesses
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-text-secondary">
-            NestedFusion is an AI automation consultancy founded by Hamza Abid
-            Chaudhary. We specialize in workflow automation, custom GPT
-            development, and full-stack solutions — helping businesses eliminate
-            manual work and scale operations.
-          </p>
+        <div className="grid items-center gap-12 md:grid-cols-2">
+          <div>
+            <Badge>About NestedFusion</Badge>
+            <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
+              Building Intelligent Systems for Growing Businesses
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-text-secondary">
+              NestedFusion is an AI automation consultancy founded by Hamza Abid
+              Chaudhary. We specialize in workflow automation, custom GPT
+              development, and full-stack solutions — helping businesses eliminate
+              manual work and scale operations.
+            </p>
+          </div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+            <Image
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
+              alt="Team collaboration and innovation"
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
       </Section>
 
@@ -99,6 +110,14 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="space-y-4">
+            <div className="relative aspect-square overflow-hidden rounded-2xl">
+              <Image
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop"
+                alt="Professional workspace"
+                fill
+                className="object-cover"
+              />
+            </div>
             <div className="rounded-2xl border border-border bg-white p-6">
               <h3 className="font-semibold text-primary">Core Expertise</h3>
               <ul className="mt-3 space-y-2 text-sm text-text-secondary">

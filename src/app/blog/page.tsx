@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Section from "@/components/section";
 import Badge from "@/components/badge";
@@ -17,6 +18,7 @@ const posts = [
       "A breakdown of why we choose n8n for most client projects — from self-hosting flexibility to its powerful node ecosystem.",
     date: "Coming Soon",
     category: "Automation",
+    image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=600&h=400&fit=crop",
   },
   {
     slug: "building-compliance-gpts",
@@ -25,6 +27,7 @@ const posts = [
       "Lessons learned from deploying 12+ custom GPTs in the disability services sector — including how we tackled evidence fabrication.",
     date: "Coming Soon",
     category: "AI Development",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
   },
   {
     slug: "automation-roi-framework",
@@ -33,6 +36,7 @@ const posts = [
       "A practical framework for measuring the real impact of automation — hours saved, errors reduced, and revenue unlocked.",
     date: "Coming Soon",
     category: "Strategy",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
   },
 ];
 
@@ -57,20 +61,30 @@ export default function BlogPage() {
           {posts.map((post) => (
             <article
               key={post.slug}
-              className="group rounded-2xl border border-border bg-white p-8 transition-shadow hover:shadow-lg"
+              className="group overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg"
             >
-              <span className="text-xs font-medium uppercase tracking-wider text-accent">
-                {post.category}
-              </span>
-              <h2 className="mt-3 text-lg font-semibold text-primary group-hover:text-accent transition-colors">
-                {post.title}
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                {post.excerpt}
-              </p>
-              <p className="mt-4 text-xs font-medium text-text-muted">
-                {post.date}
-              </p>
+              <div className="relative h-48 overflow-hidden">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-6">
+                <span className="text-xs font-medium uppercase tracking-wider text-accent">
+                  {post.category}
+                </span>
+                <h2 className="mt-3 text-lg font-semibold text-primary group-hover:text-accent transition-colors">
+                  {post.title}
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+                  {post.excerpt}
+                </p>
+                <p className="mt-4 text-xs font-medium text-text-muted">
+                  {post.date}
+                </p>
+              </div>
             </article>
           ))}
         </div>

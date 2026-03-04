@@ -24,7 +24,7 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <section className="relative px-6 pt-36 pb-20 md:px-12 md:pt-44 md:pb-28">
-        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(200,255,0,0.04)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.04)_0%,transparent_70%)] pointer-events-none" />
         <div className="relative mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <Badge>Contact</Badge>

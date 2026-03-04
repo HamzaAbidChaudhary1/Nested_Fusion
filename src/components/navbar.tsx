@@ -16,7 +16,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 w-full z-50 backdrop-blur-xl bg-bg/70 border-b border-border">
+    <header className="fixed top-0 w-full z-50 backdrop-blur-xl bg-bg/80 border-b border-border">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-12">
         <Link href="/" className="font-mono text-sm font-medium tracking-[3px] uppercase text-text-primary">
           Nested<span className="text-accent">Fusion</span>
@@ -38,7 +38,7 @@ export default function Navbar() {
 
         <Link
           href="/contact"
-          className="hidden md:block text-[13px] font-semibold px-6 py-2.5 bg-accent text-bg rounded-full tracking-wide transition-all duration-300 hover:shadow-[0_0_30px_rgba(200,255,0,0.15),0_0_60px_rgba(200,255,0,0.08)] hover:-translate-y-0.5"
+          className="hidden md:block text-[13px] font-semibold px-6 py-2.5 bg-accent text-white rounded-full tracking-wide transition-all duration-300 hover:bg-accent-dark hover:shadow-[0_0_30px_rgba(37,99,235,0.2)] hover:-translate-y-0.5"
         >
           Book a Call
         </Link>
@@ -82,7 +82,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block rounded-lg px-3 py-2.5 text-sm font-medium text-text-secondary hover:bg-bg-card hover:text-accent transition-colors"
+                    className="block rounded-lg px-3 py-2.5 text-sm font-medium text-text-secondary hover:bg-bg-secondary hover:text-accent transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -92,7 +92,7 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={() => setMobileOpen(false)}
-                  className="block rounded-full bg-accent px-4 py-2.5 text-center text-sm font-semibold text-bg transition-all hover:shadow-[0_0_30px_rgba(200,255,0,0.15)]"
+                  className="block rounded-full bg-accent px-4 py-2.5 text-center text-sm font-semibold text-white transition-all hover:bg-accent-dark"
                 >
                   Book a Call
                 </Link>

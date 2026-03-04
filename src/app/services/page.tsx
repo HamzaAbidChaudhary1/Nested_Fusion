@@ -18,7 +18,7 @@ export default function ServicesPage() {
     <>
       {/* Hero */}
       <section className="relative px-6 pt-36 pb-20 md:px-12 md:pt-44 md:pb-28">
-        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(200,255,0,0.04)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.04)_0%,transparent_70%)] pointer-events-none" />
         <div className="relative mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <Badge>Services</Badge>
@@ -99,7 +99,7 @@ export default function ServicesPage() {
       {/* CTA */}
       <Section alt>
         <div className="relative text-center py-8">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[radial-gradient(circle,rgba(200,255,0,0.05)_0%,transparent_60%)] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[radial-gradient(circle,rgba(37,99,235,0.05)_0%,transparent_60%)] pointer-events-none" />
           <div className="relative">
             <h2 className="font-display text-[clamp(32px,4vw,56px)] leading-[1.1] mb-6">
               Have a project in <em className="italic text-accent">mind</em>?
@@ -109,7 +109,7 @@ export default function ServicesPage() {
             </p>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-bg text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(200,255,0,0.15)] hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-white text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2)] hover:-translate-y-0.5"
             >
               Start a Conversation
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>

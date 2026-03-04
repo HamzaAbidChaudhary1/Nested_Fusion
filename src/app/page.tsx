@@ -128,14 +128,14 @@ export default function HomePage() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: "linear-gradient(rgba(200,255,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(200,255,0,0.03) 1px, transparent 1px)",
+            backgroundImage: "linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px)",
             backgroundSize: "80px 80px",
             maskImage: "radial-gradient(ellipse 70% 50% at 50% 40%, black 20%, transparent 70%)",
             WebkitMaskImage: "radial-gradient(ellipse 70% 50% at 50% 40%, black 20%, transparent 70%)",
           }}
         />
         {/* Glow */}
-        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[radial-gradient(circle,rgba(200,255,0,0.06)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[radial-gradient(circle,rgba(37,99,235,0.06)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="relative mx-auto max-w-7xl w-full">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
@@ -168,14 +168,14 @@ export default function HomePage() {
           >
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-bg text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(200,255,0,0.15),0_0_80px_rgba(200,255,0,0.06)] hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-whitetext-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2),0_0_80px_rgba(37,99,235,0.06)] hover:-translate-y-0.5"
             >
               Start a Project
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </Link>
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 px-8 py-4 text-text-primary text-[15px] font-medium border border-border-light rounded-full transition-all duration-300 hover:border-text-muted hover:bg-bg-card"
+              className="inline-flex items-center gap-2 px-8 py-4 text-text-primary text-[15px] font-medium border border-border-light rounded-full transition-all duration-300 hover:border-text-muted hover:bg-bg-secondary"
             >
               See How It Works
             </Link>
@@ -227,7 +227,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-bg-card p-10 transition-all duration-500 hover:bg-bg-card-hover hover:border-border-light hover:-translate-y-1 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-accent before:to-transparent before:opacity-0 before:transition-opacity before:duration-400 hover:before:opacity-100"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-bg-card p-10 transition-all duration-500 hover:bg-bg-secondary-hover hover:border-border-light hover:-translate-y-1 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-accent before:to-transparent before:opacity-0 before:transition-opacity before:duration-400 hover:before:opacity-100"
             >
               <div className="w-12 h-12 rounded-[10px] bg-accent/8 border border-accent/15 flex items-center justify-center mb-7">
                 {service.icon}
@@ -250,7 +250,7 @@ export default function HomePage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border rounded-2xl overflow-hidden">
           {processSteps.map((step) => (
-            <div key={step.num} className="bg-bg p-10 md:p-12 transition-all duration-400 hover:bg-bg-card group">
+            <div key={step.num} className="bg-bg p-10 md:p-12 transition-all duration-400 hover:bg-bg-secondary group">
               <div className="font-display text-[64px] text-border-light leading-none mb-6 transition-colors duration-400 group-hover:text-accent">
                 {step.num}
               </div>
@@ -295,10 +295,10 @@ export default function HomePage() {
             transition={{ duration: 1 }}
             className="relative h-[480px] bg-bg-card border border-border rounded-2xl overflow-hidden flex items-center justify-center"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(200,255,0,0.08)_0%,transparent_50%),radial-gradient(circle_at_70%_70%,rgba(200,255,0,0.04)_0%,transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(37,99,235,0.08)_0%,transparent_50%),radial-gradient(circle_at_70%_70%,rgba(37,99,235,0.04)_0%,transparent_50%)]" />
             <div className="relative w-[320px] h-[320px]">
               {/* Center */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[72px] h-[72px] bg-accent rounded-2xl flex items-center justify-center font-mono text-[11px] font-bold text-bg tracking-wider z-10 shadow-[0_0_60px_rgba(200,255,0,0.15)]">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[72px] h-[72px] bg-accent rounded-2xl flex items-center justify-center font-mono text-[11px] font-bold text-whitetracking-wider z-10 shadow-[0_0_60px_rgba(37,99,235,0.2)]">
                 NF
               </div>
               {/* Ring 1 */}
@@ -339,7 +339,7 @@ export default function HomePage() {
       {/* ── CTA ── */}
       <Section id="contact">
         <div className="relative text-center py-8">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(200,255,0,0.06)_0%,transparent_60%)] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(37,99,235,0.06)_0%,transparent_60%)] pointer-events-none" />
           <div className="relative">
             <div className="font-mono text-[11px] tracking-[4px] uppercase text-accent mb-5">Ready?</div>
             <h2 className="font-display text-[clamp(40px,5vw,72px)] leading-[1.05] mb-6">
@@ -350,7 +350,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-bg text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(200,255,0,0.15),0_0_80px_rgba(200,255,0,0.06)] hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-whitetext-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.2),0_0_80px_rgba(37,99,235,0.06)] hover:-translate-y-0.5"
             >
               Book Discovery Call
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>

@@ -1,18 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0a0a0b;
-  --color-bg-secondary: #111113;
-  --color-bg-card: #161618;
-  --color-bg-card-hover: #1c1c1f;
-  --color-text-primary: #f0efe9;
-  --color-text-secondary: #8a8a8e;
-  --color-text-muted: #55555a;
-  --color-accent: #c8ff00;
-  --color-accent-dim: #a5d600;
-  --color-accent-glow: rgba(200, 255, 0, 0.15);
-  --color-border: #222225;
-  --color-border-light: #2a2a2e;
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-card: #ffffff;
+  --color-bg-card-hover: #f1f5f9;
+  --color-bg-dark: #0f172a;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  --color-accent: #2563eb;
+  --color-accent-dim: #3b82f6;
+  --color-accent-dark: #1d4ed8;
+  --color-accent-glow: rgba(37, 99, 235, 0.15);
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
 
   --font-display: 'Instrument Serif', Georgia, serif;
   --font-body: 'DM Sans', sans-serif;
@@ -24,7 +26,7 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-border-light) transparent;
+  scrollbar-color: var(--color-border) transparent;
 }
 
 body {
@@ -35,21 +37,21 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Noise texture overlay */
+/* Subtle noise texture overlay */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
 ::selection {
   background-color: var(--color-accent);
-  color: var(--color-bg);
+  color: white;
 }
 
 /* Animations */

@@ -89,7 +89,7 @@ def header(active):
 
 
 def phero(kicker, title, lead):
-    lines = "".join(f'<span class="line">{html.escape(l).replace("&amp;amp;", "&amp;")}</span>' for l in title.split("|"))
+    lines = " ".join(f'<span class="line">{html.escape(l).replace("&amp;amp;", "&amp;")}</span>' for l in title.split("|"))
     return f"""<section class="phero" aria-labelledby="page-title">
   <canvas class="hero__net" aria-hidden="true"></canvas>
   <div class="hero__glow" aria-hidden="true"></div>

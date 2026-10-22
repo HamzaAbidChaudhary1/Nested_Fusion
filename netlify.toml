@@ -1,4 +1,6 @@
 [build]
+  # Static site: no build step. Overrides any dashboard build command.
+  command = "echo static site, no build needed"
   publish = "."
 
 [[headers]]

@@ -330,7 +330,7 @@
       status.textContent = 'Thanks — your message is in. We’ll reply within one business day.';
     } catch (err) {
       status.className = 'form__status err';
-      status.innerHTML = 'That didn’t send. Please email <a href="mailto:hello@nestedfusion.com">hello@nestedfusion.com</a>.';
+      status.textContent = 'That didn’t send — please check your connection and try again.';
     } finally { btn.disabled = false; }
   });
 

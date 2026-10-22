@@ -362,7 +362,7 @@ html:not(.js) .loader,html.seen .loader{display:none}
 }
 </style>
 <script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('nf-seen'))document.documentElement.classList.add('seen')}catch(e){}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"NestedFusion","description":"AI agents, voice agents and workflow automation for growing teams.","founder":{"@type":"Person","name":"Hamza Abid Chaudhary","jobTitle":"Founder & Forward Deployed Engineer"},"areaServed":["AU","GB"],"email":"hello@nestedfusion.com"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"NestedFusion","description":"AI agents, voice agents and workflow automation for growing teams.","founder":{"@type":"Person","name":"Hamza Abid Chaudhary","jobTitle":"Founder & Forward Deployed Engineer"},"areaServed":["AU","GB"]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -651,7 +651,6 @@ html:not(.js) .loader,html.seen .loader{display:none}
         <li>No-obligation automation plan</li>
         <li>Straight answer if AI isn’t the right fit</li>
       </ul>
-      <p class="contact__mail">Prefer email? <a href="mailto:hello@nestedfusion.com">hello@nestedfusion.com</a></p>
     </div>
     <form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/">
       <input type="hidden" name="form-name" value="contact">
@@ -1059,7 +1058,7 @@ html:not(.js) .loader,html.seen .loader{display:none}
       status.textContent = 'Thanks — your message is in. We’ll reply within one business day.';
     } catch (err) {
       status.className = 'form__status err';
-      status.innerHTML = 'That didn’t send. Please email <a href="mailto:hello@nestedfusion.com">hello@nestedfusion.com</a>.';
+      status.textContent = 'That didn’t send — please check your connection and try again.';
     } finally { btn.disabled = false; }
   });
 

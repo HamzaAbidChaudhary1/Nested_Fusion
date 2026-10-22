@@ -25,3 +25,8 @@
   for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[redirects]]
+  from = "/thanks.html"
+  to = "/thanks/"
+  status = 301

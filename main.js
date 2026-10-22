@@ -69,19 +69,20 @@
     nav.classList.toggle('is-scrolled', y > 20);
     const goingDown = y > lastY && y > 400 && menu.hidden;
     nav.classList.toggle('is-hidden', goingDown);
+    document.body.classList.toggle('nav-hidden', goingDown);
     lastY = y;
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Active section link
-  const links = $$('.nav__links a');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (en.isIntersecting) links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === '#' + en.target.id));
-    });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  ['services', 'process', 'work', 'approach', 'faq'].forEach(id => { const s = document.getElementById(id); if (s) io.observe(s); });
+  /* ---------- Sub-nav highlight (services jump links, FAQ groups) ---------- */
+  const subLinks = $$('.jump a, .faq__toc a');
+  if (subLinks.length) {
+    const sio = new IntersectionObserver(es => es.forEach(en => {
+      if (en.isIntersecting) subLinks.forEach(l => l.classList.toggle('is-on', l.getAttribute('href') === '#' + en.target.id));
+    }), { rootMargin: '-40% 0px -55% 0px' });
+    subLinks.forEach(l => { const t = document.getElementById(l.getAttribute('href').slice(1)); if (t) sio.observe(t); });
+  }
 
   /* ---------- Count up ---------- */
   const countUp = el => {
@@ -128,6 +129,7 @@
     }, 1100 + Math.random() * 500);
   };
   const startConsole = () => {
+    if (!items.length) return;
     if (reduce) { items.forEach(i => i.classList.add('done')); meter.style.width = '100%'; return; }
     tick();
   };
@@ -334,26 +336,77 @@
     } finally { btn.disabled = false; }
   });
 
+  /* ---------- Page transitions ---------- */
+  // Browsers with cross-document View Transitions use the CSS @view-transition rule.
+  // Others get a short cyan wipe so moving between pages still feels continuous.
+  if (!reduce && !('onpagereveal' in window)) {
+    const veil = document.createElement('div');
+    veil.className = 'veil'; veil.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(veil);
+    requestAnimationFrame(() => veil.classList.add('veil--out'));
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href]');
+      if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target === '_blank') return;
+      const url = new URL(a.href, location.href);
+      if (url.origin !== location.origin || (url.pathname === location.pathname && url.hash) || a.hasAttribute('download')) return;
+      e.preventDefault();
+      veil.classList.remove('veil--out'); veil.classList.add('veil--in');
+      setTimeout(() => { location.href = url.href; }, 320);
+    });
+    window.addEventListener('pageshow', ev => { if (ev.persisted) { veil.classList.remove('veil--in'); veil.classList.add('veil--out'); } });
+  }
+
+  /* ---------- Work filters ---------- */
+  const filters = $$('.filter');
+  if (filters.length) {
+    const studies = $$('.study'), empty = $('.filters__empty');
+    filters.forEach(f => f.addEventListener('click', () => {
+      const key = f.dataset.filter;
+      filters.forEach(x => { const on = x === f; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', String(on)); });
+      let shown = 0;
+      studies.forEach(st => {
+        const match = key === 'all' || st.dataset.type.split(' ').includes(key);
+        if (match) shown++;
+        if (hasGSAP && !reduce) {
+          if (match) { st.hidden = false; gsap.fromTo(st, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .6, ease: 'expo.out' }); }
+          else st.hidden = true;
+        } else st.hidden = !match;
+      });
+      if (empty) empty.hidden = shown > 0;
+      if (hasGSAP) ScrollTrigger.refresh();
+    }));
+  }
+
+  /* ---------- Arrive at #section from another page ---------- */
+  const goToHash = () => {
+    if (!location.hash || location.hash.length < 2) return;
+    let t; try { t = $(location.hash); } catch (e) { return; }
+    if (!t) return;
+    if (lenis) lenis.scrollTo(t, { offset: -90, immediate: true }); else t.scrollIntoView();
+  };
+
   /* ---------- GSAP choreography ---------- */
   const runIntro = () => {
     startConsole();
     net.start();
     $$('.count').forEach(c => cio.observe(c));
-    if (!hasGSAP || reduce) { showAll(); return; }
+    if (!hasGSAP || reduce) { showAll(); goToHash(); return; }
 
     gsap.registerPlugin(ScrollTrigger, window.SplitText ? SplitText : undefined);
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-    tl.to('.hero__title .line > span', { y: 0, duration: 1.3, stagger: .1 })
-      .to('.hero .reveal-up', { opacity: 1, y: 0, duration: 1, stagger: .08 }, '-=1.0')
-      .from('.hero__visual', { opacity: 0, scale: .92, duration: 1.6 }, '-=1.3')
-      .from('.console', { y: 40, opacity: 0, duration: 1.2 }, '-=1.2');
+    if ($('.hero__title')) tl.to('.hero__title .line > span', { y: 0, duration: 1.3, stagger: .1 });
+    if ($('.reveal-up')) tl.to('.reveal-up', { opacity: 1, y: 0, duration: 1, stagger: .08 }, $('.hero__title') ? '-=1.0' : 0);
+    if ($('.hero__visual')) tl.from('.hero__visual', { opacity: 0, scale: .92, duration: 1.6 }, '-=1.3').from('.console', { y: 40, opacity: 0, duration: 1.2 }, '-=1.2');
 
     // Progress bar
     gsap.to('.progress span', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
 
     // Hero parallax out
-    gsap.to('.hero__copy', { yPercent: -12, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.to('.hero__visual', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    if ($('.hero__copy')) {
+      gsap.to('.hero__copy', { yPercent: -12, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+      gsap.to('.hero__visual', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    }
+    if ($('.phero__in')) gsap.to('.phero__in', { yPercent: -18, opacity: .15, ease: 'none', scrollTrigger: { trigger: '.phero', start: 'top top', end: 'bottom top', scrub: true } });
 
     // Split headings
     if (window.SplitText) {
@@ -365,7 +418,7 @@
 
     // Manifesto scrub
     const words = $$('.manifesto__text .word');
-    ScrollTrigger.create({
+    if (words.length) ScrollTrigger.create({
       trigger: '.manifesto', start: 'top 70%', end: 'bottom 55%', scrub: true,
       onUpdate: self => { const n = Math.round(self.progress * words.length); words.forEach((w, i) => w.classList.toggle('on', i < n)); }
     });
@@ -375,9 +428,11 @@
       gsap.set(sel, { opacity: 0, y: 40 });
       ScrollTrigger.batch(sel, { start: 'top 88%', onEnter: els => gsap.to(els, { opacity: 1, y: 0, duration: 1, ease: 'expo.out', stagger: .1, ...opts, overwrite: true }) });
     };
-    batch('.card'); batch('.case'); batch('.pillar'); batch('.faq details', { stagger: .05 }); batch('.founder'); batch('.form'); batch('.contact__points li', { stagger: .06 });
-    gsap.from('.sec-head .kicker, .contact .kicker', { opacity: 0, x: -16, duration: .8, scrollTrigger: { trigger: '.services', start: 'top 85%' } });
-    $$('.lead').forEach(l => gsap.from(l, { opacity: 0, y: 20, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: l, start: 'top 90%' } }));
+    ['.card', '.case', '.study', '.pillar', '.founder', '.form', '.svc__col', '.guard__item', '.engage__card', '.band__in', '.faq__ask']
+      .forEach(sel => { if ($(sel)) batch(sel); });
+    ['.faq details', '.strip__steps li', '.principles__list li', '.next li', '.jump a'].forEach(sel => { if ($(sel)) batch(sel, { stagger: .06 }); });
+    $$('.sec-head .kicker, .cta .kicker, .svc__no').forEach(k => gsap.from(k, { opacity: 0, x: -16, duration: .8, scrollTrigger: { trigger: k, start: 'top 90%' } }));
+    $$('.lead:not(.reveal-up)').forEach(l => gsap.from(l, { opacity: 0, y: 20, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: l, start: 'top 90%' } }));
 
     // Process line + steps
     const fill = $('.process__line i');
@@ -395,7 +450,8 @@
       lenis.on('scroll', ({ velocity }) => { track.style.animationDuration = Math.max(14, 45 - Math.abs(velocity) * 3) + 's'; });
     }
 
-    window.addEventListener('load', () => ScrollTrigger.refresh());
+    window.addEventListener('load', () => { ScrollTrigger.refresh(); goToHash(); });
+    goToHash();
     document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
   };
 

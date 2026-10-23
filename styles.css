@@ -494,6 +494,16 @@ body.nav-hidden .jump{top:0}
 .ph--video .ph__in::after{opacity:0}
 .ph--video::after{background:linear-gradient(0deg,rgba(5,8,14,.45),rgba(5,8,14,0) 40%)}
 
+.also{margin-top:clamp(56px,7vw,96px)}
+.also__title{margin:0 0 20px;font:500 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+.also__grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.also__item{display:block;padding:clamp(24px,2.6vw,32px);border-radius:var(--r);border:1px solid var(--line);background:var(--bg-2);color:inherit;transition:border-color .3s}
+a.also__item:hover{border-color:rgba(35,215,255,.35)}
+.also__kind{display:inline-block;margin-bottom:14px;font:500 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);padding:7px 10px;border-radius:999px;background:rgba(35,215,255,.07)}
+.also__item p{margin:0;color:var(--muted)}
+.study__result .big,.case__result .big{white-space:nowrap}
+@media (max-width:720px){.also__grid{grid-template-columns:1fr}.study__result .big,.case__result .big{font-size:52px}}
+
 /* Reveal defaults (JS animates) */
 .js .reveal-up{opacity:0;transform:translateY(24px)}
 .js .hero__title .line > span{transform:translateY(105%)}

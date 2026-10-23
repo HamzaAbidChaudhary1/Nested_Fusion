@@ -110,15 +110,16 @@ def phero(kicker, title, lead):
 # Unsplash photos (hotlinked from Unsplash's CDN as their API terms require; downloads registered via the API).
 # key: (photo path id, alt text, photographer name, unsplash username, photo page slug)
 PHOTOS = {
+    "permit":    ("photo-1721244654392-9c912a6eb236", "Blueprint elevation of a building with windows", "Amsterdam City Archives", "amsterdamcityarchives", "URnyBZCnlIs"),
+    "dubai":     ("photo-1462007895615-c8c073bebcd8", "Dubai skyline at night", "Robert Bock", "robertbock", "cV4qkkorDFY"),
+    "church":    ("photo-1699830506478-af7b3f5e6cc9", "Church interior with stained glass windows", "Jack Gardner", "jackgardner", "9S9YGw6nmCg"),
+    "learning":  ("photo-1499914485622-a88fac536970", "Person working through an online course on a laptop", "Christin Hume", "christinhumephoto", "hBuwVLcYTnA"),
     "voice":     ("photo-1766066014237-00645c74e9c6", "Person wearing a headset working at a computer", "BaljkanN4", "baljkann4", "wnpf3Q5pkXA"),
     "workflows": ("photo-1680992044138-ce4864c2b962", "Close-up of server hardware with status lights", "Tyler", "tylergm", "vSprjjDbu60"),
     "apps":      ("photo-1555066931-4365d14bab8c", "Laptop screen showing application code", "Arnold Francisca", "clark_fransa", "f77Bh3inUpE"),
     "health":    ("photo-1758691461990-03b49d969495", "Clinician writing in a patient record", "Vitaly Gariev", "silverkblack", "8WYkI3cEZm8"),
     "wellness":  ("photo-1651528878442-720828f0e17e", "Wellness product bottles", "SUNDAY II SUNDAY", "sunday2sunday", "JK7q3Vktq0o"),
-    "property":  ("photo-1725785218870-b41365703511", "Apartment building with lit windows at night", "Patrick von der Wehd", "patrick_von_der_wehd", "SiqTD-YeKxY"),
     "content":   ("photo-1676276375742-9e3d10e39d45", "Social media content plan on a whiteboard", "Walls.io", "walls_io", "sckgeg8lNMY"),
-    "retail":    ("photo-1587293852726-70cdb56c2866", "Boxes stacked on warehouse shelving", "CHUTTERSNAP", "chuttersnap", "BNBA1h-NgdY"),
-    "onboard":   ("photo-1521791136064-7986c2920216", "Two people shaking hands", "Cytonn Photography", "cytonn_photography", "n95VMLxqM2I"),
     "workshop":  ("photo-1677506048892-edde55cf3277", "Person presenting a process mapped on sticky notes", "Paymo", "paymo", "4wSnhAT8d9g"),
     "circuit":   ("photo-1727434032773-af3cd98375ba", "Close-up of a circuit board with data lines", "Luke Jones", "lukejonesdesign", "tBvF46kmwBw"),
 }

@@ -1,34 +1,80 @@
-<!--title: Work — AI agent & automation case studies | NestedFusion-->
-<!--desc: Selected NestedFusion projects: compliance GPTs for allied health, market-intelligence agents for e-commerce, real-estate onboarding automation and more.-->
+<!--title: Work — AI systems, platforms & automation case studies | NestedFusion-->
+<!--desc: Selected NestedFusion builds: an AI permitting system for a Florida engineering firm, a Dubai real-estate investment platform, a safeguarding compliance portal, voice agents and production automation.-->
 <!--active: work-->
-{{PHERO kicker="Selected work" title="Shipped across|industries, not slideware." lead="A selection of agents and automations we've delivered. Client names are withheld; outcomes are as reported on delivery."}}
+{{PHERO kicker="Selected work" title="Shipped across|industries, not slideware." lead="Production AI systems, platforms and automations built for engineering, real estate, healthcare, non-profit and e-commerce teams. Client names are withheld."}}
 
 <section class="worklist" aria-label="Case studies">
   <div class="wrap">
     <div class="filters" role="group" aria-label="Filter case studies">
       <button class="filter is-on" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter" data-filter="agents" aria-pressed="false">AI agents</button>
-      <button class="filter" data-filter="gpt" aria-pressed="false">Custom GPTs</button>
+      <button class="filter" data-filter="ai" aria-pressed="false">AI systems</button>
+      <button class="filter" data-filter="platforms" aria-pressed="false">Platforms</button>
       <button class="filter" data-filter="automation" aria-pressed="false">Automation</button>
+      <button class="filter" data-filter="voice" aria-pressed="false">Voice AI</button>
     </div>
 
     <div class="studies">
-      <article class="study study--feature" data-type="gpt agents">
-        {{IMG key="health" cls="ph--study" ratio="21/8" sizes="(max-width: 720px) 100vw, 1200px"}}
+      <article class="study study--feature" data-type="ai platforms">
+        {{IMG key="permit" cls="ph--study" ratio="21/8" sizes="(max-width: 720px) 100vw, 1200px"}}
         <div class="study__head">
-          <div class="case__meta"><span>Allied health</span><span>Compliance</span></div>
-          <h2>Compliance report GPT suite for clinical practitioners</h2>
-          <ul class="tags"><li>Custom GPTs</li><li>OpenAI</li><li>Prompt frameworks</li><li>Guardrails</li></ul>
+          <div class="case__meta"><span>Engineering</span><span>Florida, USA</span></div>
+          <h2>AI permitting system for a Florida engineering firm</h2>
+          <ul class="tags"><li>Claude</li><li>Python</li><li>Vision models</li><li>RAG</li><li>Supabase</li><li>CAD / DXF</li></ul>
         </div>
-        <div class="study__result"><span class="big"><span class="count" data-to="50">50</span>%</span><span>less time per report — from 5+ hours to around 2.5</span></div>
+        <div class="study__result"><span class="big">0</span><span>engineering numbers left to the language model. Every calculation is deterministic code, and a licensed engineer signs off.</span></div>
         <dl class="study__body">
-          <div><dt>Challenge</dt><dd>Practitioners in the disability services sector spent five hours or more writing each compliance report, and AI-assisted drafts carried a risk of fabricated evidence.</dd></div>
-          <div><dt>What we built</dt><dd>A suite of 12+ custom GPTs with structured prompting and compliance guardrails, keeping outputs clinically accurate and aligned to NDIS standards.</dd></div>
-          <div><dt>Outcome</dt><dd>Report writing time roughly halved, with guardrails removing the evidence-fabrication risk.</dd></div>
+          <div><dt>Challenge</dt><dd>Every window and door permit needs wind-load calculations, a schedule of openings, drawings and a current Miami-Dade product approval for each product. It was all assembled by hand, and approvals that expire or get superseded went unchecked. A stale approval means a rejected permit.</dd></div>
+          <div><dt>What we built</dt><dd>A pipeline that takes a job in (order, floor plan, property photos) and reads it with a vision model. It runs the wind-load maths as code matched to the engineer's own workbook, fetches product approvals live and highlights the ratings that apply, then generates the schedule and a CAD drawing. A case library of past jobs, retrieved by structured features rather than text similarity, keeps new work consistent with how the firm has always done it.</dd></div>
+          <div><dt>Outcome</dt><dd>Delivered in milestones, each accepted by the client: intake to drawing, then floor plans and the case library, then live product-approval retrieval. The engineer reviews what the system read before anything is generated, and his word overrides it.</dd></div>
         </dl>
       </article>
 
-      <article class="study" data-type="agents">
+      <article class="study" data-type="platforms automation">
+        {{IMG key="dubai" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
+        <div class="study__head">
+          <div class="case__meta"><span>Real estate</span><span>Dubai, UAE</span></div>
+          <h2>Investment platform for a Dubai real-estate firm</h2>
+          <ul class="tags"><li>Node.js</li><li>React</li><li>Supabase</li><li>n8n</li><li>GoHighLevel</li></ul>
+        </div>
+        <div class="study__result"><span class="big"><span class="count" data-to="2">2</span></span><span>portals on one data model: an agent dashboard and an investor booking system</span></div>
+        <dl class="study__body">
+          <div><dt>Challenge</dt><dd>A licensed Dubai brokerage needed to take investors from property discovery to a booked unit, with staged down payments, government registration fees and co-investors, across several developers.</dd></div>
+          <div><dt>What we built</dt><dd>An agent dashboard and investor booking system with a multi-stage payment flow (2%, 18%, 20%), Dubai Land Department fees calculated correctly, co-investor bookings, CRM sync and automated property-inventory pipelines.</dd></div>
+          <div><dt>Outcome</dt><dd>Live in production for the firm's agents and investors, and expanding from one developer to several.</dd></div>
+        </dl>
+      </article>
+
+      <article class="study" data-type="platforms automation">
+        {{IMG key="church" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
+        <div class="study__head">
+          <div class="case__meta"><span>Non-profit</span><span>Australia</span></div>
+          <h2>Safeguarding compliance portal for a Catholic diocese</h2>
+          <ul class="tags"><li>Supabase</li><li>PostgreSQL RLS</li><li>Make.com</li><li>Netlify</li></ul>
+        </div>
+        <div class="study__result"><span class="big">Daily</span><span>compliance notifications sent automatically, with a full audit trail</span></div>
+        <dl class="study__body">
+          <div><dt>Challenge</dt><dd>Everyone in a ministry role must hold current screening and training. Tracking that across positions in spreadsheets left gaps nobody could see.</dd></div>
+          <div><dt>What we built</dt><dd>A portal for member registration and position-based compliance tracking: screening and training records, admin dashboards, confidential notes, readable audit logs and exports. It runs on row-level-secured Postgres with daily automated notifications.</dd></div>
+          <div><dt>Outcome</dt><dd>Deployed for the diocese team and refined through structured rounds of their feedback.</dd></div>
+        </dl>
+      </article>
+
+      <article class="study" data-type="voice ai">
+        {{IMG key="voice" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
+        <div class="study__head">
+          <div class="case__meta"><span>Voice AI</span><span>Sales</span></div>
+          <h2>Real-time AI voice sales agent on a self-hosted stack</h2>
+          <ul class="tags"><li>Pipecat</li><li>Twilio</li><li>Whisper</li><li>Piper</li><li>FastAPI</li><li>Next.js</li></ul>
+        </div>
+        <div class="study__result"><span class="big">Self-hosted</span><span>speech recognition and voice, keeping the cost of each call low</span></div>
+        <dl class="study__body">
+          <div><dt>Challenge</dt><dd>Hosted voice platforms charge by the minute, which adds up quickly on outbound sales calls.</dd></div>
+          <div><dt>What we built</dt><dd>A phone agent with Twilio telephony, Whisper speech-to-text, an LLM for the conversation and Piper text-to-speech, orchestrated with Pipecat behind a FastAPI backend, plus a web dashboard to dial and follow calls.</dd></div>
+          <div><dt>Outcome</dt><dd>An agent that dials out, holds a natural conversation and logs every call.</dd></div>
+        </dl>
+      </article>
+
+      <article class="study" data-type="ai automation">
         {{IMG key="wellness" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
         <div class="study__head">
           <div class="case__meta"><span>E-commerce</span><span>Australia</span></div>
@@ -37,73 +83,89 @@
         </div>
         <div class="study__result"><span class="big"><span class="count" data-to="3">3</span></span><span>agents running on a weekly schedule</span></div>
         <dl class="study__body">
-          <div><dt>Challenge</dt><dd>The team wanted a regular view of pricing, bundle and product opportunities without spending days on manual research.</dd></div>
-          <div><dt>What we built</dt><dd>Three n8n agents that pull Shopify product and order data, research competitors and trends across the web, Etsy and Reddit, and suggest pricing, bundles and new products. Memory stops them repeating past recommendations.</dd></div>
+          <div><dt>Challenge</dt><dd>The team wanted a regular view of pricing, bundle and product opportunities without days of manual research.</dd></div>
+          <div><dt>What we built</dt><dd>Three agents that pull Shopify product and order data, research competitors and trends across the web, Etsy and Reddit, and recommend pricing, bundles and new products. Memory stops them repeating past recommendations.</dd></div>
           <div><dt>Outcome</dt><dd>A formatted report lands in the team's inbox and Google Sheets every week.</dd></div>
         </dl>
       </article>
 
       <article class="study" data-type="automation">
-        {{IMG key="property" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
+        {{IMG key="workflows" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
         <div class="study__head">
-          <div class="case__meta"><span>Real estate</span><span>Investment</span></div>
-          <h2>Booking-to-onboarding pipeline for a property investment firm</h2>
-          <ul class="tags"><li>GoHighLevel</li><li>n8n</li><li>Webhooks</li><li>Payments</li></ul>
+          <div class="case__meta"><span>Real estate</span><span>Data</span></div>
+          <h2>Production data pipelines from a Salesforce partner portal</h2>
+          <ul class="tags"><li>Apify</li><li>Node.js</li><li>Salesforce APIs</li><li>Supabase</li></ul>
         </div>
-        <div class="study__result"><span class="big">0</span><span>manual hand-offs from booking to onboarded client</span></div>
+        <div class="study__result"><span class="big"><span class="count" data-to="2">2</span></span><span>production scrapers feeding live inventory and booking data</span></div>
         <dl class="study__body">
-          <div><dt>Challenge</dt><dd>The firm needed a booking and onboarding system that could handle complex investment workflows, payments and CRM updates.</dd></div>
-          <div><dt>What we built</dt><dd>A multi-step booking form with conditional logic and integrated payments, synced to GoHighLevel in real time.</dd></div>
-          <div><dt>Outcome</dt><dd>Booking flows straight into automated client onboarding, with no manual hand-offs.</dd></div>
+          <div><dt>Challenge</dt><dd>Inventory and booking data lived in a developer's Salesforce partner portal with heavy anti-bot protection and no export.</dd></div>
+          <div><dt>What we built</dt><dd>Two Apify actors that call the portal's internal APIs directly instead of driving a browser, extracting units, prices, floors and booking records into structured feeds.</dd></div>
+          <div><dt>Outcome</dt><dd>Clean data flowing into the investment platform and reporting, without anyone copying from the portal.</dd></div>
         </dl>
       </article>
 
-      <article class="study" data-type="agents automation">
+      <article class="study" data-type="automation">
+        {{IMG key="learning" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
+        <div class="study__head">
+          <div class="case__meta"><span>Online education</span><span>Memberships</span></div>
+          <h2>Membership automation across six platforms</h2>
+          <ul class="tags"><li>Make.com</li><li>n8n</li><li>ThriveCart</li><li>Stripe</li><li>HubSpot</li><li>Slack</li></ul>
+        </div>
+        <div class="study__result"><span class="big"><span class="count" data-to="8">8</span></span><span>product enrollment flows, from purchase to course and community access</span></div>
+        <dl class="study__body">
+          <div><dt>Challenge</dt><dd>Every sale, refund, cancellation and failed payment had to update course access, community access and the CRM correctly across membership tiers.</dd></div>
+          <div><dt>What we built</dt><dd>An event router that sends each purchase event to the right one of eight enrollment flows: enrollment, Slack invites and welcome emails, plus removals on refunds and failed payments. We added a holiday pause that suspends billing through the payment APIs while members keep access.</dd></div>
+          <div><dt>Outcome</dt><dd>Members get the right access automatically, and nobody manages enrollments by hand.</dd></div>
+        </dl>
+      </article>
+
+      <article class="study" data-type="ai">
+        {{IMG key="health" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
+        <div class="study__head">
+          <div class="case__meta"><span>Allied health</span><span>Compliance</span></div>
+          <h2>Clinical report-writing GPT suite for a physiotherapy practice</h2>
+          <ul class="tags"><li>Custom GPTs</li><li>OpenAI</li><li>Prompt frameworks</li><li>Guardrails</li></ul>
+        </div>
+        <div class="study__result"><span class="big"><span class="count" data-to="50">50</span>%</span><span>less time per report across a suite of 12 GPTs</span></div>
+        <dl class="study__body">
+          <div><dt>Challenge</dt><dd>Practitioners spent five hours or more on each NDIS report, and AI drafts risked paraphrasing participant goals or inventing evidence.</dd></div>
+          <div><dt>What we built</dt><dd>Twelve GPTs with structured prompting and compliance guardrails: goals quoted verbatim, plain-language function descriptions and outcome-focused progress statements.</dd></div>
+          <div><dt>Outcome</dt><dd>Report time roughly halved, with output the clinical team trusts.</dd></div>
+        </dl>
+      </article>
+
+      <article class="study" data-type="ai automation">
         {{IMG key="content" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
         <div class="study__head">
-          <div class="case__meta"><span>Publishing</span><span>Content</span></div>
-          <h2>AI content pipeline from idea to published post</h2>
-          <ul class="tags"><li>Make.com</li><li>OpenAI</li><li>Airtable</li><li>Social APIs</li></ul>
+          <div class="case__meta"><span>Marketing</span><span>Product build</span></div>
+          <h2>AI content studio: research, write and approve</h2>
+          <ul class="tags"><li>React</li><li>n8n</li><li>GPT-4</li><li>Apify</li><li>Imagen</li></ul>
         </div>
-        <div class="study__result"><span class="big">0</span><span>new hires needed to scale output</span></div>
+        <div class="study__result"><span class="big">Human</span><span>approval before anything is published</span></div>
         <dl class="study__body">
-          <div><dt>Challenge</dt><dd>A publishing company needed consistent, high-quality content across several platforms without growing the team.</dd></div>
-          <div><dt>What we built</dt><dd>A pipeline covering ideation, drafting, scheduling, publishing and engagement tracking, with performance rolled up into dashboards.</dd></div>
-          <div><dt>Outcome</dt><dd>Content output scaled with the existing team.</dd></div>
-        </dl>
-      </article>
-
-      <article class="study" data-type="automation">
-        {{IMG key="retail" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
-        <div class="study__head">
-          <div class="case__meta"><span>E-commerce</span><span>Retail</span></div>
-          <h2>Multi-channel operations suite for an online retailer</h2>
-          <ul class="tags"><li>Make.com</li><li>WooCommerce</li><li>REST APIs</li><li>Webhooks</li></ul>
-        </div>
-        <div class="study__result"><span class="big">All</span><span>sales channels kept in sync automatically</span></div>
-        <dl class="study__body">
-          <div><dt>Challenge</dt><dd>Manual inventory management, inconsistent listings across channels and slow order processing.</dd></div>
-          <div><dt>What we built</dt><dd>Automations for product sync, inventory tracking with restock alerts, personalised customer follow-ups and order fulfilment.</dd></div>
-          <div><dt>Outcome</dt><dd>Listings, stock and orders handled across channels without manual updates.</dd></div>
-        </dl>
-      </article>
-
-      <article class="study" data-type="automation">
-        {{IMG key="onboard" cls="ph--study" ratio="16/9" sizes="(max-width: 720px) 100vw, 600px"}}
-        <div class="study__head">
-          <div class="case__meta"><span>Professional services</span><span>Onboarding</span></div>
-          <h2>Zero-touch client onboarding for a service business</h2>
-          <ul class="tags"><li>n8n</li><li>GoHighLevel</li><li>Google Workspace</li><li>Webhooks</li></ul>
-        </div>
-        <div class="study__result"><span class="big">0</span><span>manual steps between intake and welcome</span></div>
-        <dl class="study__body">
-          <div><dt>Challenge</dt><dd>A manual, error-prone onboarding process caused delays and an inconsistent first impression.</dd></div>
-          <div><dt>What we built</dt><dd>Intake forms with conditional logic, automated document collection, CRM records, team notifications and personalised welcome sequences.</dd></div>
-          <div><dt>Outcome</dt><dd>Every client onboarded the same way, without anyone chasing paperwork.</dd></div>
+          <div><dt>Challenge</dt><dd>Consistent LinkedIn and X content takes hours of research, writing and finding visuals every week.</dd></div>
+          <div><dt>What we built</dt><dd>A web studio on n8n workflows that researches a topic on the web, drafts platform-specific posts, picks or generates an image and holds everything for review.</dd></div>
+          <div><dt>Outcome</dt><dd>Publish-ready drafts in minutes, with a person approving every post.</dd></div>
         </dl>
       </article>
     </div>
     <p class="filters__empty" hidden>No projects in this category yet.</p>
+
+    <section class="also" aria-labelledby="also-title">
+      <h2 id="also-title" class="also__title">Also built</h2>
+      <div class="also__grid">
+        <a class="also__item" href="https://github.com/HamzaAbidChaudhary1/Astral" target="_blank" rel="noopener">
+          <span class="also__kind">Open source</span>
+          <h3>Astral</h3>
+          <p>A 64-gate design quality system that stops AI coding assistants shipping generic UI. Installs into Claude Code, Cursor and Codex.</p>
+        </a>
+        <div class="also__item">
+          <span class="also__kind">SaaS</span>
+          <h3>LinkedIn Autopilot</h3>
+          <p>A multi-agent platform that plans, writes and manages LinkedIn content, built with Next.js, Prisma, BullMQ, Playwright and Gemini.</p>
+        </div>
+      </div>
+    </section>
   </div>
 </section>
 

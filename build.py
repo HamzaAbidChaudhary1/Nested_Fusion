@@ -18,7 +18,7 @@ ARROW = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-
 PAGES = {
     "home": "index.html", "services": "services/index.html", "process": "process/index.html",
     "work": "work/index.html", "approach": "approach/index.html", "faq": "faq/index.html",
-    "contact": "contact/index.html", "thanks": "thanks/index.html", "404": "404.html",
+    "contact": "contact/index.html", "thanks": "thanks/index.html", "credits": "credits/index.html", "404": "404.html",
 }
 
 
@@ -121,7 +121,7 @@ PHOTOS = {
 UTM = "utm_source=nestedfusion&utm_medium=referral"
 
 
-def img(key, cls="", ratio="16/9", sizes="(max-width: 720px) 100vw, 50vw", credit=True, eager=False):
+def img(key, cls="", ratio="16/9", sizes="(max-width: 720px) 100vw, 50vw", credit=False, eager=False):
     pid, alt, name, user, slug = PHOTOS[key]
     w, h = (int(x) for x in ratio.split("/"))
     base = f"https://images.unsplash.com/{pid}?auto=format&fit=crop&q=70&ar={w}:{h}"
@@ -160,7 +160,7 @@ def footer():
     <div class="footer__row">
       <a href="/" aria-label="NestedFusion home"><img src="/assets/logo.svg" alt="NestedFusion" width="150" height="51"></a>
       <nav aria-label="Footer">{links}</nav>
-      <p>© <span id="yr">2026</span> NestedFusion. Serving Australia &amp; the UK.</p>
+      <p>© <span id="yr">2026</span> NestedFusion. Serving Australia &amp; the UK. <a class="footer__credits" href="/credits/">Photo credits</a></p>
     </div>
   </div>
 </footer>
@@ -182,7 +182,12 @@ def render(key):
     body = re.sub(r"\{\{PHERO (.*?)\}\}", lambda m: phero(**dict(re.findall(r'(\w+)="(.*?)"', m.group(1)))), body)
     body = re.sub(r"\{\{IMG (.*?)\}\}", lambda m: (lambda a: img(a.pop("key"), **a))(dict(re.findall(r'(\w+)="(.*?)"', m.group(1)))), body)
     body = body.replace("{{CTA}}", CTA)
-    noindex = key in ("thanks", "404")
+    if "{{CREDITS}}" in body:
+        rows = "".join(
+            f'<li><span>{html.escape(alt)}</span><span>Photo by <a href="https://unsplash.com/@{user}?{UTM}" target="_blank" rel="noopener">{html.escape(name)}</a> on <a href="https://unsplash.com/photos/{slug}?{UTM}" target="_blank" rel="noopener">Unsplash</a></span></li>'
+            for _, (pid, alt, name, user, slug) in PHOTOS.items())
+        body = body.replace("{{CREDITS}}", f'<ul class="credits">{rows}</ul>')
+    noindex = key in ("thanks", "404", "credits")
     return head(meta["title"], meta["desc"], key, noindex) + "\n" + header(meta.get("active", key)) + body + footer()
 
 

@@ -477,6 +477,13 @@ body.nav-hidden .jump{top:0}
   .case--feature .case__result{grid-row:auto}
 }
 
+.footer__credits{color:var(--faint);margin-left:10px;text-decoration:underline;text-decoration-color:rgba(255,255,255,.15);text-underline-offset:3px}
+.footer__credits:hover{color:var(--cyan)}
+.credits{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.credits li{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:18px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+.credits li span:first-child{color:var(--text)}
+.credits a{color:var(--cyan)}
+
 /* Reveal defaults (JS animates) */
 .js .reveal-up{opacity:0;transform:translateY(24px)}
 .js .hero__title .line > span{transform:translateY(105%)}

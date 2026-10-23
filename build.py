@@ -6,9 +6,31 @@ and may use {{PHERO kicker="" title="Line 1|Line 2" lead=""}}, {{IMG key="voice"
 
 Run:  python3 build.py   (writes index.html, <page>/index.html, 404.html)
 """
-import hashlib, html, pathlib, re
+import datetime, hashlib, html, json, pathlib, re
 
 ROOT = pathlib.Path(__file__).parent
+
+# Public address of the site. Change this ONE line when the custom domain goes live.
+SITE = "https://nestedfusion.netlify.app"
+
+FOUNDER = {"@type": "Person", "@id": f"{SITE}/#founder", "name": "Hamza Abid Chaudhary",
+           "jobTitle": "Founder & AI Solutions Engineer", "url": f"{SITE}/approach/",
+           "sameAs": ["https://github.com/HamzaAbidChaudhary1"]}
+ORG = {"@type": "ProfessionalService", "@id": f"{SITE}/#org", "name": "NestedFusion", "url": f"{SITE}/",
+       "logo": f"{SITE}/assets/apple-touch-icon.png", "image": f"{SITE}/assets/og.png",
+       "description": "NestedFusion designs, builds and runs production AI agents, voice agents and workflow automation for businesses in the US and Australia.",
+       "areaServed": [{"@type": "Country", "name": "United States"}, {"@type": "Country", "name": "Australia"}],
+       "knowsAbout": ["AI agents", "AI voice agents", "Workflow automation", "n8n", "Make.com", "GoHighLevel",
+                      "LangChain", "LangGraph", "Retrieval-augmented generation", "Supabase", "Next.js"],
+       "founder": {"@id": f"{SITE}/#founder"}, "sameAs": ["https://github.com/HamzaAbidChaudhary1"]}
+WEBSITE = {"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": "NestedFusion",
+           "publisher": {"@id": f"{SITE}/#org"}, "inLanguage": "en-US"}
+SERVICES = [
+    ("AI agent development", "Custom AI agents that research, triage, draft and update records across your tools, with guardrails and human approval.", "agents"),
+    ("AI voice agents", "Phone agents that answer and make calls, qualify callers, book appointments and log every call in your CRM.", "voice"),
+    ("Workflow automation", "n8n, Make.com and GoHighLevel automation with error handling, retries and alerts.", "workflows"),
+    ("AI apps and internal tools", "Copilots on your own data, client portals and dashboards built on Next.js, Supabase and FastAPI.", "apps"),
+]
 SRC = ROOT / "src" / "pages"
 
 
@@ -27,11 +49,17 @@ PAGES = {
 }
 
 
-def head(title, desc, path, noindex=False):
+def url_for(key):
+    return f"{SITE}/" if key == "home" else (f"{SITE}/404.html" if key == "404" else f"{SITE}/{key}/")
+
+
+def head(title, desc, path, noindex=False, ld=None):
     t, d = html.escape(title), html.escape(desc)
-    robots = '<meta name="robots" content="noindex">\n' if noindex else ""
+    url = url_for(path)
+    robots = '<meta name="robots" content="noindex">\n' if noindex else f'<link rel="canonical" href="{url}">\n'
+    ld_json = json.dumps({"@context": "https://schema.org", "@graph": ld or []}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     return f"""<!doctype html>
-<html lang="en">
+<html lang="en-US">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -41,15 +69,24 @@ def head(title, desc, path, noindex=False):
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="NestedFusion">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="{url}">
 <meta property="og:title" content="{t}">
 <meta property="og:description" content="{d}">
-<meta property="og:image" content="/assets/og.png">
+<meta property="og:image" content="{SITE}/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NestedFusion: AI agents, voice agents and workflow automation">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{t}">
+<meta name="twitter:description" content="{d}">
+<meta name="twitter:image" content="{SITE}/assets/og.png">
 <link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styles.css?v={ver('styles.css')}">
 <script>document.documentElement.classList.add('js');try{{if(sessionStorage.getItem('nf-seen'))document.documentElement.classList.add('seen')}}catch(e){{}}</script>
-<script type="application/ld+json">{{"@context":"https://schema.org","@type":"ProfessionalService","name":"NestedFusion","description":"AI agents, voice agents and workflow automation for growing teams.","founder":{{"@type":"Person","name":"Hamza Abid Chaudhary","jobTitle":"Founder & Forward Deployed Engineer"}},"areaServed":["US","AU"]}}</script>
+<script type="application/ld+json">{ld_json}</script>
 </head>"""
 
 
@@ -201,7 +238,51 @@ def render(key):
             for _, (pid, alt, name, user, slug) in PHOTOS.items())
         body = body.replace("{{CREDITS}}", f'<ul class="credits">{rows}</ul>')
     noindex = key in ("thanks", "404", "credits")
-    return head(meta["title"], meta["desc"], key, noindex) + "\n" + header(meta.get("active", key)) + body + footer()
+    return head(meta["title"], meta["desc"], key, noindex, structured_data(key, meta, body)) + "\n" + header(meta.get("active", key)) + body + footer()
+
+
+def _text(fragment):
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", fragment))).strip()
+
+
+def structured_data(key, meta, body):
+    """JSON-LD graph per page: organisation + site everywhere, plus breadcrumbs, services, FAQ and page type."""
+    url = url_for(key)
+    page = {"@type": "WebPage", "@id": f"{url}#page", "url": url, "name": meta["title"], "description": meta["desc"],
+            "isPartOf": {"@id": f"{SITE}/#website"}, "about": {"@id": f"{SITE}/#org"}, "inLanguage": "en-US"}
+    graph = [ORG, WEBSITE, FOUNDER, page]
+    if key != "home":
+        name = dict(NAV).get(key, meta.get("crumb", key.title()))
+        if key == "contact": name = "Contact"
+        graph.append({"@type": "BreadcrumbList", "@id": f"{url}#breadcrumb", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{SITE}/"},
+            {"@type": "ListItem", "position": 2, "name": name, "item": url}]})
+        page["breadcrumb"] = {"@id": f"{url}#breadcrumb"}
+    if key in ("home", "services"):
+        for n, d, anchor in SERVICES:
+            graph.append({"@type": "Service", "@id": f"{SITE}/services/#{anchor}", "name": n, "description": d,
+                          "serviceType": n, "provider": {"@id": f"{SITE}/#org"}, "url": f"{SITE}/services/#{anchor}",
+                          "areaServed": ORG["areaServed"]})
+    if key == "faq":
+        qa = re.findall(r"<summary>(.*?)</summary>\s*<div class=\"faq__a\">(.*?)</div>", body, re.S)
+        page["@type"] = ["WebPage", "FAQPage"]
+        page["mainEntity"] = [{"@type": "Question", "name": _text(q), "acceptedAnswer": {"@type": "Answer", "text": _text(a)}} for q, a in qa]
+    if key == "work":
+        page["@type"] = ["WebPage", "CollectionPage"]
+    if key == "contact":
+        page["@type"] = ["WebPage", "ContactPage"]
+    if key == "approach":
+        page["@type"] = ["WebPage", "AboutPage"]
+    return graph
+
+
+def write_sitemap():
+    today = datetime.date.today().isoformat()
+    keys = [k for k in PAGES if k not in ("thanks", "404", "credits")]
+    prio = {"home": "1.0", "services": "0.9", "work": "0.9", "contact": "0.8"}
+    rows = "".join(f"  <url><loc>{url_for(k)}</loc><lastmod>{today}</lastmod><priority>{prio.get(k, '0.7')}</priority></url>\n" for k in keys)
+    (ROOT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{rows}</urlset>\n')
+    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
 
 
 if __name__ == "__main__":
@@ -210,3 +291,5 @@ if __name__ == "__main__":
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(render(key))
         print("wrote", out)
+    write_sitemap()
+    print("wrote sitemap.xml, robots.txt")

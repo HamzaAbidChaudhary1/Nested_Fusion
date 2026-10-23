@@ -131,7 +131,11 @@
   const startConsole = () => {
     if (!items.length) return;
     if (reduce) { items.forEach(i => i.classList.add('done')); meter.style.width = '100%'; return; }
-    tick();
+    let running = false;
+    new IntersectionObserver(([en]) => {
+      if (en.isIntersecting && !running) { running = true; tick(); }
+      else if (!en.isIntersecting && running) { running = false; clearTimeout(consoleTimer); }
+    }, { threshold: .35 }).observe(items[0].closest('.console'));
   };
 
   /* ---------- Hero network canvas ---------- */
@@ -429,7 +433,6 @@
     // Hero parallax out
     if ($('.hero__copy')) {
       gsap.to('.hero__copy', { yPercent: -12, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-      gsap.to('.hero__visual', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
     }
     if ($('.phero__in')) gsap.to('.phero__in', { yPercent: -18, opacity: .15, ease: 'none', scrollTrigger: { trigger: '.phero', start: 'top top', end: 'bottom top', scrub: true } });
 
@@ -453,6 +456,7 @@
       gsap.set(sel, { opacity: 0, y: 40 });
       ScrollTrigger.batch(sel, { start: 'top 88%', onEnter: els => gsap.to(els, { opacity: 1, y: 0, duration: 1, ease: 'expo.out', stagger: .1, ...opts, overwrite: true }) });
     };
+    if ($('.demo__stage')) gsap.from('.demo__stage .console', { y: 60, opacity: 0, rotateX: 8, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.demo', start: 'top 75%' } });
     ['.card', '.case', '.study', '.pillar', '.founder', '.form', '.svc__col', '.guard__item', '.engage__card', '.band__in', '.faq__ask']
       .forEach(sel => { if ($(sel)) batch(sel); });
     ['.faq details', '.strip__steps li', '.principles__list li', '.next li', '.jump a'].forEach(sel => { if ($(sel)) batch(sel, { stagger: .06 }); });

@@ -504,6 +504,25 @@ a.also__item:hover{border-color:rgba(35,215,255,.35)}
 .study__result .big,.case__result .big{white-space:nowrap}
 @media (max-width:720px){.also__grid{grid-template-columns:1fr}.study__result .big,.case__result .big{font-size:52px}}
 
+/* ===== Agent demo section ===== */
+.page-home .hero__grid{grid-template-columns:minmax(0,760px)}
+.demo{padding:clamp(40px,6vw,90px) 0 clamp(80px,10vw,140px)}
+.demo__grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,6vw,96px);align-items:center}
+.demo__grid > *{min-width:0}
+.demo__points{list-style:none;margin:36px 0 0;padding:0;display:grid;gap:18px}
+.demo__points li{display:grid;grid-template-columns:110px 1fr;gap:16px;padding-top:18px;border-top:1px solid var(--line)}
+.demo__points strong{font:500 12px/1.6 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--cyan)}
+.demo__points span{color:var(--muted)}
+.demo__stage{position:relative;padding:clamp(40px,6vw,80px) 0}
+.demo__stage .orb{inset:-6% 4%}
+.demo__stage .console{position:relative;left:auto;right:auto;top:auto;transform:none;max-width:560px;margin:0 auto}
+@media (max-width:1024px){.demo__grid{grid-template-columns:1fr}}
+@media (max-width:720px){
+  .demo__points li{grid-template-columns:1fr;gap:4px}
+  .demo__stage{padding:24px 0}
+  .demo__stage .orb{display:none}
+}
+
 /* Reveal defaults (JS animates) */
 .js .reveal-up{opacity:0;transform:translateY(24px)}
 .js .hero__title .line > span{transform:translateY(105%)}

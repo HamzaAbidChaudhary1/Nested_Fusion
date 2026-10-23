@@ -25,7 +25,7 @@
 <meta name="twitter:image" content="https://nestedfusion.netlify.app/assets/og.png">
 <link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styles.css?v=3aa83ee2e7">
+<link rel="stylesheet" href="/styles.css?v=ab51df9871">
 <script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('nf-seen'))document.documentElement.classList.add('seen')}catch(e){}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://nestedfusion.netlify.app/#org","name":"NestedFusion","url":"https://nestedfusion.netlify.app/","logo":"https://nestedfusion.netlify.app/assets/apple-touch-icon.png","image":"https://nestedfusion.netlify.app/assets/og.png","description":"NestedFusion designs, builds and runs production AI agents, voice agents and workflow automation for businesses in the US and Australia.","areaServed":[{"@type":"Country","name":"United States"},{"@type":"Country","name":"Australia"}],"knowsAbout":["AI agents","AI voice agents","Workflow automation","n8n","Make.com","GoHighLevel","LangChain","LangGraph","Retrieval-augmented generation","Supabase","Next.js"],"founder":{"@id":"https://nestedfusion.netlify.app/#founder"},"sameAs":["https://github.com/HamzaAbidChaudhary1"]},{"@type":"WebSite","@id":"https://nestedfusion.netlify.app/#website","url":"https://nestedfusion.netlify.app/","name":"NestedFusion","publisher":{"@id":"https://nestedfusion.netlify.app/#org"},"inLanguage":"en-US"},{"@type":"Person","@id":"https://nestedfusion.netlify.app/#founder","name":"Hamza Abid Chaudhary","jobTitle":"Founder & AI Solutions Engineer","url":"https://nestedfusion.netlify.app/approach/","sameAs":["https://github.com/HamzaAbidChaudhary1"]},{"@type":"WebPage","@id":"https://nestedfusion.netlify.app/#page","url":"https://nestedfusion.netlify.app/","name":"AI Automation Agency for US Businesses | NestedFusion","description":"NestedFusion builds production AI agents, AI voice agents and n8n workflow automation for US and Australian businesses. Engineered, human-reviewed, owned by you.","isPartOf":{"@id":"https://nestedfusion.netlify.app/#website"},"about":{"@id":"https://nestedfusion.netlify.app/#org"},"inLanguage":"en-US"},{"@type":"Service","@id":"https://nestedfusion.netlify.app/services/#agents","name":"AI agent development","description":"Custom AI agents that research, triage, draft and update records across your tools, with guardrails and human approval.","serviceType":"AI agent development","provider":{"@id":"https://nestedfusion.netlify.app/#org"},"url":"https://nestedfusion.netlify.app/services/#agents","areaServed":[{"@type":"Country","name":"United States"},{"@type":"Country","name":"Australia"}]},{"@type":"Service","@id":"https://nestedfusion.netlify.app/services/#voice","name":"AI voice agents","description":"Phone agents that answer and make calls, qualify callers, book appointments and log every call in your CRM.","serviceType":"AI voice agents","provider":{"@id":"https://nestedfusion.netlify.app/#org"},"url":"https://nestedfusion.netlify.app/services/#voice","areaServed":[{"@type":"Country","name":"United States"},{"@type":"Country","name":"Australia"}]},{"@type":"Service","@id":"https://nestedfusion.netlify.app/services/#workflows","name":"Workflow automation","description":"n8n, Make.com and GoHighLevel automation with error handling, retries and alerts.","serviceType":"Workflow automation","provider":{"@id":"https://nestedfusion.netlify.app/#org"},"url":"https://nestedfusion.netlify.app/services/#workflows","areaServed":[{"@type":"Country","name":"United States"},{"@type":"Country","name":"Australia"}]},{"@type":"Service","@id":"https://nestedfusion.netlify.app/services/#apps","name":"AI apps and internal tools","description":"Copilots on your own data, client portals and dashboards built on Next.js, Supabase and FastAPI.","serviceType":"AI apps and internal tools","provider":{"@id":"https://nestedfusion.netlify.app/#org"},"url":"https://nestedfusion.netlify.app/services/#apps","areaServed":[{"@type":"Country","name":"United States"},{"@type":"Country","name":"Australia"}]}]}</script>
 </head>
@@ -93,24 +93,6 @@
       </dl>
     </div>
 
-    <div class="hero__visual" aria-hidden="true">
-      <div class="orb"><div class="orb__ring"></div><div class="orb__ring orb__ring--2"></div><div class="orb__core"></div></div>
-      <div class="console">
-        <div class="console__head">
-          <span class="console__dots"><i></i><i></i><i></i></span>
-          <span class="console__title">agents.run</span>
-          <span class="console__live"><i></i>example run</span>
-        </div>
-        <ol class="console__list">
-          <li data-agent="Intake"><span class="st"></span><span class="tx">New enquiry read → lead scored → CRM updated</span></li>
-          <li data-agent="Voice"><span class="st"></span><span class="tx">Inbound call answered → appointment booked</span></li>
-          <li data-agent="Ops"><span class="st"></span><span class="tx">Orders pulled from Shopify → weekly report sent</span></li>
-          <li data-agent="Docs"><span class="st"></span><span class="tx">Compliance report drafted → sent for review</span></li>
-          <li data-agent="Finance"><span class="st"></span><span class="tx">Invoices matched → exceptions flagged</span></li>
-        </ol>
-        <div class="console__foot"><span>Human-in-the-loop</span><span class="console__meter"><i></i></span></div>
-      </div>
-    </div>
   </div>
   <a class="hero__scroll" href="#manifesto" aria-label="Scroll to next section"><span></span></a>
 </section>
@@ -132,6 +114,40 @@
   </div>
 </section>
 
+
+<!-- AGENT DEMO -->
+<section class="demo" id="demo" aria-labelledby="demo-title">
+  <div class="wrap demo__grid">
+    <div class="demo__copy">
+      <p class="kicker"><span class="dot"></span>See it work</p>
+      <h2 id="demo-title" class="h2 split">Watch an agent work.</h2>
+      <p class="lead">One run, five jobs your team does by hand today. Each step reads, decides and acts in the tools you already use, and anything consequential waits for a person.</p>
+      <ul class="demo__points">
+        <li><strong>Logged</strong><span>Every run records what the agent saw, decided and did.</span></li>
+        <li><strong>Approved</strong><span>Sending, paying and filing wait for a human sign-off.</span></li>
+        <li><strong>Alerted</strong><span>If a step fails, it retries, falls back and tells someone.</span></li>
+      </ul>
+    </div>
+    <div class="demo__stage" aria-hidden="true">
+      <div class="orb"><div class="orb__ring"></div><div class="orb__ring orb__ring--2"></div><div class="orb__core"></div></div>
+      <div class="console">
+        <div class="console__head">
+          <span class="console__dots"><i></i><i></i><i></i></span>
+          <span class="console__title">agents.run</span>
+          <span class="console__live"><i></i>example run</span>
+        </div>
+        <ol class="console__list">
+          <li data-agent="Intake"><span class="st"></span><span class="tx">New enquiry read → lead scored → CRM updated</span></li>
+          <li data-agent="Voice"><span class="st"></span><span class="tx">Inbound call answered → appointment booked</span></li>
+          <li data-agent="Ops"><span class="st"></span><span class="tx">Orders pulled from Shopify → weekly report sent</span></li>
+          <li data-agent="Docs"><span class="st"></span><span class="tx">Compliance report drafted → sent for review</span></li>
+          <li data-agent="Finance"><span class="st"></span><span class="tx">Invoices matched → exceptions flagged</span></li>
+        </ol>
+        <div class="console__foot"><span>Human-in-the-loop</span><span class="console__meter"><i></i></span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICES OVERVIEW -->
 <section class="services" aria-labelledby="services-title">
@@ -284,6 +300,6 @@
 <script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="/assets/vendor/SplitText.min.js" defer></script>
 <script src="/assets/vendor/lenis.min.js" defer></script>
-<script src="/main.js?v=b5985a5a8e" defer></script>
+<script src="/main.js?v=6304d6dfdc" defer></script>
 </body>
 </html>

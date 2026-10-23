@@ -349,6 +349,7 @@
     const probe = document.createElement('video');
     const useWebm = !probe.canPlayType('video/mp4; codecs="avc1.640028"') && !!probe.canPlayType('video/webm; codecs="vp9"');
     const load = v => { if (!v.src && v.dataset.src) { v.src = useWebm ? v.dataset.src.replace(/\.mp4$/, '.webm') : v.dataset.src; v.load(); } };
+    if (reduce) vids.forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
     if (!reduce && !saveData) {
       const vio = new IntersectionObserver(es => es.forEach(en => {
         const v = en.target;

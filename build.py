@@ -6,10 +6,15 @@ and may use {{PHERO kicker="" title="Line 1|Line 2" lead=""}}, {{IMG key="voice"
 
 Run:  python3 build.py   (writes index.html, <page>/index.html, 404.html)
 """
-import html, pathlib, re
+import hashlib, html, pathlib, re
 
 ROOT = pathlib.Path(__file__).parent
 SRC = ROOT / "src" / "pages"
+
+
+def ver(path):
+    """Short content hash so every deploy gets a fresh URL and browsers never mix old and new files."""
+    return hashlib.sha1((ROOT / path).read_bytes()).hexdigest()[:10]
 
 NAV = [("services", "Services"), ("process", "Process"), ("work", "Work"), ("approach", "Approach"), ("faq", "FAQ")]
 ARROW = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
@@ -42,7 +47,7 @@ def head(title, desc, path, noindex=False):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css?v={ver('styles.css')}">
 <script>document.documentElement.classList.add('js');try{{if(sessionStorage.getItem('nf-seen'))document.documentElement.classList.add('seen')}}catch(e){{}}</script>
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"ProfessionalService","name":"NestedFusion","description":"AI agents, voice agents and workflow automation for growing teams.","founder":{{"@type":"Person","name":"Hamza Abid Chaudhary","jobTitle":"Founder & Forward Deployed Engineer"}},"areaServed":["AU","GB"]}}</script>
 </head>"""
@@ -175,7 +180,7 @@ def footer():
 <script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="/assets/vendor/SplitText.min.js" defer></script>
 <script src="/assets/vendor/lenis.min.js" defer></script>
-<script src="/main.js" defer></script>
+<script src="/main.js?v={ver('main.js')}" defer></script>
 </body>
 </html>
 """

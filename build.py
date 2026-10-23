@@ -49,7 +49,7 @@ def head(title, desc, path, noindex=False):
 <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styles.css?v={ver('styles.css')}">
 <script>document.documentElement.classList.add('js');try{{if(sessionStorage.getItem('nf-seen'))document.documentElement.classList.add('seen')}}catch(e){{}}</script>
-<script type="application/ld+json">{{"@context":"https://schema.org","@type":"ProfessionalService","name":"NestedFusion","description":"AI agents, voice agents and workflow automation for growing teams.","founder":{{"@type":"Person","name":"Hamza Abid Chaudhary","jobTitle":"Founder & Forward Deployed Engineer"}},"areaServed":["AU","GB"]}}</script>
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"ProfessionalService","name":"NestedFusion","description":"AI agents, voice agents and workflow automation for growing teams.","founder":{{"@type":"Person","name":"Hamza Abid Chaudhary","jobTitle":"Founder & Forward Deployed Engineer"}},"areaServed":["US","AU"]}}</script>
 </head>"""
 
 
@@ -171,7 +171,7 @@ def footer():
     <div class="footer__row">
       <a href="/" aria-label="NestedFusion home"><img src="/assets/logo.svg" alt="NestedFusion" width="150" height="51"></a>
       <nav aria-label="Footer">{links}</nav>
-      <p>© <span id="yr">2026</span> NestedFusion. Serving Australia &amp; the UK. <a class="footer__credits" href="/credits/">Photo credits</a></p>
+      <p>© <span id="yr">2026</span> NestedFusion. Serving the US &amp; Australia. <a class="footer__credits" href="/credits/">Photo credits</a></p>
     </div>
   </div>
 </footer>

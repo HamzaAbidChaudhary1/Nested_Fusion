@@ -336,6 +336,12 @@
     } finally { btn.disabled = false; }
   });
 
+  /* ---------- Photos: fade in when loaded ---------- */
+  $$('.ph img').forEach(im => {
+    const done = () => im.closest('.ph').classList.add('is-loaded');
+    if (im.complete && im.naturalWidth) done(); else { im.addEventListener('load', done, { once: true }); im.addEventListener('error', done, { once: true }); }
+  });
+
   /* ---------- Page transitions ---------- */
   // Browsers with cross-document View Transitions use the CSS @view-transition rule.
   // Others get a short cyan wipe so moving between pages still feels continuous.
@@ -440,6 +446,15 @@
       gsap.to(fill, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '.process__track', start: 'top 62%', end: 'bottom 62%', scrub: .4 } });
       $$('.step').forEach(s => ScrollTrigger.create({ trigger: s, start: 'top 62%', onEnter: () => s.classList.add('on'), onLeaveBack: () => s.classList.remove('on') }));
     }
+
+    // Photos: clip reveal + gentle parallax
+    $$('.ph--band, .ph--svc').forEach(f => {
+      gsap.fromTo(f, { clipPath: 'inset(10% 6% 10% 6% round 28px)' }, { clipPath: 'inset(0% 0% 0% 0% round 28px)', ease: 'none', scrollTrigger: { trigger: f, start: 'top 95%', end: 'top 45%', scrub: .6 } });
+    });
+    $$('.ph').forEach(f => {
+      const im = $('img', f);
+      gsap.fromTo(im, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: f, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
 
     // Footer wordmark
     gsap.from('.footer__big', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.footer', start: 'top 90%' } });

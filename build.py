@@ -2,7 +2,7 @@
 
 Each page fragment starts with comment headers:
   <!--title: ...-->  <!--desc: ...-->  <!--active: services-->
-and may use {{PHERO kicker="" title="Line 1|Line 2" lead=""}} and {{CTA}}.
+and may use {{PHERO kicker="" title="Line 1|Line 2" lead=""}}, {{IMG key="agents" ratio="16/9" cls=""}} and {{CTA}}.
 
 Run:  python3 build.py   (writes index.html, <page>/index.html, 404.html)
 """
@@ -102,6 +102,38 @@ def phero(kicker, title, lead):
 """
 
 
+# Unsplash photos (hotlinked from Unsplash's CDN as their API terms require; downloads registered via the API).
+# key: (photo path id, alt text, photographer name, unsplash username, photo page slug)
+PHOTOS = {
+    "agents":    ("photo-1644088379091-d574269d422f", "Glowing blue network of connected points", "Conny Schneider", "choys_", "xuTJZ7uD7PI"),
+    "voice":     ("photo-1766066014237-00645c74e9c6", "Person wearing a headset working at a computer", "BaljkanN4", "baljkann4", "wnpf3Q5pkXA"),
+    "workflows": ("photo-1680992044138-ce4864c2b962", "Close-up of server hardware with status lights", "Tyler", "tylergm", "vSprjjDbu60"),
+    "apps":      ("photo-1555066931-4365d14bab8c", "Laptop screen showing application code", "Arnold Francisca", "clark_fransa", "f77Bh3inUpE"),
+    "health":    ("photo-1758691461990-03b49d969495", "Clinician writing in a patient record", "Vitaly Gariev", "silverkblack", "8WYkI3cEZm8"),
+    "wellness":  ("photo-1651528878442-720828f0e17e", "Wellness product bottles", "SUNDAY II SUNDAY", "sunday2sunday", "JK7q3Vktq0o"),
+    "property":  ("photo-1725785218870-b41365703511", "Apartment building with lit windows at night", "Patrick von der Wehd", "patrick_von_der_wehd", "SiqTD-YeKxY"),
+    "content":   ("photo-1676276375742-9e3d10e39d45", "Social media content plan on a whiteboard", "Walls.io", "walls_io", "sckgeg8lNMY"),
+    "retail":    ("photo-1587293852726-70cdb56c2866", "Boxes stacked on warehouse shelving", "CHUTTERSNAP", "chuttersnap", "BNBA1h-NgdY"),
+    "onboard":   ("photo-1521791136064-7986c2920216", "Two people shaking hands", "Cytonn Photography", "cytonn_photography", "n95VMLxqM2I"),
+    "workshop":  ("photo-1677506048892-edde55cf3277", "Person presenting a process mapped on sticky notes", "Paymo", "paymo", "4wSnhAT8d9g"),
+    "circuit":   ("photo-1727434032773-af3cd98375ba", "Close-up of a circuit board with data lines", "Luke Jones", "lukejonesdesign", "tBvF46kmwBw"),
+}
+UTM = "utm_source=nestedfusion&utm_medium=referral"
+
+
+def img(key, cls="", ratio="16/9", sizes="(max-width: 720px) 100vw, 50vw", credit=True, eager=False):
+    pid, alt, name, user, slug = PHOTOS[key]
+    w, h = (int(x) for x in ratio.split("/"))
+    base = f"https://images.unsplash.com/{pid}?auto=format&fit=crop&q=70&ar={w}:{h}"
+    srcset = ", ".join(f"{base}&w={px} {px}w" for px in (480, 800, 1200, 1800))
+    cap = (f'<figcaption class="ph__credit">Photo: <a href="https://unsplash.com/@{user}?{UTM}" target="_blank" rel="noopener">{html.escape(name)}</a>'
+           f' / <a href="https://unsplash.com/photos/{slug}?{UTM}" target="_blank" rel="noopener">Unsplash</a></figcaption>') if credit else ""
+    load = 'fetchpriority="high"' if eager else 'loading="lazy"'
+    return (f'<figure class="ph {cls}" style="aspect-ratio:{ratio}"><div class="ph__in">'
+            f'<img src="{base}&w=1200" srcset="{srcset}" sizes="{sizes}" alt="{html.escape(alt)}" {load} decoding="async" width="{w*100}" height="{h*100}">'
+            f'</div>{cap}</figure>')
+
+
 CTA = f"""<section class="cta" aria-labelledby="cta-title">
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="wrap cta__in">
@@ -148,6 +180,7 @@ def render(key):
     meta = dict(re.findall(r"<!--(\w+): (.*?)-->", raw))
     body = re.sub(r"<!--\w+: .*?-->\n?", "", raw)
     body = re.sub(r"\{\{PHERO (.*?)\}\}", lambda m: phero(**dict(re.findall(r'(\w+)="(.*?)"', m.group(1)))), body)
+    body = re.sub(r"\{\{IMG (.*?)\}\}", lambda m: (lambda a: img(a.pop("key"), **a))(dict(re.findall(r'(\w+)="(.*?)"', m.group(1)))), body)
     body = body.replace("{{CTA}}", CTA)
     noindex = key in ("thanks", "404")
     return head(meta["title"], meta["desc"], key, noindex) + "\n" + header(meta.get("active", key)) + body + footer()

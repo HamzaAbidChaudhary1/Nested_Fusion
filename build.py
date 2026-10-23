@@ -2,7 +2,7 @@
 
 Each page fragment starts with comment headers:
   <!--title: ...-->  <!--desc: ...-->  <!--active: services-->
-and may use {{PHERO kicker="" title="Line 1|Line 2" lead=""}}, {{IMG key="agents" ratio="16/9" cls=""}} and {{CTA}}.
+and may use {{PHERO kicker="" title="Line 1|Line 2" lead=""}}, {{IMG key="voice" ratio="16/9" cls=""}}, {{VIDEO key="agents" ratio="16/10" cls=""}} and {{CTA}}.
 
 Run:  python3 build.py   (writes index.html, <page>/index.html, 404.html)
 """
@@ -105,7 +105,6 @@ def phero(kicker, title, lead):
 # Unsplash photos (hotlinked from Unsplash's CDN as their API terms require; downloads registered via the API).
 # key: (photo path id, alt text, photographer name, unsplash username, photo page slug)
 PHOTOS = {
-    "agents":    ("photo-1644088379091-d574269d422f", "Glowing blue network of connected points", "Conny Schneider", "choys_", "xuTJZ7uD7PI"),
     "voice":     ("photo-1766066014237-00645c74e9c6", "Person wearing a headset working at a computer", "BaljkanN4", "baljkann4", "wnpf3Q5pkXA"),
     "workflows": ("photo-1680992044138-ce4864c2b962", "Close-up of server hardware with status lights", "Tyler", "tylergm", "vSprjjDbu60"),
     "apps":      ("photo-1555066931-4365d14bab8c", "Laptop screen showing application code", "Arnold Francisca", "clark_fransa", "f77Bh3inUpE"),
@@ -119,6 +118,13 @@ PHOTOS = {
     "circuit":   ("photo-1727434032773-af3cd98375ba", "Close-up of a circuit board with data lines", "Luke Jones", "lukejonesdesign", "tBvF46kmwBw"),
 }
 UTM = "utm_source=nestedfusion&utm_medium=referral"
+
+
+def video(key, cls="", ratio="16/9"):
+    """Looping, muted, lazy-played background clip from /assets/video/<key>.mp4 with a poster still."""
+    return (f'<figure class="ph ph--video {cls}" style="aspect-ratio:{ratio}"><div class="ph__in">'
+            f'<video class="bgvid" muted loop playsinline preload="none" poster="/assets/video/{key}-poster.jpg" '
+            f'data-src="/assets/video/{key}.mp4" aria-hidden="true"></video></div></figure>')
 
 
 def img(key, cls="", ratio="16/9", sizes="(max-width: 720px) 100vw, 50vw", credit=False, eager=False):
@@ -181,6 +187,7 @@ def render(key):
     body = re.sub(r"<!--\w+: .*?-->\n?", "", raw)
     body = re.sub(r"\{\{PHERO (.*?)\}\}", lambda m: phero(**dict(re.findall(r'(\w+)="(.*?)"', m.group(1)))), body)
     body = re.sub(r"\{\{IMG (.*?)\}\}", lambda m: (lambda a: img(a.pop("key"), **a))(dict(re.findall(r'(\w+)="(.*?)"', m.group(1)))), body)
+    body = re.sub(r"\{\{VIDEO (.*?)\}\}", lambda m: (lambda a: video(a.pop("key"), **a))(dict(re.findall(r'(\w+)="(.*?)"', m.group(1)))), body)
     body = body.replace("{{CTA}}", CTA)
     if "{{CREDITS}}" in body:
         rows = "".join(

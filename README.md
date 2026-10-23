@@ -16,6 +16,7 @@ python3 build.py
 - `styles.css` — design tokens and styles
 - `main.js` — motion (GSAP + ScrollTrigger + SplitText, Lenis), hero network canvas, page transitions, work filters, Netlify Forms submit
 - `assets/` — logo (vector), fonts (self-hosted), vendor libs, OG image
+- `assets/video/` — looping background clips (MP4 + WebM fallback + poster). Add one with `{{VIDEO key="name" ratio="16/10"}}` in a page; files must be `name.mp4`, `name.webm`, `name-poster.jpg`
 
 Motion respects `prefers-reduced-motion`.
 

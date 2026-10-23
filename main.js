@@ -342,6 +342,24 @@
     if (im.complete && im.naturalWidth) done(); else { im.addEventListener('load', done, { once: true }); im.addEventListener('error', done, { once: true }); }
   });
 
+  /* ---------- Background videos: load when near view, play only while visible ---------- */
+  const vids = $$('video.bgvid');
+  if (vids.length) {
+    const saveData = navigator.connection && navigator.connection.saveData;
+    const probe = document.createElement('video');
+    const useWebm = !probe.canPlayType('video/mp4; codecs="avc1.640028"') && !!probe.canPlayType('video/webm; codecs="vp9"');
+    const load = v => { if (!v.src && v.dataset.src) { v.src = useWebm ? v.dataset.src.replace(/\.mp4$/, '.webm') : v.dataset.src; v.load(); } };
+    if (!reduce && !saveData) {
+      const vio = new IntersectionObserver(es => es.forEach(en => {
+        const v = en.target;
+        if (en.isIntersecting) { load(v); const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+        else if (!v.paused) v.pause();
+      }), { rootMargin: '200px 0px' });
+      vids.forEach(v => { if (v.hasAttribute('data-eager')) load(v); vio.observe(v); });
+      document.addEventListener('visibilitychange', () => { if (document.hidden) vids.forEach(v => v.pause()); });
+    }
+  }
+
   /* ---------- Page transitions ---------- */
   // Browsers with cross-document View Transitions use the CSS @view-transition rule.
   // Others get a short cyan wipe so moving between pages still feels continuous.
@@ -452,7 +470,8 @@
       gsap.fromTo(f, { clipPath: 'inset(10% 6% 10% 6% round 28px)' }, { clipPath: 'inset(0% 0% 0% 0% round 28px)', ease: 'none', scrollTrigger: { trigger: f, start: 'top 95%', end: 'top 45%', scrub: .6 } });
     });
     $$('.ph').forEach(f => {
-      const im = $('img', f);
+      const im = $('img, video', f);
+      if (!im) return;
       gsap.fromTo(im, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: f, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 

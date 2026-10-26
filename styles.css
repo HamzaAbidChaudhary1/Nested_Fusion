@@ -798,3 +798,15 @@ h3,.h4x{font-weight:600;letter-spacing:-.015em}
 .hero--reel .hero__scroll{z-index:2}
 @media (max-width:1024px){.reel__scrim{background:linear-gradient(180deg,rgba(233,238,242,.82) 0%,rgba(233,238,242,.93) 45%,rgba(233,238,242,1) 100%)}.reel__tag{top:96px;bottom:auto}}
 @media (prefers-reduced-motion:reduce){.reel__s,.reel__s img,.reel__s video{animation:none}.reel__s:not(:first-child){display:none}}
+
+/* Inner page heroes: same slow-motion reel as home */
+.phero--reel{isolation:isolate;min-height:min(72svh,680px);display:flex;align-items:flex-end;border-bottom:0}
+.phero--reel .phero__in{z-index:2;width:100%}
+.phero--reel .phero__copy{max-width:760px}
+.phero--reel .reel__s img{object-position:75% 50%}
+.phero--reel .reel__scrim{background:linear-gradient(90deg,rgba(233,238,242,.97) 0%,rgba(233,238,242,.9) 38%,rgba(233,238,242,.45) 66%,rgba(233,238,242,.08) 100%),linear-gradient(0deg,rgba(233,238,242,1) 0%,rgba(233,238,242,0) 26%)}
+@media (max-width:1024px){.phero--reel{min-height:0}.phero--reel .reel__scrim{background:linear-gradient(180deg,rgba(233,238,242,.78) 0%,rgba(233,238,242,.92) 50%,rgba(233,238,242,1) 100%)}}
+.reel[style*="--n:3"] .reel__s{animation-name:reelFade3}
+.reel[style*="--n:3"] .reel__s img{animation-name:reelDrift3}
+@keyframes reelFade3{0%{opacity:0}6%{opacity:1}33.4%{opacity:1}41%{opacity:0}100%{opacity:0}}
+@keyframes reelDrift3{0%{transform:scale(1.02) translateX(0)}41%{transform:scale(1.12) translateX(-1.5%)}100%{transform:scale(1.12) translateX(-1.5%)}}

@@ -132,11 +132,12 @@ def header(active):
 
 def phero(kicker, title, lead, photo=None):
     lines = " ".join(f'<span class="line">{html.escape(l).replace("&amp;amp;", "&amp;")}</span>' for l in title.split("|"))
-    pic = img(photo, cls="phero__ph reveal-up", ratio="4/3", sizes="(max-width: 1024px) 100vw, 46vw", eager=True) if photo else ""
-    grid = " phero__in--ph" if photo else ""
-    return f"""<section class="phero" aria-labelledby="page-title">
-  <div class="hero__glow" aria-hidden="true"></div>
-  <div class="wrap phero__in{grid}">
+    bg = reel([(None, k.strip(), None) for k in photo.split(",")]) if photo else '<div class="hero__glow" aria-hidden="true"></div>'
+    cls = " phero--reel" if photo else ""
+    pic = ""
+    return f"""<section class="phero{cls}" aria-labelledby="page-title">
+  {bg}
+  <div class="wrap phero__in">
     <div class="phero__copy">
       <p class="kicker reveal-up"><span class="dot"></span>{html.escape(kicker)}</p>
       <h1 id="page-title" class="phero__title hero__title">{lines}</h1>
@@ -201,16 +202,18 @@ REEL_SLIDES = [("Healthcare", "reel-health", None), ("Real estate", "reel-estate
                ("Engineering", "reel-eng", None), ("Your team", "hero-services", None)]
 
 
-def reel():
+def reel(slides=None):
     out = []
-    for i, (label, key, clip) in enumerate(REEL_SLIDES):
+    for i, (label, key, clip) in enumerate(slides or REEL_SLIDES):
         pid = PHOTOS[key][0]
         base = f"https://images.unsplash.com/{pid}?auto=format&fit=crop&q=72&ar=16:9"
         load = 'fetchpriority="high"' if i == 0 else 'loading="lazy"'
         media = (f'<video muted loop playsinline autoplay preload="metadata" poster="{base}&w=1600" src="/assets/video/{clip}.mp4"></video>' if clip else
                  f'<img src="{base}&w=1600" srcset="{base}&w=900 900w, {base}&w=1600 1600w, {base}&w=2400 2400w" sizes="100vw" alt="" {load} decoding="async">')
-        out.append(f'<div class="reel__s" style="--i:{i}">{media}<span class="reel__tag">{label}</span></div>')
-    return f'<div class="reel" aria-hidden="true" style="--n:{len(REEL_SLIDES)}">{"".join(out)}<div class="reel__scrim"></div></div>'
+        tag = f'<span class="reel__tag">{label}</span>' if label else ""
+        out.append(f'<div class="reel__s" style="--i:{i}">{media}{tag}</div>')
+    n = len(slides or REEL_SLIDES)
+    return f'<div class="reel" aria-hidden="true" style="--n:{n}">{"".join(out)}<div class="reel__scrim"></div></div>'
 
 
 CTA = f"""<section class="cta" aria-labelledby="cta-title">

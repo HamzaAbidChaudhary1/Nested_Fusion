@@ -766,3 +766,5 @@ h3,.h4x{font-weight:600;letter-spacing:-.015em}
 .footer__row nav a:hover{color:#fff}
 .footer__credits{color:#7D8792;text-decoration-color:rgba(255,255,255,.2)}
 .footer__credits:hover{color:#fff}
+/* Footer wordmark: original condensed Archivo with cyan fade */
+.footer__big{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-stretch:75%;letter-spacing:-.05em;background:linear-gradient(180deg,rgba(35,215,255,.24),rgba(35,215,255,0) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}

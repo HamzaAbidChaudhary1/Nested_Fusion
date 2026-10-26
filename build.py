@@ -14,7 +14,7 @@ ROOT = pathlib.Path(__file__).parent
 SITE = "https://nestedfusion.netlify.app"
 
 FOUNDER = {"@type": "Person", "@id": f"{SITE}/#founder", "name": "Hamza Abid Chaudhary",
-           "jobTitle": "Founder & AI Solutions Engineer", "url": f"{SITE}/approach/",
+           "jobTitle": "Founder & AI Solutions Engineer", "image": f"{SITE}/assets/hamza.jpg", "url": f"{SITE}/approach/",
            "sameAs": ["https://github.com/HamzaAbidChaudhary1"]}
 ORG = {"@type": "ProfessionalService", "@id": f"{SITE}/#org", "name": "NestedFusion", "url": f"{SITE}/",
        "logo": f"{SITE}/assets/apple-touch-icon.png", "image": f"{SITE}/assets/og.png",

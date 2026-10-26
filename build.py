@@ -65,7 +65,7 @@ def head(title, desc, path, noindex=False, ld=None):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{t}</title>
 <meta name="description" content="{d}">
-{robots}<meta name="theme-color" content="#05080e">
+{robots}<meta name="theme-color" content="#E9EEF2">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -100,7 +100,7 @@ def header(active):
     loader = """
 <div class="loader" aria-hidden="true">
   <div class="loader__inner">
-    <img class="loader__mark" src="/assets/mark.svg" alt="" width="88" height="88">
+    <img class="loader__mark" src="/assets/mark-dark.svg" alt="" width="88" height="88">
     <div class="loader__bar"><span></span></div>
   </div>
 </div>
@@ -112,7 +112,7 @@ def header(active):
 
 <header class="nav" id="top">
   <div class="nav__in">
-    <a class="nav__logo" href="/" aria-label="NestedFusion home"><img src="/assets/logo.svg" alt="NestedFusion" width="176" height="60"></a>
+    <a class="nav__logo" href="/" aria-label="NestedFusion home"><img src="/assets/logo-dark.svg" alt="NestedFusion" width="176" height="60"></a>
     <nav class="nav__links" aria-label="Primary">
       {desk}
     </nav>
@@ -207,7 +207,7 @@ def footer():
   <div class="wrap">
     <div class="footer__big" aria-hidden="true">nestedfusion</div>
     <div class="footer__row">
-      <a href="/" aria-label="NestedFusion home"><img src="/assets/logo.svg" alt="NestedFusion" width="150" height="51"></a>
+      <a href="/" aria-label="NestedFusion home"><img src="/assets/logo-dark.svg" alt="NestedFusion" width="150" height="51"></a>
       <nav aria-label="Footer">{links}</nav>
       <p>© <span id="yr">2026</span> NestedFusion. Serving the US &amp; Australia. <a class="footer__credits" href="/credits/">Photo credits</a></p>
     </div>

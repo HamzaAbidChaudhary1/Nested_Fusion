@@ -810,3 +810,30 @@ h3,.h4x{font-weight:600;letter-spacing:-.015em}
 .reel[style*="--n:3"] .reel__s img{animation-name:reelDrift3}
 @keyframes reelFade3{0%{opacity:0}6%{opacity:1}33.4%{opacity:1}41%{opacity:0}100%{opacity:0}}
 @keyframes reelDrift3{0%{transform:scale(1.02) translateX(0)}41%{transform:scale(1.12) translateX(-1.5%)}100%{transform:scale(1.12) translateX(-1.5%)}}
+
+/* Photo frames that move like footage: crossfade + slow drift */
+.ph--reel .reel__s{animation-delay:calc(var(--i) * 6s - var(--o, 0s))}
+.ph--reel .reel__s img{top:0;height:100%;animation-delay:calc(var(--i) * 6s - var(--o, 0s));transition:opacity .8s var(--ease),filter .7s var(--ease)}
+.ph--reel[style*="--n:2;"] .reel__s{animation-name:reelFade2}.ph--reel[style*="--n:2;"] .reel__s img{animation-name:reelDrift2}
+.ph--reel[style*="--n:3;"] .reel__s{animation-name:reelFade3}.ph--reel[style*="--n:3;"] .reel__s img{animation-name:reelDrift3}
+.ph--reel[style*="--n:5;"] .reel__s{animation-name:reelFade5}.ph--reel[style*="--n:5;"] .reel__s img{animation-name:reelDrift5}
+@keyframes reelFade2{0%{opacity:0}10%{opacity:1}50%{opacity:1}60%{opacity:0}100%{opacity:0}}
+@keyframes reelDrift2{0%{transform:scale(1.02) translateX(0)}60%{transform:scale(1.12) translateX(-1.5%)}100%{transform:scale(1.12) translateX(-1.5%)}}
+@keyframes reelFade5{0%{opacity:0}4%{opacity:1}20%{opacity:1}24%{opacity:0}100%{opacity:0}}
+@keyframes reelDrift5{0%{transform:scale(1.02) translateX(0)}24%{transform:scale(1.12) translateX(-1.5%)}100%{transform:scale(1.12) translateX(-1.5%)}}
+.ph--reel .reel__tag{bottom:16px;right:16px}
+/* single photos everywhere else drift gently too */
+.ph:not(.ph--reel):not(.ph--video) img{animation:phDrift 16s ease-in-out infinite alternate}
+@keyframes phDrift{from{transform:scale(1.03) translate(0,0)}to{transform:scale(1.1) translate(-1.2%,-1%)}}
+
+/* Home: hero is copy-only now, let the reel breathe on the right */
+.page-home .hero__grid{grid-template-columns:minmax(0,780px)}
+.hero--reel .reel__scrim{background:linear-gradient(90deg,rgba(233,238,242,.97) 0%,rgba(233,238,242,.9) 36%,rgba(233,238,242,.35) 62%,rgba(233,238,242,0) 100%),linear-gradient(0deg,rgba(233,238,242,1) 0%,rgba(233,238,242,0) 22%)}
+@media (max-width:1024px){.hero--reel .reel__scrim{background:linear-gradient(180deg,rgba(233,238,242,.8) 0%,rgba(233,238,242,.93) 50%,rgba(233,238,242,1) 100%)}}
+
+/* Home demo: photo reel in place of the console */
+.demo__stage{padding:0}
+.ph--demo{max-width:540px;margin-left:auto;border-radius:24px;box-shadow:0 30px 70px -40px rgba(16,20,24,.45)}
+.ph--demo .reel__tag{left:18px;right:18px;bottom:18px;white-space:normal;line-height:1.35;font-size:14px;padding:12px 16px;border-radius:14px}
+@media (max-width:1024px){.ph--demo{margin:0 auto;aspect-ratio:4/3!important}}
+@media (prefers-reduced-motion:reduce){.ph img{animation:none!important}.ph--reel .reel__s{animation:none}.ph--reel .reel__s:not(:first-child){display:none}}

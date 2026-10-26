@@ -171,6 +171,15 @@ PHOTOS = {
     "reel-health": ("photo-1778151270886-f227700b0eba", "Bright clinic reception desk", "Irshad Pathan", "alrighthospital", "bdeLBIPYUrE"),
     "reel-estate": ("photo-1741156386380-0236c72eb6f9", "Hand holding house keys at a front door", "Jakub Żerdzicki", "jakubzerdzicki", "bqUZEAeWuok"),
     "reel-eng":    ("photo-1581092160562-40aa08e78837", "Engineer measuring technical drawings on a desk", "ThisisEngineering", "thisisengineering", "WDCE0T4khsE"),
+    "x-window":    ("photo-1505798577917-a65157d3320a", "Carpenter at a workbench with a miter saw", "Annie Gray", "anniegray", "WEWTGkPUVT0"),
+    "x-callteam":  ("photo-1626863905121-3b0c0ed7b94c", "Two women wearing headsets in a bright office", "Charanjeet Dhiman", "charanjeet_dhiman", "mHusyBu4bxM"),
+    "x-laptop":    ("photo-1602016736566-7ed6a58894bd", "Woman working on a laptop", "Luke Southern", "lukesouthern", "9yCYGgPe5Kg"),
+    "x-desk":      ("photo-1544717302-de2939b7ef71", "Woman sitting at a desk using a laptop", "Icons8 Team", "icons8", "CrW-TbykPBQ"),
+    "x-apartment": ("photo-1637747022660-12ce5ce4e420", "Living room of a modern Dubai apartment", "Usman Mehmood", "usmanmeh90", "MME_XnKUTIg"),
+    "x-group":     ("photo-1651514645933-c26e0eb4ace3", "Small group of people talking together", "Small Group Network", "smallgroupnetwork", "bxiOjnbjRM0"),
+    "x-orders":    ("photo-1770013413878-2530e2c3d82b", "Small business owner checking a package beside a laptop", "Rifki Kurniawan", "kurniawann", "k63Or81F8-M"),
+    "x-doctor":    ("photo-1666886573531-48d2e3c2b684", "Doctor showing a patient something on a tablet", "Nappy", "nappystudio", "J5UTvRgse7Q"),
+    "x-doctors":   ("photo-1758691463203-cce9d415b2b5", "Two doctors looking at a tablet together", "Vitaly Gariev", "silverkblack", "2kopEHjST-g"),
     "hero-faq":      ("photo-1628645339131-0c39c7527856", "Woman with a coffee mug on a video call", "Helena Lopes", "helenalopesph", "_SzvRwdFo6o"),
 }
 UTM = "utm_source=nestedfusion&utm_medium=referral"
@@ -183,7 +192,9 @@ def video(key, cls="", ratio="16/9"):
             f'data-src="/assets/video/{key}.mp4" aria-hidden="true"></video></div></figure>')
 
 
-def img(key, cls="", ratio="16/9", sizes="(max-width: 720px) 100vw, 50vw", credit=False, eager=False):
+def img(key, cls="", ratio="16/9", sizes="(max-width: 720px) 100vw, 50vw", credit=False, eager=False, tags=""):
+    if "," in key:
+        return img_reel([k.strip() for k in key.split(",")], cls, ratio, sizes, eager, [t.strip() for t in tags.split("|")] if tags else [])
     pid, alt, name, user, slug = PHOTOS[key]
     w, h = (int(x) for x in ratio.split("/"))
     base = f"https://images.unsplash.com/{pid}?auto=format&fit=crop&q=70&ar={w}:{h}"
@@ -214,6 +225,22 @@ def reel(slides=None):
         out.append(f'<div class="reel__s" style="--i:{i}">{media}{tag}</div>')
     n = len(slides or REEL_SLIDES)
     return f'<div class="reel" aria-hidden="true" style="--n:{n}">{"".join(out)}<div class="reel__scrim"></div></div>'
+
+
+def img_reel(keys, cls, ratio, sizes, eager=False, tags=()):
+    """Several photos crossfading with a slow camera drift inside one frame, so a still reads like footage."""
+    w, h = (int(x) for x in ratio.split("/"))
+    off = sum(map(ord, "".join(keys))) % 5  # stagger frames so they don't all change together
+    slides = []
+    for i, k in enumerate(keys):
+        pid, alt = PHOTOS[k][0], PHOTOS[k][1]
+        base = f"https://images.unsplash.com/{pid}?auto=format&fit=crop&q=70&ar={w}:{h}"
+        srcset = ", ".join(f"{base}&w={px} {px}w" for px in (480, 800, 1200, 1800))
+        load = 'fetchpriority="high"' if (eager and i == 0) else 'loading="lazy"'
+        tag = f'<span class="reel__tag">{html.escape(tags[i])}</span>' if i < len(tags) and tags[i] else ""
+        slides.append(f'<div class="reel__s" style="--i:{i}"><img src="{base}&w=1200" srcset="{srcset}" sizes="{sizes}" alt="{html.escape(alt) if i == 0 else ""}" {load} decoding="async" width="{w*100}" height="{h*100}">{tag}</div>')
+    return (f'<figure class="ph ph--reel {cls}" style="aspect-ratio:{ratio};--n:{len(keys)};--o:{off}s"><div class="ph__in">'
+            f'{"".join(slides)}</div></figure>')
 
 
 CTA = f"""<section class="cta" aria-labelledby="cta-title">

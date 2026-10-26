@@ -24,18 +24,6 @@
       </dl>
     </div>
 
-    <aside class="hidx reveal-up" aria-label="Selected work">
-      <p class="hidx__k">Selected work</p>
-      <ol class="hidx__list">
-        <li><a href="/work/"><span class="n">01</span><span><small>Engineering · Florida</small>AI permitting system</span></a></li>
-        <li><a href="/work/"><span class="n">02</span><span><small>Real estate · Dubai</small>Investor booking platform</span></a></li>
-        <li><a href="/work/"><span class="n">03</span><span><small>Compliance · Australia</small>Safeguarding compliance portal</span></a></li>
-        <li><a href="/work/"><span class="n">04</span><span><small>Healthcare</small>Clinical report-writing assistants</span></a></li>
-        <li><a href="/work/"><span class="n">05</span><span><small>E-commerce · Australia</small>Market-intelligence agents</span></a></li>
-      </ol>
-      <a class="hidx__more" href="/work/">All case studies <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </aside>
-
   </div>
   <a class="hero__scroll" href="#manifesto" aria-label="Scroll to next section"><span></span></a>
 </section>
@@ -71,23 +59,8 @@
         <li><strong>Alerted</strong><span>If a step fails, it retries, falls back and tells someone.</span></li>
       </ul>
     </div>
-    <div class="demo__stage" aria-hidden="true">
-      
-      <div class="console">
-        <div class="console__head">
-          <span class="console__dots"><i></i><i></i><i></i></span>
-          <span class="console__title">agents.run</span>
-          <span class="console__live"><i></i>example run</span>
-        </div>
-        <ol class="console__list">
-          <li data-agent="Intake"><span class="st"></span><span class="tx">New enquiry read → lead scored → CRM updated</span></li>
-          <li data-agent="Voice"><span class="st"></span><span class="tx">Inbound call answered → appointment booked</span></li>
-          <li data-agent="Ops"><span class="st"></span><span class="tx">Orders pulled from Shopify → weekly report sent</span></li>
-          <li data-agent="Docs"><span class="st"></span><span class="tx">Compliance report drafted → sent for review</span></li>
-          <li data-agent="Finance"><span class="st"></span><span class="tx">Invoices matched → exceptions flagged</span></li>
-        </ol>
-        <div class="console__foot"><span>Human-in-the-loop</span><span class="console__meter"><i></i></span></div>
-      </div>
+    <div class="demo__stage">
+      {{IMG key="reel-estate,x-callteam,x-orders,x-doctors,x-laptop" cls="ph--demo" ratio="4/5" sizes="(max-width: 1024px) 100vw, 50vw" tags="New enquiry read → lead scored → CRM updated|Inbound call answered → appointment booked|Orders pulled from Shopify → weekly report sent|Compliance report drafted → sent for review|Invoices matched → exceptions flagged"}}
     </div>
   </div>
 </section>
@@ -166,7 +139,7 @@
     </header>
     <div class="cases">
       <article class="case case--feature">
-        {{IMG key="permit" cls="ph--case" ratio="21/7" sizes="(max-width: 720px) 100vw, 1200px"}}
+        {{IMG key="permit,reel-eng,x-window" cls="ph--case" ratio="21/7" sizes="(max-width: 720px) 100vw, 1200px"}}
         <div class="case__meta"><span>Engineering</span><span>Florida, USA</span></div>
         <h3>AI permitting system for a Florida engineering firm</h3>
         <p>From job intake to permit package: vision reads the order, plans and photos, wind loads run as deterministic code, product approvals are fetched live, and a CAD drawing is generated for the licensed engineer to sign off.</p>
@@ -174,7 +147,7 @@
         <ul class="tags"><li>Claude</li><li>Python</li><li>RAG</li><li>CAD / DXF</li></ul>
       </article>
       <article class="case">
-        {{IMG key="dubai" cls="ph--case" ratio="16/10" sizes="(max-width: 720px) 100vw, 400px"}}
+        {{IMG key="dubai,x-apartment,reel-estate" cls="ph--case" ratio="16/10" sizes="(max-width: 720px) 100vw, 400px"}}
         <div class="case__meta"><span>Real estate</span><span>Dubai</span></div>
         <h3>Investment platform for a Dubai real-estate firm</h3>
         <p>Agent dashboard and investor booking system with staged payments, government fees and co-investors.</p>
@@ -182,7 +155,7 @@
         <ul class="tags"><li>Node.js</li><li>Supabase</li><li>GoHighLevel</li></ul>
       </article>
       <article class="case">
-        {{IMG key="church" cls="ph--case" ratio="16/10" sizes="(max-width: 720px) 100vw, 400px"}}
+        {{IMG key="church,x-group" cls="ph--case" ratio="16/10" sizes="(max-width: 720px) 100vw, 400px"}}
         <div class="case__meta"><span>Non-profit</span><span>Australia</span></div>
         <h3>Safeguarding compliance portal for a Catholic diocese</h3>
         <p>Position-based screening and training records, admin dashboards and audit logs.</p>
@@ -190,7 +163,7 @@
         <ul class="tags"><li>Supabase</li><li>Make.com</li></ul>
       </article>
       <article class="case">
-        {{IMG key="voice" cls="ph--case" ratio="16/10" sizes="(max-width: 720px) 100vw, 400px"}}
+        {{IMG key="voice,x-callteam,reel-health" cls="ph--case" ratio="16/10" sizes="(max-width: 720px) 100vw, 400px"}}
         <div class="case__meta"><span>Voice AI</span><span>Sales</span></div>
         <h3>Real-time AI voice sales agent</h3>
         <p>Twilio calls through a self-hosted speech pipeline with an LLM in the loop and a live dashboard.</p>

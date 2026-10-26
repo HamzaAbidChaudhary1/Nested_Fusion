@@ -510,3 +510,20 @@
     }, 1150);
   }
 })();
+
+// Work page on phones: show the headline result, tuck the long write-up behind a toggle
+(() => {
+  document.querySelectorAll('.study__body').forEach((body) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'study__more';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.textContent = 'Read the full story';
+    btn.addEventListener('click', () => {
+      const open = body.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Show less' : 'Read the full story';
+    });
+    body.after(btn);
+  });
+})();

@@ -837,3 +837,22 @@ h3,.h4x{font-weight:600;letter-spacing:-.015em}
 .ph--demo .reel__tag{left:18px;right:18px;bottom:18px;white-space:normal;line-height:1.35;font-size:14px;padding:12px 16px;border-radius:14px}
 @media (max-width:1024px){.ph--demo{margin:0 auto;aspect-ratio:4/3!important}}
 @media (prefers-reduced-motion:reduce){.ph img{animation:none!important}.ph--reel .reel__s{animation:none}.ph--reel .reel__s:not(:first-child){display:none}}
+
+/* Phones: photo shows crisp at the top, copy sits below it (no white wash over the picture) */
+@media (max-width:1024px){
+  .hero--reel,.phero--reel{--ph-h:min(56svh,430px);padding-top:calc(var(--ph-h) - 40px)!important;min-height:0;align-items:flex-start;background:var(--bg)}
+  .hero--reel .reel,.phero--reel .reel{bottom:auto;height:var(--ph-h)}
+  .hero--reel .reel__scrim,.phero--reel .reel__scrim{background:linear-gradient(180deg,rgba(233,238,242,.75) 0%,rgba(233,238,242,0) 22%,rgba(233,238,242,0) 62%,rgba(233,238,242,.9) 88%,var(--bg) 100%)}
+  .hero--reel .reel__tag{top:auto;bottom:56px;right:16px}
+  .hero--reel .reel__s img,.phero--reel .reel__s img{object-position:50% 40%}
+}
+.study__more{display:none}
+@media (max-width:720px){
+  .study__body{display:none}
+  .study__body.is-open{display:grid}
+  .study__more{display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:12px 18px;border:1px solid var(--line);border-radius:999px;background:#fff;font:600 14px/1 "Inter",system-ui,sans-serif;color:var(--text);cursor:pointer;grid-column:1/-1;justify-self:start}
+  .svc__col + .svc__col{display:none}
+}
+/* Process: one-line outcome per step */
+.step__get{margin-top:14px;padding:12px 16px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:15px;color:var(--text)}
+.step__get strong{display:block;font-size:12px;font-weight:600;color:var(--cyan);margin-bottom:4px;letter-spacing:.02em}

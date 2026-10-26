@@ -167,6 +167,9 @@ PHOTOS = {
     "hero-process":  ("photo-1531403009284-440f080d1e12", "Person arranging a process plan on a wall board", "Alvaro Reyes", "alvarordesign", "qWwpHwip31M"),
     "hero-work":     ("photo-1758876020300-76a782ca51c6", "Man reviewing documents at an office desk", "Vitaly Gariev", "silverkblack", "cX62K66gMUk"),
     "hero-approach": ("photo-1527689368864-3a821dbccc34", "Two colleagues talking while looking at a laptop", "KOBU Agency", "kobuagency", "7okkFhxrxNw"),
+    "reel-health": ("photo-1778151270886-f227700b0eba", "Bright clinic reception desk", "Irshad Pathan", "alrighthospital", "bdeLBIPYUrE"),
+    "reel-estate": ("photo-1741156386380-0236c72eb6f9", "Hand holding house keys at a front door", "Jakub Żerdzicki", "jakubzerdzicki", "bqUZEAeWuok"),
+    "reel-eng":    ("photo-1581092160562-40aa08e78837", "Engineer measuring technical drawings on a desk", "ThisisEngineering", "thisisengineering", "WDCE0T4khsE"),
     "hero-faq":      ("photo-1628645339131-0c39c7527856", "Woman with a coffee mug on a video call", "Helena Lopes", "helenalopesph", "_SzvRwdFo6o"),
 }
 UTM = "utm_source=nestedfusion&utm_medium=referral"
@@ -190,6 +193,24 @@ def img(key, cls="", ratio="16/9", sizes="(max-width: 720px) 100vw, 50vw", credi
     return (f'<figure class="ph {cls}" style="aspect-ratio:{ratio}"><div class="ph__in">'
             f'<img src="{base}&w=1200" srcset="{srcset}" sizes="{sizes}" alt="{html.escape(alt)}" {load} decoding="async" width="{w*100}" height="{h*100}">'
             f'</div>{cap}</figure>')
+
+
+# Hero reel: full-bleed slow-motion slides behind the home headline.
+# Each slide is (label, photo key, optional clip). Drop an MP4 at /assets/video/<clip>.mp4 to swap a still for footage.
+REEL_SLIDES = [("Healthcare", "reel-health", None), ("Real estate", "reel-estate", None),
+               ("Engineering", "reel-eng", None), ("Your team", "hero-services", None)]
+
+
+def reel():
+    out = []
+    for i, (label, key, clip) in enumerate(REEL_SLIDES):
+        pid = PHOTOS[key][0]
+        base = f"https://images.unsplash.com/{pid}?auto=format&fit=crop&q=72&ar=16:9"
+        load = 'fetchpriority="high"' if i == 0 else 'loading="lazy"'
+        media = (f'<video muted loop playsinline autoplay preload="metadata" poster="{base}&w=1600" src="/assets/video/{clip}.mp4"></video>' if clip else
+                 f'<img src="{base}&w=1600" srcset="{base}&w=900 900w, {base}&w=1600 1600w, {base}&w=2400 2400w" sizes="100vw" alt="" {load} decoding="async">')
+        out.append(f'<div class="reel__s" style="--i:{i}">{media}<span class="reel__tag">{label}</span></div>')
+    return f'<div class="reel" aria-hidden="true" style="--n:{len(REEL_SLIDES)}">{"".join(out)}<div class="reel__scrim"></div></div>'
 
 
 CTA = f"""<section class="cta" aria-labelledby="cta-title">
@@ -240,7 +261,7 @@ def render(key):
     body = re.sub(r"\{\{PHERO (.*?)\}\}", lambda m: phero(**dict(re.findall(r'(\w+)="(.*?)"', m.group(1)))), body)
     body = re.sub(r"\{\{IMG (.*?)\}\}", lambda m: (lambda a: img(a.pop("key"), **a))(dict(re.findall(r'(\w+)="(.*?)"', m.group(1)))), body)
     body = re.sub(r"\{\{VIDEO (.*?)\}\}", lambda m: (lambda a: video(a.pop("key"), **a))(dict(re.findall(r'(\w+)="(.*?)"', m.group(1)))), body)
-    body = body.replace("{{CTA}}", CTA)
+    body = body.replace("{{CTA}}", CTA).replace("{{REEL}}", reel())
     if "{{CREDITS}}" in body:
         rows = "".join(
             f'<li><span>{html.escape(alt)}</span><span>Photo by <a href="https://unsplash.com/@{user}?{UTM}" target="_blank" rel="noopener">{html.escape(name)}</a> on <a href="https://unsplash.com/photos/{slug}?{UTM}" target="_blank" rel="noopener">Unsplash</a></span></li>'

@@ -130,14 +130,19 @@ def header(active):
 """
 
 
-def phero(kicker, title, lead):
+def phero(kicker, title, lead, photo=None):
     lines = " ".join(f'<span class="line">{html.escape(l).replace("&amp;amp;", "&amp;")}</span>' for l in title.split("|"))
+    pic = img(photo, cls="phero__ph reveal-up", ratio="4/3", sizes="(max-width: 1024px) 100vw, 46vw", eager=True) if photo else ""
+    grid = " phero__in--ph" if photo else ""
     return f"""<section class="phero" aria-labelledby="page-title">
   <div class="hero__glow" aria-hidden="true"></div>
-  <div class="wrap phero__in">
-    <p class="kicker reveal-up"><span class="dot"></span>{html.escape(kicker)}</p>
-    <h1 id="page-title" class="phero__title hero__title">{lines}</h1>
-    <p class="lead phero__lead reveal-up">{html.escape(lead)}</p>
+  <div class="wrap phero__in{grid}">
+    <div class="phero__copy">
+      <p class="kicker reveal-up"><span class="dot"></span>{html.escape(kicker)}</p>
+      <h1 id="page-title" class="phero__title hero__title">{lines}</h1>
+      <p class="lead phero__lead reveal-up">{html.escape(lead)}</p>
+    </div>
+    {pic}
   </div>
 </section>
 """
@@ -158,6 +163,11 @@ PHOTOS = {
     "content":   ("photo-1676276375742-9e3d10e39d45", "Social media content plan on a whiteboard", "Walls.io", "walls_io", "sckgeg8lNMY"),
     "workshop":  ("photo-1677506048892-edde55cf3277", "Person presenting a process mapped on sticky notes", "Paymo", "paymo", "4wSnhAT8d9g"),
     "circuit":   ("photo-1727434032773-af3cd98375ba", "Close-up of a circuit board with data lines", "Luke Jones", "lukejonesdesign", "tBvF46kmwBw"),
+    "hero-services": ("photo-1681949287382-052ea3954a51", "Team meeting in a sunlit office", "Sable Flow", "sableflow", "KHpjeuaWOec"),
+    "hero-process":  ("photo-1531403009284-440f080d1e12", "Person arranging a process plan on a wall board", "Alvaro Reyes", "alvarordesign", "qWwpHwip31M"),
+    "hero-work":     ("photo-1758876020300-76a782ca51c6", "Man reviewing documents at an office desk", "Vitaly Gariev", "silverkblack", "cX62K66gMUk"),
+    "hero-approach": ("photo-1527689368864-3a821dbccc34", "Two colleagues talking while looking at a laptop", "KOBU Agency", "kobuagency", "7okkFhxrxNw"),
+    "hero-faq":      ("photo-1628645339131-0c39c7527856", "Woman with a coffee mug on a video call", "Helena Lopes", "helenalopesph", "_SzvRwdFo6o"),
 }
 UTM = "utm_source=nestedfusion&utm_medium=referral"
 

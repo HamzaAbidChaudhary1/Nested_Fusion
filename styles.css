@@ -768,3 +768,9 @@ h3,.h4x{font-weight:600;letter-spacing:-.015em}
 .footer__credits:hover{color:#fff}
 /* Footer wordmark: original condensed Archivo with cyan fade */
 .footer__big{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-stretch:75%;letter-spacing:-.05em;background:linear-gradient(180deg,rgba(35,215,255,.24),rgba(35,215,255,0) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* Page heroes with a photo */
+.phero__in--ph{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(36px,5vw,80px);align-items:end}
+.phero__in--ph .phero__title.hero__title{font-size:clamp(38px,4.6vw,72px)}
+.phero__ph{border-radius:14px;border:1px solid var(--line)}
+@media (max-width:1024px){.phero__in--ph{grid-template-columns:1fr}.phero__ph{max-width:640px}}

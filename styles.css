@@ -757,3 +757,12 @@ h3,.h4x{font-weight:600;letter-spacing:-.015em}
 .hidx__more svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .cases .case:not(.case--feature) .case__result .big{font-size:52px}
 @media (max-width:1024px){.page-home .hero__grid{grid-template-columns:1fr}.hidx{max-width:560px}}
+
+/* Light theme: dark footer to close the page */
+.footer{background:#101418;color:#EEF1F4;border-top:0}
+.footer__big{color:#1B2128;-webkit-text-fill-color:#1B2128}
+.footer__row{color:#7D8792}
+.footer__row nav a{color:#B7C0C9}
+.footer__row nav a:hover{color:#fff}
+.footer__credits{color:#7D8792;text-decoration-color:rgba(255,255,255,.2)}
+.footer__credits:hover{color:#fff}

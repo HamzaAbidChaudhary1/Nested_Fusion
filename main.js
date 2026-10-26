@@ -267,6 +267,7 @@
 
     return {
       start() {
+        if (!canvas.clientWidth || !canvas.clientHeight) return; // hidden: skip, never block the intro
         build();
         if (reduce) { ctx.drawImage(base, 0, 0); return; }
         running = true; frame();

@@ -133,7 +133,6 @@ def header(active):
 def phero(kicker, title, lead):
     lines = " ".join(f'<span class="line">{html.escape(l).replace("&amp;amp;", "&amp;")}</span>' for l in title.split("|"))
     return f"""<section class="phero" aria-labelledby="page-title">
-  <canvas class="hero__net" aria-hidden="true"></canvas>
   <div class="hero__glow" aria-hidden="true"></div>
   <div class="wrap phero__in">
     <p class="kicker reveal-up"><span class="dot"></span>{html.escape(kicker)}</p>
@@ -207,7 +206,7 @@ def footer():
   <div class="wrap">
     <div class="footer__big" aria-hidden="true">nestedfusion</div>
     <div class="footer__row">
-      <a href="/" aria-label="NestedFusion home"><img src="/assets/logo-dark.svg" alt="NestedFusion" width="150" height="51"></a>
+      <a href="/" aria-label="NestedFusion home"><img src="/assets/logo.svg" alt="NestedFusion" width="150" height="51"></a>
       <nav aria-label="Footer">{links}</nav>
       <p>© <span id="yr">2026</span> NestedFusion. Serving the US &amp; Australia. <a class="footer__credits" href="/credits/">Photo credits</a></p>
     </div>

@@ -1,14 +1,19 @@
-/* NestedFusion — hero sculpture.
-   Four rings on a real gimbal hierarchy (each ring is the parent of the next) around a cyan core.
-   They arrive turning, idle open, and close flat into one nested mark as the hero scrolls away.
+/* NestedFusion — hero object.
+   Modeled in Blender (src/blender/nested_core.py): a thin-walled glass case, a champagne-gold frame
+   standing on its corner, and a graphite hub wiring a teal enamel core to every corner of the frame.
+   Lit by a studio environment baked in the same Blender scene. The case and its contents turn at
+   different speeds so the nesting reads, then lock into line as the hero scrolls away.
    Decorative: aria-hidden, no content depends on it. Bundled with esbuild into /assets/js/sculpt.js. */
 import {
-  WebGLRenderer, Scene, PerspectiveCamera, Group, Mesh, LatheGeometry, SphereGeometry, PlaneGeometry,
-  MeshPhysicalMaterial, ShadowMaterial, HemisphereLight, DirectionalLight, Vector2, PMREMGenerator,
-  NeutralToneMapping, VSMShadowMap, MathUtils, Timer,
+  WebGLRenderer, Scene, PerspectiveCamera, Group, Mesh, PlaneGeometry, MeshPhysicalMaterial, ShadowMaterial,
+  DirectionalLight, PMREMGenerator, EquirectangularReflectionMapping, NeutralToneMapping, VSMShadowMap,
+  MathUtils, Timer, Color, Quaternion, Vector3, FrontSide,
 } from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { HDRLoader } from 'three/addons/loaders/HDRLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
+const ASSETS = '/assets/3d/';
 const host = document.querySelector('[data-sculpt]');
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const wide = window.matchMedia('(min-width: 1025px)');
@@ -17,100 +22,82 @@ function webgl2() {
   try { return !!document.createElement('canvas').getContext('webgl2'); } catch { return false; }
 }
 
-if (host && wide.matches && webgl2()) start(host);
+if (host && wide.matches && webgl2()) start(host).catch(() => { /* keep the poster */ });
 
-function start(host) {
+async function start(host) {
   const hero = host.closest('.hero');
   const canvas = host.querySelector('canvas');
 
-  const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  const gltfLoader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+  const [gltf, hdr] = await Promise.all([
+    gltfLoader.loadAsync(ASSETS + 'nested-core.glb'),
+    new HDRLoader().loadAsync(ASSETS + 'studio.hdr'),
+  ]);
+
+  const renderer = new WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
-  renderer.setClearColor(0x000000, 0);
   renderer.toneMapping = NeutralToneMapping;
   renderer.toneMappingExposure = 1.0;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = VSMShadowMap; // soft, wide contact shadow; only the floor receives it
+  renderer.shadowMap.type = VSMShadowMap;
 
   const scene = new Scene();
+  // Glass refracts what is behind it, so the scene carries the page colour (#E9EEF2) rather than transparency.
+  scene.background = new Color(0xe9eef2);
+  hdr.mapping = EquirectangularReflectionMapping;
   const pmrem = new PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.environmentIntensity = 0.55;
+  scene.environment = pmrem.fromEquirectangular(hdr).texture;
+  scene.environmentIntensity = 1.0;
+  hdr.dispose();
   pmrem.dispose();
 
-  const camera = new PerspectiveCamera(28, 1, 0.1, 50);
-  camera.position.set(0, 0.5, 8.4);
-  camera.lookAt(0, -0.32, 0);
+  const camera = new PerspectiveCamera(26, 1, 0.1, 50);
+  camera.position.set(0, 0.55, 7.6);
+  camera.lookAt(0, -0.12, 0);
 
-  // Lights: soft sky from above, one key that casts the contact shadow, a cool rim from behind.
-  scene.add(new HemisphereLight(0xffffff, 0xc4ced6, 1.1));
-  const key = new DirectionalLight(0xffffff, 2.6);
-  key.position.set(-1.6, 7, 2.4);
+  // One light only, for the contact shadow; the look comes from the baked studio.
+  const key = new DirectionalLight(0xffffff, 0.9);
+  key.position.set(-0.5, 7.5, 1.4);
   key.castShadow = true;
   key.shadow.mapSize.set(512, 512);
-  Object.assign(key.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: 1, far: 16 });
-  key.shadow.radius = 14;
+  Object.assign(key.shadow.camera, { left: -3, right: 3, top: 3, bottom: -3, near: 1, far: 14 });
+  key.shadow.radius = 16;
   key.shadow.blurSamples = 16;
   scene.add(key);
-  const rim = new DirectionalLight(0xdff4ff, 1.2);
-  rim.position.set(4, 2, -5);
-  scene.add(rim);
 
-  // Materials: glazed ceramic, one ink ring, a cyan core. Same palette as the page.
-  const ceramic = new MeshPhysicalMaterial({ color: 0xf2f5f7, roughness: 0.46, clearcoat: 0.7, clearcoatRoughness: 0.22 });
-  const ink = new MeshPhysicalMaterial({ color: 0x14191f, roughness: 0.32, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.12 });
-  const cyan = new MeshPhysicalMaterial({ color: 0x23d7ff, roughness: 0.28, clearcoat: 1, clearcoatRoughness: 0.08 });
+  // Parts by name, as modeled.
+  const part = name => gltf.scene.getObjectByName(name);
+  const glass = part('Glass'), frame = part('Frame'), network = part('Network'), core = part('Core');
 
-  // A band with rounded edges, spun on a lathe, then turned to face the camera.
-  function band(radius, thick, depth) {
-    const r = Math.min(thick, depth) * 0.42, pts = [], seg = 6;
-    const corner = (cx, cy, a0) => {
-      for (let i = 0; i <= seg; i++) {
-        const a = a0 + (i / seg) * Math.PI / 2;
-        pts.push(new Vector2(cx + Math.cos(a) * r, cy + Math.sin(a) * r));
-      }
-    };
-    const x0 = radius - thick / 2, x1 = radius + thick / 2, y0 = -depth / 2, y1 = depth / 2;
-    corner(x0 + r, y0 + r, Math.PI);         // inner bottom
-    corner(x1 - r, y0 + r, Math.PI * 1.5);   // outer bottom
-    corner(x1 - r, y1 - r, 0);               // outer top
-    corner(x0 + r, y1 - r, Math.PI / 2);     // inner top
-    pts.push(pts[0].clone());
-    const g = new LatheGeometry(pts, 128);
-    g.rotateX(Math.PI / 2);
-    return g;
-  }
-
-  // Gimbal: ring 0 turns about Y, its child about X, and so on. Nested in code, not just in name.
-  const spec = [
-    { radius: 1.62, thick: 0.13, depth: 0.30, mat: ceramic, axis: 'y', open: 0.95 },
-    { radius: 1.28, thick: 0.12, depth: 0.26, mat: ink,     axis: 'x', open: -1.15 },
-    { radius: 0.96, thick: 0.11, depth: 0.23, mat: ceramic, axis: 'y', open: 1.05 },
-    { radius: 0.66, thick: 0.10, depth: 0.20, mat: ceramic, axis: 'x', open: -0.85 },
-  ];
-  const root = new Group();
-  root.rotation.x = -0.12;
-  scene.add(root);
-  let parent = root;
-  const rings = spec.map((s, i) => {
-    const pivot = new Group();
-    const mesh = new Mesh(band(s.radius, s.thick, s.depth), s.mat);
-    mesh.castShadow = true;
-    pivot.add(mesh);
-    parent.add(pivot);
-    parent = pivot;
-    return { pivot, ...s, phase: i * 1.7 };
+  // Glass: real transmission with a teal body colour that only shows through the thick edges.
+  glass.material = new MeshPhysicalMaterial({
+    color: 0xffffff, metalness: 0, roughness: 0.02, transmission: 1, thickness: 0.12, ior: 1.5,
+    attenuationColor: new Color(0xbfe9f0), attenuationDistance: 3.5, specularIntensity: 1,
+    iridescence: 0.12, iridescenceIOR: 1.33, iridescenceThicknessRange: [320, 440], side: FrontSide,
   });
-  const core = new Mesh(new SphereGeometry(0.34, 64, 32), cyan);
-  core.castShadow = true;
-  parent.add(core);
+  glass.castShadow = true;
+  // Metals and enamel keep their Blender materials, tuned slightly for the real-time renderer.
+  frame.material.roughness = 0.16;
+  frame.material.envMapIntensity = 1.15;
+  network.material.roughness = 0.32;
+  core.material.clearcoat = 1;
+  core.material.clearcoatRoughness = 0.04;
+  [frame, network, core].forEach(m => { m.castShadow = true; });
 
-  const floor = new Mesh(new PlaneGeometry(6.5, 6.5), new ShadowMaterial({ opacity: 0.16 })); // kept inside the shadow camera so no edge ever shows
+  // The contents turn as one unit inside the case: wrap them, keeping their modeled orientation.
+  const inner = new Group();
+  [frame, network, core].forEach(o => inner.add(o));
+  const root = new Group();
+  root.add(glass, inner);
+  scene.add(root);
+
+  const floor = new Mesh(new PlaneGeometry(4.6, 4.6), new ShadowMaterial({ opacity: 0.18 })); // inside the shadow camera so its edge never shows
   floor.rotation.x = -Math.PI / 2;
-  floor.position.y = -1.95;
+  floor.position.y = -1.72;
   floor.receiveShadow = true;
   scene.add(floor);
 
-  // Input: the cursor tilts the assembly, a drag spins the outer ring and lets it coast.
+  // Input: the cursor tilts the object, a drag spins the case and lets it coast.
   const look = { x: 0, y: 0, tx: 0, ty: 0 };
   let spin = 0, spinV = 0, drag = null;
   window.addEventListener('pointermove', e => {
@@ -123,11 +110,11 @@ function start(host) {
   canvas.addEventListener('pointerup', release);
   canvas.addEventListener('pointercancel', release);
 
-  // Scroll: as the hero leaves, the rings close flat. 0 = open, 1 = fused.
-  let fuse = 0;
+  // Scroll: 0 = contents turning freely, 1 = locked square with the case.
+  let lock = 0;
   const readScroll = () => {
     const r = hero.getBoundingClientRect();
-    fuse = MathUtils.smoothstep(-r.top / r.height, 0.04, 0.62);
+    lock = MathUtils.smoothstep(-r.top / r.height, 0.04, 0.6);
   };
   window.addEventListener('scroll', readScroll, { passive: true });
   readScroll();
@@ -145,51 +132,49 @@ function start(host) {
   const easeOutExpo = t => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
   const timer = new Timer();
   timer.connect(document);
-  const INTRO = 2.2;
+  const INTRO = 2.4, Y = new Vector3(0, 1, 0), X = new Vector3(1, 0, 0);
+  const qa = new Quaternion(), qb = new Quaternion();
   let shown = false, visible = true;
 
   function pose(t) {
-    // Arrival: rings start a full extra turn out and settle with an exponential ease.
     const arrive = reduce ? 1 : easeOutExpo(Math.min(t / INTRO, 1));
-    const breathe = reduce ? 0.75 : 0.62 + 0.38 * Math.sin(t * 0.32);
-    rings.forEach((r, i) => {
-      const idle = r.open * breathe * (1 + 0.08 * Math.sin(t * 0.5 + r.phase));
-      const settle = (1 - arrive) * (i % 2 ? -1 : 1) * (2.4 + i * 0.5);
-      r.pivot.rotation[r.axis] = (idle + settle) * (1 - fuse) + (i === 0 ? spin : 0);
-    });
-    root.scale.setScalar(0.86 + 0.14 * arrive);
-    core.scale.setScalar(1 - 0.12 * fuse);
+    // Case: a slow sway plus the user's spin; it arrives from a part-turn out.
+    glass.rotation.set(0.18, -0.5 + Math.sin(t * 0.16) * 0.28 + spin + (1 - arrive) * 2.2, 0);
+    // Contents: counter-rotate and nod while free; once locked they sit square with the case.
+    const free = 1 - lock;
+    qa.setFromAxisAngle(Y, (-t * 0.22 + 0.6 - (1 - arrive) * 3.0) * free + glass.rotation.y * lock);
+    qb.setFromAxisAngle(X, (Math.sin(t * 0.27) * 0.3 + 0.18) * free + 0.18 * lock);
+    inner.quaternion.copy(qb).multiply(qa);
+    root.scale.setScalar(0.82 + 0.1 * arrive);
   }
 
-  function frame() {
+  function frameLoop() {
     timer.update();
     const dt = Math.min(timer.getDelta(), 0.05);
-    const t = timer.getElapsed();
+    const t = reduce ? 4 : timer.getElapsed();
     look.x += (look.tx - look.x) * Math.min(dt * 3, 1);
     look.y += (look.ty - look.y) * Math.min(dt * 3, 1);
     if (drag === null) spinV *= Math.pow(0.04, dt);
     spin += spinV;
-    // Spin settles back to the nearest full turn once the hand lets go, so the fused mark lands square.
-    if (drag === null && Math.abs(spinV) < 0.002) spin += (Math.round(spin / (Math.PI * 2)) * Math.PI * 2 - spin) * Math.min(dt * 2, 1);
-    root.rotation.y = look.x * 0.32 + (reduce ? 0 : Math.sin(t * 0.17) * 0.12);
-    root.rotation.x = -0.12 + look.y * 0.18;
+    root.rotation.y = look.x * 0.28;
+    root.rotation.x = look.y * 0.14;
     pose(t);
     renderer.render(scene, camera);
     if (!shown) { shown = true; hero.classList.add('has-sculpt'); }
   }
 
   if (reduce) {
-    // One still frame, re-drawn only when the size changes.
-    frame();
+    // One still frame, redrawn only when the size changes.
+    frameLoop();
     new ResizeObserver(() => { resize(); renderer.render(scene, camera); }).observe(host);
     return;
   }
 
-  // Draw only while on screen.
+  // Draw only while on screen and on a wide viewport.
   new IntersectionObserver(([e]) => {
     visible = e.isIntersecting;
-    renderer.setAnimationLoop(visible ? frame : null);
+    renderer.setAnimationLoop(visible && wide.matches ? frameLoop : null);
   }, { rootMargin: '80px' }).observe(host);
-  wide.addEventListener('change', e => renderer.setAnimationLoop(e.matches && visible ? frame : null));
-  if (visible) renderer.setAnimationLoop(frame);
+  wide.addEventListener('change', e => renderer.setAnimationLoop(e.matches && visible ? frameLoop : null));
+  renderer.setAnimationLoop(frameLoop);
 }

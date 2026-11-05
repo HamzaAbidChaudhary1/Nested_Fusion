@@ -16,9 +16,11 @@ python3 build.py
 - `styles.css` — design tokens and styles
 - `main.js` — motion (GSAP + ScrollTrigger + SplitText, Lenis), hero network canvas, page transitions, work filters, Netlify Forms submit
 - `assets/` — logo (vector), fonts (self-hosted), vendor libs, OG image
-- `src/js/sculpt.js` — the home hero's 3D nested-ring sculpture (three.js r186). It is bundled, with only the three.js parts it uses, into `assets/js/sculpt.js`:
-  `npx esbuild@0.25 src/js/sculpt.js --bundle --minify --format=esm --target=es2020 --outfile=assets/js/sculpt.js` (needs `npm i three@0.186.0` next to it), then `python3 build.py`.
-  It loads only on screens 1025px and wider, after the page is idle, and only with WebGL2; phones and older browsers keep the photo reel. Reduced motion gets one still frame.
+- **Hero 3D object** — modeled in Blender: `src/blender/nested_core.py` builds it headless with Blender's Python module (`pip install bpy`, Blender 5.2).
+  - `python3 src/blender/nested_core.py export nested-core.glb` → compress with `npx @gltf-transform/cli optimize nested-core.glb assets/3d/nested-core.glb --compress meshopt --join false --flatten false --instance false`
+  - `python3 src/blender/nested_core.py env assets/3d/studio.hdr 1024` bakes the studio lighting used on the web; `render out.png 800 64` makes a Cycles preview
+  - `src/js/sculpt.js` loads both with three.js r186 and is bundled to `assets/js/sculpt.js`: `npx esbuild@0.25 src/js/sculpt.js --bundle --minify --format=esm --target=es2020 --outfile=assets/js/sculpt.js` (with `npm i three@0.186.0`), then `python3 build.py`
+  - Loads only at 1025px and wider, after the page is idle, with WebGL2; phones and older browsers keep the photo reel. Reduced motion gets one still frame.
 - `assets/video/` — looping background clips (MP4 + WebM fallback + poster). Add one with `{{VIDEO key="name" ratio="16/10"}}` in a page; files must be `name.mp4`, `name.webm`, `name-poster.jpg`
 
 Motion respects `prefers-reduced-motion`.

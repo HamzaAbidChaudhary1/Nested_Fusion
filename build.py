@@ -279,7 +279,7 @@ def footer():
 <script src="/assets/vendor/SplitText.min.js" defer></script>
 <script src="/assets/vendor/lenis.min.js" defer></script>
 <script src="/main.js?v={ver('main.js')}" defer></script>
-</body>
+{{SCULPT_LOADER}}</body>
 </html>
 """
 
@@ -298,7 +298,13 @@ def render(key):
             for _, (pid, alt, name, user, slug) in PHOTOS.items())
         body = body.replace("{{CREDITS}}", f'<ul class="credits">{rows}</ul>')
     noindex = key in ("thanks", "404", "credits")
-    return head(meta["title"], meta["desc"], key, noindex, structured_data(key, meta, body)) + "\n" + header(meta.get("active", key)) + body + footer()
+    # 3D sculpture: only fetched on wide screens, after the page is idle, on pages that place one.
+    loader = ""
+    if "data-sculpt" in body:
+        loader = ("<script type=\"module\">if(matchMedia('(min-width:1025px)').matches){const go=()=>import('/assets/js/sculpt.js?v="
+                  f"{ver('assets/js/sculpt.js')}');'requestIdleCallback' in window?requestIdleCallback(go,{{timeout:1500}}):setTimeout(go,600)}}</script>\n")
+    return (head(meta["title"], meta["desc"], key, noindex, structured_data(key, meta, body)) + "\n" + header(meta.get("active", key))
+            + body + footer().replace("{SCULPT_LOADER}", loader))
 
 
 def _text(fragment):

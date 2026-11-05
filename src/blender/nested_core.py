@@ -98,7 +98,7 @@ def build():
 
     # --- Gold hub: one core wired to all eight frame corners by right-angle traces
     ink = mat("Graphite", **{"Base Color": (*GRAPHITE, 1), "Metallic": 1.0, "Roughness": 0.3})
-    enamel = mat("Enamel", **{"Base Color": (0.01, 0.36, 0.5, 1), "Roughness": 0.14, "Coat Weight": 1.0, "Coat Roughness": 0.03})
+    enamel = mat("Enamel", **{"Base Color": (0.012, 0.013, 0.015, 1), "Roughness": 0.12, "Coat Weight": 1.0, "Coat Roughness": 0.03})
     parts = []
     bpy.ops.mesh.primitive_uv_sphere_add(radius=0.2, segments=64, ring_count=32)
     core = bpy.context.object

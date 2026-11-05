@@ -1,6 +1,6 @@
 /* NestedFusion — hero object.
    Modeled in Blender (src/blender/nested_core.py): a thin-walled glass case, a champagne-gold frame
-   standing on its corner, and a graphite hub wiring a teal enamel core to every corner of the frame.
+   standing on its corner, and a graphite hub wiring a glossy black core to every corner of the frame.
    Lit by a studio environment baked in the same Blender scene. The case and its contents turn at
    different speeds so the nesting reads, then lock into line as the hero scrolls away.
    Decorative: aria-hidden, no content depends on it. Bundled with esbuild into /assets/js/sculpt.js. */
@@ -80,6 +80,8 @@ async function start(host) {
   frame.material.roughness = 0.16;
   frame.material.envMapIntensity = 1.15;
   network.material.roughness = 0.32;
+  core.material.color.set(0x050607); // glossy black, as set in the Blender source
+  core.material.roughness = 0.12;
   core.material.clearcoat = 1;
   core.material.clearcoatRoughness = 0.04;
   [frame, network, core].forEach(m => { m.castShadow = true; });

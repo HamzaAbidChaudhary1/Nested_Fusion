@@ -1,8 +1,8 @@
 /* NestedFusion — 3D pieces, modeled in Blender (src/blender/), shown with three.js r186.
    Every element with data-sculpt="<name>" becomes a stage for one model:
-     hero   — nested core: glass case, gold frame on its corner, graphite hub, black core (nested_core.py)
      fusion — fusion data core: aluminium dodecahedron, pentagon windows, light rings inside (showcase.py)
-     hex    — hex core: nested cubes seen corner-on as hexagons around a glowing teal core (showcase.py)
+     hex    — hex core: nested cubes seen corner-on as hexagons around a glowing teal core (showcase.py);
+              used in the home hero and above the closing call to action
    Each stage loads when it nears the viewport, draws only while visible, and is lit by the studio
    environment baked in Blender. Decorative: aria-hidden; the photo or layout underneath stays as the
    fallback on phones, without WebGL2, and until the model is ready.
@@ -29,42 +29,6 @@ const metal = (color, roughness) => new MeshPhysicalMaterial({ color, metalness:
 
 /* ------------------------------------------------------------------ models */
 const MODELS = {
-  hero: {
-    file: 'nested-core.glb', mark: '.hero', fov: 26, cam: [0, 0.55, 7.6], look: [0, -0.12, 0], floor: -1.72,
-    setup(part) {
-      const glass = part('Glass'), frame = part('Frame'), network = part('Network'), core = part('Core');
-      glass.material = new MeshPhysicalMaterial({
-        color: 0xffffff, metalness: 0, roughness: 0.02, transmission: 1, thickness: 0.12, ior: 1.5,
-        attenuationColor: new Color(0xbfe9f0), attenuationDistance: 3.5, specularIntensity: 1,
-        iridescence: 0.12, iridescenceIOR: 1.33, iridescenceThicknessRange: [320, 440], side: FrontSide,
-      });
-      frame.material.roughness = 0.16;
-      frame.material.envMapIntensity = 1.15;
-      network.material.roughness = 0.32;
-      core.material.color.set(0x050607); // glossy black
-      core.material.roughness = 0.12;
-      core.material.clearcoat = 1;
-      core.material.clearcoatRoughness = 0.04;
-      const inner = new Group();
-      inner.add(frame, network, core);
-      const root = new Group();
-      root.add(glass, inner);
-      const qa = new Quaternion(), qb = new Quaternion();
-      return {
-        root,
-        pose({ t, arrive, spin, leave }) {
-          glass.rotation.set(0.18, -0.5 + Math.sin(t * 0.16) * 0.28 + spin + (1 - arrive) * 2.2, 0);
-          // Contents counter-rotate inside the case, then lock square with it as the hero scrolls away.
-          const free = 1 - leave;
-          qa.setFromAxisAngle(Y, (-t * 0.22 + 0.6 - (1 - arrive) * 3.0) * free + glass.rotation.y * leave);
-          qb.setFromAxisAngle(X, (Math.sin(t * 0.27) * 0.3 + 0.18) * free + 0.18 * leave);
-          inner.quaternion.copy(qb).multiply(qa);
-          root.scale.setScalar(0.82 + 0.1 * arrive);
-        },
-      };
-    },
-  },
-
   fusion: {
     file: 'fusion-core.glb', mark: '.ph', fov: 24, cam: [0, 0.35, 8.6], look: [0, -0.42, 0], floor: -1.32, shadow: 0.12,
     setup(part) {
@@ -97,7 +61,7 @@ const MODELS = {
   },
 
   hex: {
-    file: 'hex-core.glb', mark: '.cta', fov: 24, cam: [0, 0.18, 8.2], look: [0, -0.22, 0], floor: -1.62, shadow: 0.07,
+    file: 'hex-core.glb', mark: 'section', fov: 24, cam: [0, 0.18, 8.2], look: [0, -0.22, 0], floor: -1.62, shadow: 0.07,
     setup(part) {
       const steel = metal(0xc4cad0, 0.26);
       const shell = part('Shell'), rim = part('Rim'), frame = part('Frame');

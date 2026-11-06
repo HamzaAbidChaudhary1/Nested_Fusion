@@ -866,12 +866,10 @@ h3,.h4x{font-weight:600;letter-spacing:-.015em}
   .sculpt.is-drag{cursor:grabbing}
   .sculpt canvas{display:block;width:100%;height:100%}
 
-  /* hero: its own column beside the copy */
-  .page-home .hero__grid:has(.sculpt--hero){grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,3vw,56px)}
-  .sculpt--hero{position:relative;width:100%;max-width:600px;aspect-ratio:1;justify-self:end;margin-right:clamp(-40px,-2vw,0px);transform:translateY(12px)}
-  .sculpt--hero.is-on{transform:none}
-  .sculpt--hero canvas{-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent);mask-image:linear-gradient(180deg,#000 82%,transparent)}
-  .hero.has-sculpt .reel{opacity:0;transition:opacity .9s ease}
+  /* hero: the hex core in its own column beside the copy, over its Blender still until it is ready */
+  .page-home .hero__grid:has(.hero__visual){grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,3vw,56px)}
+  .sculpt--hero{position:absolute;inset:0}
+  .hero__visual:has(.sculpt.is-on) .hero__poster{opacity:0}
 
   /* demo card: the model takes the photo frame's place; the step captions keep cycling over it */
   .ph__in>.sculpt--card{position:absolute;inset:0;z-index:0;background:#dde4ea}
@@ -884,3 +882,9 @@ h3,.h4x{font-weight:600;letter-spacing:-.015em}
   .sculpt--cta.is-on{transform:none}
 }
 @media (prefers-reduced-motion:reduce){.sculpt{transition:none;transform:none!important}}
+/* Hero visual: a Blender still of the hex core. Phones keep the still, above the copy, in place of the old photo band. */
+.hero__visual{position:relative;width:100%;max-width:560px;aspect-ratio:1;justify-self:end}
+.hero__poster{display:block;width:100%;height:100%;object-fit:contain;transition:opacity .9s ease}
+@media (max-width:1024px){
+  .hero__visual{order:-1;justify-self:center;width:min(72vw,320px);max-width:none;aspect-ratio:1;min-height:0;margin:-8px auto -12px}
+}

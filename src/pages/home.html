@@ -2,8 +2,7 @@
 <!--desc: NestedFusion builds production AI agents, AI voice agents and n8n workflow automation for US and Australian businesses. Engineered, human-reviewed, owned by you.-->
 <!--active: home-->
 <!-- HERO -->
-<section class="hero hero--reel" aria-labelledby="hero-title">
-  {{REEL}}
+<section class="hero" aria-labelledby="hero-title">
   <div class="wrap hero__grid">
     <div class="hero__copy">
       <p class="kicker reveal-up"><span class="dot"></span>AI automation<span class="long">&nbsp;· Forward-deployed engineering</span></p>
@@ -23,7 +22,10 @@
         <div><dt>US<span class="sep">·</span>AU</dt><dd>teams served remotely</dd></div>
       </dl>
     </div>
-
+    <div class="hero__visual" aria-hidden="true">
+      <img class="hero__poster" src="/assets/3d/hex-core.webp" alt="" width="900" height="900" fetchpriority="high" decoding="async">
+      <div class="sculpt sculpt--hero" data-sculpt="hex"><canvas></canvas></div>
+    </div>
   </div>
   <a class="hero__scroll" href="#manifesto" aria-label="Scroll to next section"><span></span></a>
 </section>
@@ -61,6 +63,7 @@
     </div>
     <div class="demo__stage">
       {{IMG key="reel-estate,x-callteam,x-orders,x-doctors,x-laptop" cls="ph--demo" ratio="4/5" sizes="(max-width: 1024px) 100vw, 50vw" tags="New enquiry read → lead scored → CRM updated|Inbound call answered → appointment booked|Orders pulled from Shopify → weekly report sent|Compliance report drafted → sent for review|Invoices matched → exceptions flagged"}}
+      <div class="sculpt sculpt--card" data-sculpt="fusion" data-sculpt-into=".ph--demo .ph__in" aria-hidden="true"><canvas></canvas></div>
     </div>
   </div>
 </section>

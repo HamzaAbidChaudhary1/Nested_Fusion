@@ -111,7 +111,7 @@ const MODELS = {
         root,
         pose({ t, arrive, spin, enter }) {
           // Layers start out of step and fuse into one hexagon as the section scrolls in.
-          const apart = 1 - enter * arrive, base = upright + Math.sin(t * 0.15) * 0.22 + spin; // sways, stays upright
+          const apart = 1 - enter * arrive, base = upright + Math.sin(t * 0.45) * 0.3 + spin; // sways, stays upright
           turn(outer, base);
           turn(mid, base - apart * TAU3 * 0.5);
           turn(inside, base + apart * TAU3 * 0.75);
@@ -188,7 +188,10 @@ async function start(host) {
 
   // Input: the cursor tilts every model a little; dragging spins this one and lets it coast.
   const look = { x: 0, y: 0, tx: 0, ty: 0 };
-  let spin = 0, spinV = 0, drag = null;
+  let spin = 0, spinV = 0, drag = null, hover = false, idle = 1;
+  // Mouse over the model: it follows the cursor. Mouse elsewhere: it sways on its own, so the depth always shows.
+  host.addEventListener('pointerenter', () => { hover = true; });
+  host.addEventListener('pointerleave', () => { hover = false; });
   window.addEventListener('pointermove', e => {
     look.tx = (e.clientX / innerWidth - 0.5) * 2;
     look.ty = (e.clientY / innerHeight - 0.5) * 2;
@@ -233,8 +236,10 @@ async function start(host) {
     spin += spinV;
     state.spin = spin;
     model.pose(state);
-    model.root.rotation.y = look.x * 0.28;
-    model.root.rotation.x = look.y * 0.14;
+    idle += ((hover || drag !== null ? 0 : 1) - idle) * Math.min(dt * 2, 1);
+    const wt = state.t;
+    model.root.rotation.y = look.x * 0.28 + idle * Math.sin(wt * 0.55) * 0.38;
+    model.root.rotation.x = look.y * 0.14 + idle * Math.sin(wt * 0.43 + 1.1) * 0.17;
     renderer.render(scene, camera);
     if (!shown) { shown = true; host.classList.add('is-on'); marked.classList.add('has-sculpt'); }
   }

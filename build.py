@@ -246,6 +246,7 @@ def img_reel(keys, cls, ratio, sizes, eager=False, tags=()):
 CTA = f"""<section class="cta" aria-labelledby="cta-title">
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="wrap cta__in">
+    <div class="sculpt sculpt--cta" data-sculpt="hex" aria-hidden="true"><canvas></canvas></div>
     <p class="kicker"><span class="dot"></span>Start here</p>
     <h2 id="cta-title" class="h1 split">Let’s automate the boring part.</h2>
     <p class="lead">Tell us which task eats your team’s week. We reply within one business day.</p>

@@ -4,8 +4,9 @@
      hex    — hex core: nested cubes seen corner-on as hexagons around a glowing teal core (showcase.py);
               used in the home hero and above the closing call to action
    Each stage loads when it nears the viewport, draws only while visible, and is lit by the studio
-   environment baked in Blender. Decorative: aria-hidden; the photo or layout underneath stays as the
-   fallback on phones, without WebGL2, and until the model is ready.
+   environment baked in Blender. Phones get a lighter renderer (see `lite`). Decorative: aria-hidden; the
+   still or photo underneath stays as the fallback without WebGL2, on weak or data-saving devices, and
+   until the model is ready.
    Bundled with esbuild into /assets/js/sculpt.js. */
 import {
   WebGLRenderer, Scene, PerspectiveCamera, Group, Mesh, PlaneGeometry, MeshPhysicalMaterial, MeshBasicMaterial,
@@ -18,7 +19,15 @@ import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
 const ASSETS = '/assets/3d/';
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const wide = window.matchMedia('(min-width: 1025px)');
+// Phones and tablets get a lighter renderer: lower resolution, a painted contact shadow instead of a
+// real-time one, and 30 frames a second. Weak or data-saving devices keep the stills and photos.
+const lite = window.matchMedia('(max-width: 1024px), (pointer: coarse)').matches;
+function weakDevice() {
+  const c = navigator.connection;
+  return !!((c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || ''))) ||
+    (navigator.deviceMemory && navigator.deviceMemory < 4) ||
+    (lite && navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4));
+}
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 let studio; // the baked HDR, fetched once and shared by every stage
 const getStudio = () => (studio ??= new HDRLoader().loadAsync(ASSETS + 'studio.hdr'));
@@ -141,6 +150,18 @@ function backdrop(el) {
   return new Color(0xe9eef2);
 }
 
+function blob() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 128;
+  const g = c.getContext('2d'), r = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  r.addColorStop(0, 'rgba(255,255,255,1)');
+  r.addColorStop(0.45, 'rgba(255,255,255,.55)');
+  r.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = r;
+  g.fillRect(0, 0, 128, 128);
+  return new CanvasTexture(c);
+}
+
 async function start(host) {
   const cfg = MODELS[host.dataset.sculpt];
   if (!cfg) return;
@@ -148,10 +169,10 @@ async function start(host) {
   const marked = host.closest(cfg.mark) || host.parentElement;
   const [gltf, hdr] = await Promise.all([loader.loadAsync(ASSETS + cfg.file), getStudio()]);
 
-  const renderer = new WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+  const renderer = new WebGLRenderer({ canvas, antialias: true, powerPreference: lite ? 'default' : 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, lite ? 1.5 : 1.75));
   renderer.toneMapping = NeutralToneMapping;
-  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.enabled = !lite;
   renderer.shadowMap.type = VSMShadowMap;
 
   const scene = new Scene();
@@ -166,24 +187,29 @@ async function start(host) {
   camera.lookAt(...cfg.look);
 
   // One light, only for the soft contact shadow; the look comes from the baked studio.
-  const key = new DirectionalLight(0xffffff, 0.9);
-  key.position.set(-0.5, 7.5, 1.4);
-  key.castShadow = true;
-  key.shadow.mapSize.set(512, 512);
-  Object.assign(key.shadow.camera, { left: -3, right: 3, top: 3, bottom: -3, near: 1, far: 14 });
-  key.shadow.radius = 16;
-  key.shadow.blurSamples = 16;
-  scene.add(key);
+  if (!lite) {
+    const key = new DirectionalLight(0xffffff, 0.9);
+    key.position.set(-0.5, 7.5, 1.4);
+    key.castShadow = true;
+    key.shadow.mapSize.set(512, 512);
+    Object.assign(key.shadow.camera, { left: -3, right: 3, top: 3, bottom: -3, near: 1, far: 14 });
+    key.shadow.radius = 16;
+    key.shadow.blurSamples = 16;
+    scene.add(key);
+  }
 
   const part = name => gltf.scene.getObjectByName(name);
   const model = cfg.setup(part);
-  model.root.traverse(o => { if (o.isMesh) o.castShadow = true; });
+  model.root.traverse(o => { if (o.isMesh) o.castShadow = !lite; });
   scene.add(model.root);
 
-  const floor = new Mesh(new PlaneGeometry(4.6, 4.6), new ShadowMaterial({ opacity: cfg.shadow ?? 0.18 })); // inside the shadow camera
+  // Contact shadow: real-time on desktop; on phones a painted soft ellipse that costs nothing per frame.
+  const floor = lite
+    ? new Mesh(new PlaneGeometry(3.2, 3.2), new MeshBasicMaterial({ map: blob(), transparent: true, depthWrite: false, opacity: (cfg.shadow ?? 0.18) * 2.2, color: 0x1c2630 }))
+    : new Mesh(new PlaneGeometry(4.6, 4.6), new ShadowMaterial({ opacity: cfg.shadow ?? 0.18 })); // inside the shadow camera
   floor.rotation.x = -Math.PI / 2;
   floor.position.y = cfg.floor;
-  floor.receiveShadow = true;
+  floor.receiveShadow = !lite;
   scene.add(floor);
 
   // Input: the cursor tilts every model a little; dragging spins this one and lets it coast.
@@ -224,7 +250,9 @@ async function start(host) {
 
   const INTRO = 2.4;
   let last = 0, shown = false, visible = true;
+  const STEP = lite ? 1000 / 31 : 0; // phones: 30 fps is plenty for slow motion and kinder to the battery
   function frame(now = 0) {
+    if (STEP && last && now - last < STEP) return; // skip this vsync; the last frame stays on screen
     const dt = last ? Math.min((now - last) / 1000, 0.05) : 0.016;
     last = now;
     state.t = reduce ? 4 : state.t + dt; // own clock: it pauses while the stage is off-screen
@@ -250,20 +278,19 @@ async function start(host) {
     return;
   }
   const run = on => { last = 0; renderer.setAnimationLoop(on ? frame : null); };
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; run(visible && wide.matches); }, { rootMargin: '80px' }).observe(host);
-  wide.addEventListener('change', e => run(e.matches && visible));
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; run(visible); }, { rootMargin: '80px' }).observe(host);
   run(true);
 }
 
 /* ------------------------------------------------------------------ boot */
-if (wide.matches && webgl2()) {
+if (webgl2() && !weakDevice()) {
   const lazy = new IntersectionObserver(entries => {
     for (const e of entries) {
       if (!e.isIntersecting) continue;
       lazy.unobserve(e.target);
       start(e.target).catch(() => { /* the photo or plain layout stays */ });
     }
-  }, { rootMargin: '600px 0px' });
+  }, { rootMargin: lite ? '300px 0px' : '600px 0px' });
   document.querySelectorAll('[data-sculpt]').forEach(host => {
     // A stage can ask to sit inside a neighbouring element, e.g. over a photo frame it replaces.
     const into = host.dataset.sculptInto && host.parentElement.querySelector(host.dataset.sculptInto);

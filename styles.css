@@ -835,7 +835,7 @@ h3,.h4x{font-weight:600;letter-spacing:-.015em}
 .demo__stage{padding:0}
 .ph--demo{max-width:540px;margin-left:auto;border-radius:24px;box-shadow:0 30px 70px -40px rgba(16,20,24,.45)}
 .ph--demo .reel__tag{left:18px;right:18px;bottom:18px;white-space:normal;line-height:1.35;font-size:14px;padding:12px 16px;border-radius:14px}
-@media (max-width:1024px){.ph--demo{margin:0 auto;aspect-ratio:4/3!important}}
+@media (max-width:1024px){.ph--demo{margin:0 auto;aspect-ratio:1/1!important}.ph--demo .reel__tag{top:auto;bottom:14px;left:14px;right:14px;font-size:13px;padding:10px 14px}}
 @media (prefers-reduced-motion:reduce){.ph img{animation:none!important}.ph--reel .reel__s{animation:none}.ph--reel .reel__s:not(:first-child){display:none}}
 
 /* Phones: photo shows crisp at the top, copy sits below it (no white wash over the picture) */
@@ -857,34 +857,33 @@ h3,.h4x{font-weight:600;letter-spacing:-.015em}
 .step__get{margin-top:14px;padding:12px 16px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:15px;color:var(--text)}
 .step__get strong{display:block;font-size:12px;font-weight:600;color:var(--cyan);margin-bottom:4px;letter-spacing:.02em}
 
-/* 3D pieces (assets/js/sculpt.js, models from src/blender/). Wide screens only; whatever sits underneath
-   (photo reel, photo frame, plain layout) stays as the fallback on phones and until a model is ready. */
-.sculpt{display:none}
-@media (min-width:1025px){
-  .sculpt{display:block;opacity:0;transition:opacity 1.2s cubic-bezier(.16,1,.3,1),transform 1.6s cubic-bezier(.16,1,.3,1);cursor:grab;touch-action:pan-y;-webkit-tap-highlight-color:transparent}
-  .sculpt.is-on{opacity:1}
-  .sculpt.is-drag{cursor:grabbing}
-  .sculpt canvas{display:block;width:100%;height:100%}
+/* 3D pieces (assets/js/sculpt.js, models from src/blender/). On every screen size; phones get a lighter renderer.
+   Whatever sits underneath (a Blender still, a photo frame) stays as the fallback until a model is ready,
+   and for good on weak or data-saving devices. */
+.sculpt{display:block;opacity:0;transition:opacity 1.2s cubic-bezier(.16,1,.3,1);cursor:grab;touch-action:pan-y;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+.sculpt.is-on{opacity:1}
+.sculpt.is-drag{cursor:grabbing}
+.sculpt canvas{display:block;width:100%;height:100%;touch-action:pan-y}
+.sculpt--fill{position:absolute;inset:0}
+.sculpt-poster{display:block;width:100%;height:100%;object-fit:contain;transition:opacity .9s ease}
+:has(>.sculpt.is-on)>.sculpt-poster{opacity:0}
 
-  /* hero: the hex core in its own column beside the copy, over its Blender still until it is ready */
-  .page-home .hero__grid:has(.hero__visual){grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,3vw,56px)}
-  .sculpt--hero{position:absolute;inset:0}
-  .hero__visual:has(.sculpt.is-on) .hero__poster{opacity:0}
-
-  /* demo card: the model takes the photo frame's place; the step captions keep cycling over it */
-  .ph__in>.sculpt--card{position:absolute;inset:0;z-index:0;background:#dde4ea}
-  .ph.has-sculpt .reel__s img{opacity:0;transition:opacity .9s ease}
-  .ph.has-sculpt .reel__s{pointer-events:none}
-  .ph.has-sculpt .ph__in::before,.ph.has-sculpt .ph__in::after{display:none}
-
-  /* closing call to action: the hex core above the headline */
-  .sculpt--cta{width:min(400px,32vw);aspect-ratio:1;margin:-72px auto -8px;transform:translateY(10px)}
-  .sculpt--cta.is-on{transform:none}
-}
-@media (prefers-reduced-motion:reduce){.sculpt{transition:none;transform:none!important}}
-/* Hero visual: a Blender still of the hex core. Phones keep the still, above the copy, in place of the old photo band. */
+/* hero: the hex core beside the copy on desktop; above it on phones, where the photo band used to be */
 .hero__visual{position:relative;width:100%;max-width:560px;aspect-ratio:1;justify-self:end}
-.hero__poster{display:block;width:100%;height:100%;object-fit:contain;transition:opacity .9s ease}
-@media (max-width:1024px){
-  .hero__visual{order:-1;justify-self:center;width:min(72vw,320px);max-width:none;aspect-ratio:1;min-height:0;margin:-8px auto -12px}
+@media (min-width:1025px){
+  .page-home .hero__grid:has(.hero__visual){grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,3vw,56px)}
 }
+@media (max-width:1024px){
+  .hero__visual{order:-1;justify-self:center;width:min(76vw,340px);max-width:none;aspect-ratio:1;min-height:0;margin:-12px auto -16px}
+}
+
+/* demo card: the model takes the photo frame's place; the step captions keep cycling over it */
+.ph__in>.sculpt--card{position:absolute;inset:0;z-index:0;background:#dde4ea}
+.ph.has-sculpt .reel__s img{opacity:0;transition:opacity .9s ease}
+.ph.has-sculpt .reel__s{pointer-events:none}
+.ph.has-sculpt .ph__in::before,.ph.has-sculpt .ph__in::after{display:none}
+
+/* closing call to action: the hex core above the headline */
+.cta__visual{position:relative;width:min(400px,32vw);aspect-ratio:1;margin:-72px auto -8px}
+@media (max-width:1024px){.cta__visual{width:min(64vw,280px);margin:-28px 0 4px -10px}}
+@media (prefers-reduced-motion:reduce){.sculpt,.sculpt-poster{transition:none}}

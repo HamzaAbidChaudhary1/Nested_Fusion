@@ -25,7 +25,7 @@
 <meta name="twitter:image" content="https://nestedfusion.netlify.app/assets/og.png">
 <link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styles.css?v=f50e02e4e5">
+<link rel="stylesheet" href="/styles.css?v=cb34d1c182">
 <script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('nf-seen'))document.documentElement.classList.add('seen')}catch(e){}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://nestedfusion.netlify.app/#org","name":"NestedFusion","url":"https://nestedfusion.netlify.app/","logo":"https://nestedfusion.netlify.app/assets/apple-touch-icon.png","image":"https://nestedfusion.netlify.app/assets/og.png","description":"NestedFusion designs, builds and runs production AI agents, voice agents and workflow automation for businesses in the US and Australia.","areaServed":[{"@type":"Country","name":"United States"},{"@type":"Country","name":"Australia"}],"knowsAbout":["AI agents","AI voice agents","Workflow automation","n8n","Make.com","GoHighLevel","LangChain","LangGraph","Retrieval-augmented generation","Supabase","Next.js"],"founder":{"@id":"https://nestedfusion.netlify.app/#founder"},"sameAs":["https://github.com/HamzaAbidChaudhary1"]},{"@type":"WebSite","@id":"https://nestedfusion.netlify.app/#website","url":"https://nestedfusion.netlify.app/","name":"NestedFusion","publisher":{"@id":"https://nestedfusion.netlify.app/#org"},"inLanguage":"en-US"},{"@type":"Person","@id":"https://nestedfusion.netlify.app/#founder","name":"Hamza Abid Chaudhary","jobTitle":"Founder & AI Solutions Engineer","image":"https://nestedfusion.netlify.app/assets/hamza.jpg","url":"https://nestedfusion.netlify.app/approach/","sameAs":["https://github.com/HamzaAbidChaudhary1"]},{"@type":["WebPage","AboutPage"],"@id":"https://nestedfusion.netlify.app/approach/#page","url":"https://nestedfusion.netlify.app/approach/","name":"Forward-Deployed AI Engineering | About NestedFusion","description":"NestedFusion works like a forward-deployed AI engineering team: embedded with yours, production-grade by default, and everything we build stays in your accounts.","isPartOf":{"@id":"https://nestedfusion.netlify.app/#website"},"about":{"@id":"https://nestedfusion.netlify.app/#org"},"inLanguage":"en-US","breadcrumb":{"@id":"https://nestedfusion.netlify.app/approach/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://nestedfusion.netlify.app/approach/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nestedfusion.netlify.app/"},{"@type":"ListItem","position":2,"name":"Approach","item":"https://nestedfusion.netlify.app/approach/"}]}]}</script>
 </head>
@@ -165,7 +165,10 @@
 <section class="cta" aria-labelledby="cta-title">
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="wrap cta__in">
-    <div class="sculpt sculpt--cta" data-sculpt="hex" aria-hidden="true"><canvas></canvas></div>
+    <div class="cta__visual" aria-hidden="true">
+      <img class="sculpt-poster" src="/assets/3d/hex-core.webp" alt="" width="900" height="900" loading="lazy" decoding="async">
+      <div class="sculpt sculpt--fill" data-sculpt="hex"><canvas></canvas></div>
+    </div>
     <p class="kicker"><span class="dot"></span>Start here</p>
     <h2 id="cta-title" class="h1 split">Let’s automate the boring part.</h2>
     <p class="lead">Tell us which task eats your team’s week. We reply within one business day.</p>
@@ -195,6 +198,6 @@
 <script src="/assets/vendor/SplitText.min.js" defer></script>
 <script src="/assets/vendor/lenis.min.js" defer></script>
 <script src="/main.js?v=c0413a0532" defer></script>
-<script type="module">if(matchMedia('(min-width:1025px)').matches){const go=()=>import('/assets/js/sculpt.js?v=edb45b5c33');'requestIdleCallback' in window?requestIdleCallback(go,{timeout:1500}):setTimeout(go,600)}</script>
+<script type="module">const c=navigator.connection;if(!(c&&(c.saveData||/(^|-)2g$/.test(c.effectiveType||''))||navigator.deviceMemory<4)){const go=()=>import('/assets/js/sculpt.js?v=1edd937f85');'requestIdleCallback' in window?requestIdleCallback(go,{timeout:2000}):setTimeout(go,800)}</script>
 </body>
 </html>

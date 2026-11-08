@@ -246,7 +246,10 @@ def img_reel(keys, cls, ratio, sizes, eager=False, tags=()):
 CTA = f"""<section class="cta" aria-labelledby="cta-title">
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="wrap cta__in">
-    <div class="sculpt sculpt--cta" data-sculpt="hex" aria-hidden="true"><canvas></canvas></div>
+    <div class="cta__visual" aria-hidden="true">
+      <img class="sculpt-poster" src="/assets/3d/hex-core.webp" alt="" width="900" height="900" loading="lazy" decoding="async">
+      <div class="sculpt sculpt--fill" data-sculpt="hex"><canvas></canvas></div>
+    </div>
     <p class="kicker"><span class="dot"></span>Start here</p>
     <h2 id="cta-title" class="h1 split">Let’s automate the boring part.</h2>
     <p class="lead">Tell us which task eats your team’s week. We reply within one business day.</p>
@@ -302,8 +305,9 @@ def render(key):
     # 3D sculpture: only fetched on wide screens, after the page is idle, on pages that place one.
     loader = ""
     if "data-sculpt" in body:
-        loader = ("<script type=\"module\">if(matchMedia('(min-width:1025px)').matches){const go=()=>import('/assets/js/sculpt.js?v="
-                  f"{ver('assets/js/sculpt.js')}');'requestIdleCallback' in window?requestIdleCallback(go,{{timeout:1500}}):setTimeout(go,600)}}</script>\n")
+        # Skipped on data-saver / 2G / low-memory devices: they keep the stills and photos.
+        loader = ("<script type=\"module\">const c=navigator.connection;if(!(c&&(c.saveData||/(^|-)2g$/.test(c.effectiveType||''))||navigator.deviceMemory<4)){const go=()=>import('/assets/js/sculpt.js?v="
+                  f"{ver('assets/js/sculpt.js')}');'requestIdleCallback' in window?requestIdleCallback(go,{{timeout:2000}}):setTimeout(go,800)}}</script>\n")
     return (head(meta["title"], meta["desc"], key, noindex, structured_data(key, meta, body)) + "\n" + header(meta.get("active", key))
             + body + footer().replace("{SCULPT_LOADER}", loader))
 
